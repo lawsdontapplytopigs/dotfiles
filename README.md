@@ -8,9 +8,9 @@
   that I'm trying to implement. The ones (mostly) completed will have a
   ' x ' in the checkbox
 
-    [ ]  Keybindings
-    [ ]  Terminal configuration
-    [ ]  Good colorscheme and overall consistent "theme"
+    [x]  Keybindings
+    [x]  Terminal configuration
+    [x]  Good colorscheme and overall consistent "theme"
     [ ]  Titlebars
     [ ]  Menubar
     [ ]  Widgets

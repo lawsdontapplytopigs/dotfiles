@@ -5,33 +5,91 @@ autocmd!
 
 
 
+" VIM-PLUG EXAMPLE
+
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+" call plug#begin('~/.vim/plugged')
+" 
+" Make sure you use single quotes
+" 
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" Plug 'junegunn/vim-easy-align'
+" 
+" Any valid git URL is allowed
+" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+" 
+" Multiple Plug commands can be written in a single line using | separators
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" 
+" On-demand loading
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" 
+" Using a non-master branch
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+" 
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+" Plug 'fatih/vim-go', { 'tag': '*' }
+" 
+" Plugin options
+" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+" 
+" Plugin outside ~/.vim/plugged with post-update hook
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" 
+" Unmanaged plugin (manually installed and updated)
+" Plug '~/my-prototype-plugin'
+" 
+" Initialize plugin system
+" call plug#end()
+" 
+" Reload .vimrc and :PlugInstall to install plugins.
+
+
+"setup vim-plug
+call plug#begin('~/.vim/plugins')
+"section for plugins
+"at least this vimplug thing helps keep things organized
+Plug '~/.vim/plugins/colorizer.vim'
+Plug 'junegunn/goyo.vim'
+call plug#end()
+
+
 " set syntax highlighting on file opening
 :syntax on
-
-" true colors in terminal "
-
-:colorscheme BlackCherriesExperiments
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"  " i actually don't have a clue what this does
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"  " BUT if you modify the semicolons to colons
-                                        " in this thing (the way they were by default, 
-                                        " it doesn't work anymore
-
 " TIPSanTRIX: cycle through colorschemes in vim:
 " write ':colorscheme ' and press [TAB] to cycle through color schemes 
 
+" set colorscheme and true colors in vim "
+:colorscheme BlackCherriesExperiments
+set termguicolors
+" i actually don't have a clue what this does
+" BUT if you modify the semicolons to colons
+" in this thing (the way they were by default, 
+" it doesn't work anymore. these still have to do
+" with enabling true colors in vim in the terminal
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"  
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"  
+                                        
+" Configure Goyo "
+let goyo_width = 140
+let goyo_height = '85%'
+nmap <S-y><S-y> :Goyo <CR>
 
 " TOGGLING LINE NUMBERS "
 " 'ctrl+n' twice to toggle line numbers on or off "
 nmap <C-n><C-n> :set invnumber<CR>
 noremap <C-m><C-m> :set invrelativenumber<CR>
+
 " color the line numbers gray. 
 " also, when both 'set number' and 'set relativenumber' are set, 
 " make the relative number dark yellow
 ":highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 " INDENTATION "
-filetype plugin indent on
+filetype plugin indent off
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width

@@ -1,0 +1,2 @@
+mouse wheel xev command numbers: (145, 106). 
+it says button 4 and button 5 when scrolling up and down respectively

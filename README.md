@@ -1,7 +1,5 @@
 # dotfiles
 
-
-
 ### Tasklist
 
   So there's still a lot to do, but currently these are roughly the things 

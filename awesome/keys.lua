@@ -1,10 +1,12 @@
 local awful = require("awful")
 local gears = require("gears")
+naughty = require("naughty")
+
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
-require("naughty")
+require("awful.hotkeys_popup.keys")                          ---------------- might take this out. have to see if it does anything
+
 
 keys = {}
 
@@ -24,9 +26,20 @@ alt = "Mod1"
 -- tags: workspaces or "desktops"
 
 
+-- keys.desktopbuttons = gears.table.join(
+    -- awful.button({ }, 1, function ()
+        -- mymainmenu:hide()
+        -- sidebar.visible = false
+        -- naughty.destroy_all_notifications()
+-- 
+        -- local function double_tap() end
+-- 
+        -- helpers.single_double_tap(function() end, double_tap)
+    -- end),
+    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
+-- )
 
-globalkeys = gears.table.join(
-
+keys.globalkeys = gears.table.join(
 
     ---------------
     -- Screens
@@ -44,7 +57,6 @@ globalkeys = gears.table.join(
     ---------------
     -- Tabs
     ---------------
-
 
     -- superkey + q
     -- view previous tag
@@ -131,23 +143,12 @@ globalkeys = gears.table.join(
 
     -- Menubar
     awful.key({ superkey }, "x", function() menubar.show() end,
-              {description = "show the menubar", group = "awesome"})
-)
+              {description = "show the menubar", group = "awesome"}),
 
 
     ---------------
     -- Clients
     ---------------
-
-clientkeys = gears.table.join(
-
-
-
-
-
-------------------------------------------------------------------------------- TODO
--- implement tabbing clients with super + shift + [er]
-
 
     ------ TABBING THROUGH CLIENTS 
 
@@ -372,9 +373,12 @@ clientkeys = gears.table.join(
     -- minimize client
     awful.key({ superkey }, "s",
         function (c)
+            local c = client.focus
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
+            if c then
+                c.minimized = true
+            end
         end ,
         {description = "minimize", group = "client"}),
 
@@ -420,8 +424,11 @@ clientkeys = gears.table.join(
 
     -- kill current client
     awful.key({ superkey }, "Escape",
-            function (c)
-                    c:kill()
+            function ()
+                    local c = client.focus
+                    if c then
+                        c:kill()
+                    end
             end,
             { description = "close", group = "client" }),
 
@@ -472,15 +479,13 @@ clientkeys = gears.table.join(
     -- show help
     awful.key({ superkey, shift }, "h",      hotkeys_popup.show_help,
               {description="show help", group="awesome"})
-
 )
-
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
-    globalkeys = gears.table.join(globalkeys,
+    keys.globalkeys = gears.table.join(keys.globalkeys,
         -- View tag only.
         awful.key({ superkey }, "#" .. i + 9,
                   function ()
@@ -528,22 +533,12 @@ end
 
 ------------------------------------------------------------------------------- MOUSE BINDINGS
 
--- 
-root.buttons(gears.table.join(
--- 
-    -- awful.button({ }, 4, awful.tag.viewnext),
-    -- awful.button({ }, 5, awful.tag.viewprev)
-    awful.button({ }, 3, function () mymainmenu:toggle() end)  
-    ))
--- 
--- for some reason, if the above piece of code gets put together with the one below, 
--- it doesn't work right. it's really weird.
---
-clientbuttons = gears.table.join(
+-- Mouse buttons on the client (whole window, not just titlebar)
+keys.clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ superkey }, 1, awful.mouse.client.move),
-    awful.button({ superkey }, 3, awful.mouse.client.resize)
-
+    awful.button({ superkey }, 3, awful.mouse.client.resize),
+    awful.button({ }, 3, function () mymainmenu:toggle() end)
 )
 
 
@@ -553,6 +548,7 @@ clientbuttons = gears.table.join(
 
 
 -- Set keys
-root.keys(globalkeys)
-root.buttons(clientbuttons)
+root.keys(keys.globalkeys)
+-- root.buttons(keys.desktopbuttons)
 
+return keys

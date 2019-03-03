@@ -2,6 +2,7 @@
 
 
 
+
 local theme_collection = {
     "Momoshiki"
 }
@@ -69,9 +70,20 @@ end
 ------------------------------------------------------------------------------- END ERROR HANDLING
 
 
-
-
 ------------------------------------------------------------------------------- VARIABLE DEFINITIONS
+
+------------------- TERMINAL AND EDITOR
+-- This is used later as the default terminal and editor to run.
+terminal = "st"
+editor = "vim"
+editor_cmd = terminal .. " -e " .. editor
+
+-- autostart programs
+for _, v in pairs(startup_programs) do
+    awful.spawn(v)
+end
+
+
 
 
 
@@ -85,17 +97,7 @@ naughty.notify({ title = 'number of screens',
                  text = tostring(screen:count()),
                  timeout = 12 })
 
-------------------- TERMINAL AND EDITOR
--- This is used later as the default terminal and editor to run.
-terminal = "st"
-editor = "vim"
-editor_cmd = terminal .. " -e " .. editor
 
-
--- autostart programs
-for _, v in pairs(startup_programs) do
-    naughty.notify{text = tostring((awful.spawn(v)))}
-end
 
 
 ------------------- WINDOW MANAGER LAYOUT TYPE
@@ -111,9 +113,9 @@ awful.layout.layouts = {
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max.fullscreen,            THIS ONE SUCKS
-    -- awful.layout.suit.magnifier,                 MIGHT HAVE TO TRY THIS ONE
-    -- awful.layout.suit.corner.nw,                 MIGHT HAVE TO TRY THIS ONE TOO
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -308,10 +310,10 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      raise = true,
-                     keys = clientkeys,
+                     keys = keys.globalkeys,
+                     buttons = keys.clientbuttons,
                      maximized_vertical = false,
                      maximized_horisontal = false,
-                     buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen,
                      size_hints_honor = false

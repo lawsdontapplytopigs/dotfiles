@@ -99,7 +99,6 @@ function utils.create_titlebar(c, titlebar_buttons, titlebar_position, titlebar_
     }
 end
 
-
 local double_tap_timer = nil
 function utils.single_double_tap(single_tap_function, double_tap_function)
   if double_tap_timer then

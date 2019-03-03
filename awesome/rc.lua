@@ -1,3 +1,16 @@
+
+
+
+
+local theme_collection = {
+    "Momoshiki"
+}
+
+-- local theme_dir = 
+local startup_programs = require("startup")
+
+
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -13,6 +26,7 @@ local menubar = require("menubar")
 -- Load Debian menu entries
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
+
 
 -- Key bindings
 local keys = require("keys")
@@ -55,7 +69,13 @@ end
 ------------------------------------------------------------------------------- END ERROR HANDLING
 
 
+
+
 ------------------------------------------------------------------------------- VARIABLE DEFINITIONS
+
+
+
+
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(os.getenv('HOME').."/.config/awesome/theme.lua")
 
@@ -70,6 +90,12 @@ naughty.notify({ title = 'number of screens',
 terminal = "st"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
+
+
+-- autostart programs
+for _, v in pairs(startup_programs) do
+    naughty.notify{text = tostring((awful.spawn(v)))}
+end
 
 
 ------------------- WINDOW MANAGER LAYOUT TYPE
@@ -431,6 +457,7 @@ naughty.notify({ title = "hey now",
                  width = 160,
                  font = 'sans 14' })
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- these color client borders when focusing and unfocusing
+-- client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)    
+-- client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 ------------------------------------------------------------------------------- SIGNALS END

@@ -12,38 +12,33 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 theme.font          = "Roboto 10"
-
-bg          = "#1e1e27"
-bg_light    = "#2e2e37"
-gamer_pink  = "#e92f52"
-red         = "#9a3049"
-blue        = "#77ffff"
-pink        = "#ff8bff"
-purple      = "#8860ed"
-beige       = "#e6c098"
-gray        = "#5d5543"
-fg          = "#fffdd8"
+--fg #ffe3cd
+--	"#222428", /* hard contrast: #1d2021 / soft contrast: #32302f */
+    -- "#9a3049", -- strings
+	-- "#e92f52", -- executables, type declarations
+	-- "#d79921", -- Gtk-"WARNING"
+	-- "#5d554e", -- dirs
+	-- "#723159", -- pngs
+	-- "#e6c098", -- symbolic links
 
 
-theme.bg_normal     = bg_light --titlebar unfocused
-theme.bg_focus      = purple
-theme.bg_urgent     = purple
-theme.bg_minimize   = bg_light
-theme.bg_systray    = bg_light
+theme.bg_normal     = "#2e2e37"
+--theme.bg_focus      = "#ffe3cd"
+theme.bg_focus      = "#9a3049"
+theme.bg_urgent     = "#9a3049"
+theme.bg_minimize   = "#222428"
+theme.bg_systray    = theme.bg_normal
 
-
--- these don't matter because I turned them off
--- they're basically the text on windows titlebars
--- theme.fg_normal     = "#aaaaaa" 
--- theme.fg_focus      = fg
--- theme.fg_urgent     = fg
--- theme.fg_minimize   = fg
+theme.fg_normal     = "#aaaaaa"
+theme.fg_focus      = "#ffffff"
+theme.fg_urgent     = "#ffffff"
+theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(5)
-theme.border_width  = dpi(0)    -- hide client border
--- theme.border_normal = "#000000"
--- theme.border_focus  = "#535d8c" -- currently the border is 0 so it doesn't matter
--- theme.border_marked = "#e92f52"
+theme.border_width  = dpi(0)
+theme.border_normal = "#000000"
+theme.border_focus  = "#535d8c" -- currently the border is 0 so it doesn't matter
+theme.border_marked = "#e92f52"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -69,7 +64,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 
 ------------------------------------------------------------------------------- NOTIFICATIONS
 -- Variables set for theming notifications:
-theme.notification_font = "Roboto 10"
+theme.notification_font = "sans 10"
 theme.notification_height = 320
 theme.notification_width = 400
 theme.notification_border_width = 0
@@ -92,7 +87,25 @@ theme.menu_width  = dpi(100)
 
 theme.maximized_honor_padding = true
 theme.fullscreen_hide_border = true
-theme.border_radius = dpi(10) -- set roundness of corners
+--beautiful.border_focus = #ccc666
+--beautiful.boder_normal = #666666
+theme.border_radius = dpi(10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

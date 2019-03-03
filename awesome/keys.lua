@@ -153,22 +153,14 @@ clientkeys = gears.table.join(
 
     awful.key({ superkey, shift }, "q",
             function() 
-                    local c = client.focus
-                    if c then
-                            client.focus = awful.client.next(1)
-                            c:raise()
-                    end
+                    awful.client.focus.byidx(1)
             end,
             { description = "focus next client", group = "client"}),
 
 
     awful.key({ superkey, shift }, "w",
             function()
-                    local c = client.focus
-                    if c then
-                            client.focus = awful.client.next(-1)
-                            c:raise()
-                    end
+                    awful.client.focus.byidx(-1)
             end,
             { description = "focus previous client", group = "client"}),
 

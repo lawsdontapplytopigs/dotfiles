@@ -64,7 +64,8 @@ call plug#end()
 " write ':colorscheme ' and press [TAB] to cycle through color schemes 
 
 " set colorscheme and true colors in vim "
-:colorscheme BlackCherriesExperiments
+":colorscheme BlackCherriesExperiments
+:colorscheme Momoshiki
 set termguicolors
 " i actually don't have a clue what this does
 " BUT if you modify the semicolons to colons
@@ -87,7 +88,6 @@ noremap <C-m><C-m> :set invrelativenumber<CR>
 " color the line numbers gray. 
 " also, when both 'set number' and 'set relativenumber' are set, 
 " make the relative number dark yellow
-":highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 " INDENTATION "
 filetype plugin indent off

@@ -106,7 +106,7 @@ function utils.single_double_tap(single_tap_function, double_tap_function)
     double_tap_timer:stop()
     double_tap_timer = nil
     double_tap_function()
-    -- naughty.notify({text = "We got a double tap"})
+    naughty.notify({text = "We got a double tap"})
     return
   end
   

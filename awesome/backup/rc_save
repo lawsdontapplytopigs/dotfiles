@@ -16,6 +16,10 @@ local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- Key bindings
 local keys = require("keys")
+
+-- utility functions
+local utils = require("utils")
+
 ------------------------------------------------------------------------------- ERROR HANDLING
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -43,8 +47,8 @@ do
         naughty.notify({ title = "OWIE",
                          text = tostring(err),
                          font = 'sans 16',
-                         height = 40,
-                         width = 30,})
+                         height = 200,
+                         width = 300,})
         in_error = false
     end)
 end
@@ -63,8 +67,7 @@ naughty.notify({ title = 'number of screens',
 
 ------------------- TERMINAL AND EDITOR
 -- This is used later as the default terminal and editor to run.
-terminal = "io.elementary.terminal"
--- terminal = "termite"
+terminal = "st"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -74,12 +77,12 @@ editor_cmd = terminal .. " -e " .. editor
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.max,
+    awful.layout.suit.fair,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max.fullscreen,            THIS ONE SUCKS
@@ -222,8 +225,8 @@ awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     local names = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
     local l = awful.layout.suit  -- Just to save some typing: use an alias.
-    local layouts = { l.tile, l.tile, l.floating, l.fair, l.max, 
-                      l.floating, l.tile.left, l.floating, l.floating }
+    local layouts = { l.floating, l.floating, l.floating, l.floating, 
+                      l.floating, l.floating, l.tile, l.tile, l.tile,}
 
     awful.tag(names, s, layouts)
 
@@ -269,13 +272,6 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 ------------------------------------------------------------------------------- WIBAR END
 
-------------------------------------------------------------------------------- MOUSE BINDINGS
-root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
-------------------------------------------------------------------------------- MOUSE BINDINGS END
 
 ------------------------------------------------------------------------------- RULES
 -- Rules to apply to new clients (through the "manage" signal).
@@ -287,9 +283,12 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
+                     maximized_vertical = false,
+                     maximized_horisontal = false,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                     size_hints_honor = false
      }
     },
 
@@ -363,29 +362,55 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c) : setup {
         { -- Left
-            awful.titlebar.widget.iconwidget(c),
+            -- awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
+            -- { -- Title -- ( I don't like how the title looks on top, so I took it out )
+                -- align  = "center"
+                -- widget = awful.titlebar.widget.titlewidget(c)
+            -- },
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            -- awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.minimizebutton(c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            -- awful.titlebar.widget.stickybutton   (c),
+            -- awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
     }
 end)
+
+
+-- Rounded corners
+if beautiful.border_radius ~= 0 then
+    client.connect_signal("manage", function (c, startup)
+        if not c.fullscreen then
+            c.shape = utils.rrect(beautiful.border_radius)
+        end
+    end)
+
+    -- Fullscreen clients should not have rounded corners
+    client.connect_signal("property::fullscreen", function (c)
+        if c.fullscreen then
+            c.shape = utils.rect()
+        else
+            c.shape = utils.rrect(beautiful.border_radius)
+        end
+    end)
+end
+
+
+
+
+
+
 
 ------------------- Sloppy focus
 -- Enable sloppy focus, so that focus follows mouse.

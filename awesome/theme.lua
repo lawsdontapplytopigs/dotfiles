@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Roboto 10"
+theme.font          = "Roboto 5"
 
 bg          = "#1e1e27"
 bg_light    = "#2e2e37"
@@ -39,7 +39,7 @@ theme.bg_systray    = bg_light
 -- theme.fg_urgent     = fg
 -- theme.fg_minimize   = fg
 
-theme.useless_gap   = dpi(5)
+theme.useless_gap   = dpi(2)
 theme.border_width  = dpi(0)    -- hide client border
 -- theme.border_normal = "#000000"
 -- theme.border_focus  = "#535d8c" -- currently the border is 0 so it doesn't matter
@@ -69,7 +69,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 
 ------------------------------------------------------------------------------- NOTIFICATIONS
 -- Variables set for theming notifications:
-theme.notification_font = "Roboto 10"
+theme.notification_font = "Roboto 5"
 theme.notification_height = 320
 theme.notification_width = 400
 theme.notification_border_width = 0
@@ -92,7 +92,7 @@ theme.menu_width  = dpi(100)
 
 theme.maximized_honor_padding = true
 theme.fullscreen_hide_border = true
-theme.border_radius = dpi(10) -- set roundness of corners
+theme.border_radius = dpi(5) -- set roundness of corners
 
 
 

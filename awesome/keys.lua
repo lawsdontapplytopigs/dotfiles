@@ -1,6 +1,7 @@
 local awful = require("awful")
 local gears = require("gears")
-naughty = require("naughty")
+local naughty = require("naughty")
+local utils = require("utils")
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
@@ -26,18 +27,15 @@ alt = "Mod1"
 -- tags: workspaces or "desktops"
 
 
--- keys.desktopbuttons = gears.table.join(
-    -- awful.button({ }, 1, function ()
-        -- mymainmenu:hide()
-        -- sidebar.visible = false
-        -- naughty.destroy_all_notifications()
--- 
-        -- local function double_tap() end
--- 
-        -- helpers.single_double_tap(function() end, double_tap)
-    -- end),
-    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
--- )
+keys.desktopbuttons = gears.table.join(
+    awful.button({ }, 1, function ()
+
+        local function double_tap() end
+
+        utils.single_double_tap(function() end, double_tap)
+    end),
+    awful.button({ }, 3, function () mymainmenu:toggle() end)
+)
 
 keys.globalkeys = gears.table.join(
 
@@ -363,11 +361,14 @@ keys.globalkeys = gears.table.join(
     -- superkey + f 
     -- toggle fullscreen
     awful.key({ superkey }, "f",
-            function (c)
-                    c.fullscreen = not c.fullscreen
-                    c:raise()
-            end,
-            {description = "toggle fullscreen", group = "client"}),
+        function (c)
+            local c = client.focus
+            if c then
+                c.fullscreen = not c.fullscreen
+                c:raise()
+            end
+        end,
+        {description = "toggle fullscreen", group = "client"}),
 
     -- superkey + s
     -- minimize client
@@ -386,8 +387,11 @@ keys.globalkeys = gears.table.join(
     -- toggle maximized
     awful.key({ superkey }, "d",
         function (c)
-            c.maximized = not c.maximized
-            c:raise()
+            local c = client.focus
+            if c then
+                c.maximized = not c.maximized
+                c:raise()
+            end
         end ,
         {description = "(un)maximize", group = "client"}),
 
@@ -535,7 +539,18 @@ end
 
 -- Mouse buttons on the client (whole window, not just titlebar)
 keys.clientbuttons = gears.table.join(
-    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ }, 1, 
+        function (c) 
+            client.focus = c
+            c:raise() 
+        end,
+
+        function ()
+            mymainmenu:hide()
+            -- sidebar.visible = false
+            naughty.destroy_all_notifications()
+        end),
+
     awful.button({ superkey }, 1, awful.mouse.client.move),
     awful.button({ superkey }, 3, awful.mouse.client.resize),
     awful.button({ }, 3, function () mymainmenu:toggle() end)
@@ -549,6 +564,6 @@ keys.clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(keys.globalkeys)
--- root.buttons(keys.desktopbuttons)
+root.buttons(keys.desktopbuttons)
 
 return keys

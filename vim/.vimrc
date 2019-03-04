@@ -78,7 +78,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " Configure Goyo "
 let goyo_width = 140
 let goyo_height = '85%'
-nmap <S-y><S-y> :Goyo <CR>
+nnoremap <S-y><S-y> :Goyo <CR>
 
 " TOGGLING LINE NUMBERS "
 " 'ctrl+n' twice to toggle line numbers on or off "
@@ -129,9 +129,6 @@ let s:comment_map = {
     \   "vim": '"',
     \   "tex": '%',
     \ }
-
-
-
 
 function! ToggleComment()
     if has_key(s:comment_map, &filetype)

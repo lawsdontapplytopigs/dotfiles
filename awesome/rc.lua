@@ -4,7 +4,7 @@
 
 
 local theme_collection = {
-    "Momoshiki"
+    "ok"
 }
 
 -- local theme_dir = 
@@ -25,7 +25,6 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- Load Debian menu entries
-local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 
@@ -41,7 +40,7 @@ local utils = require("utils")
 if awesome.startup_errors then
     naughty.notify({ title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors,
-                     font = "sans, 14",
+                     font = "sans, 6",
                      height = 80,
                      width = 140 })
 end
@@ -61,7 +60,7 @@ do
 
         naughty.notify({ title = "OWIE",
                          text = tostring(err),
-                         font = 'sans 16',
+                         font = 'sans 6',
                          height = 200,
                          width = 300,})
         in_error = false
@@ -311,7 +310,7 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = keys.globalkeys,
-                     buttons = keys.clientbuttons,
+                     buttons = keys.clientkeys,
                      maximized_vertical = false,
                      maximized_horisontal = false,
                      screen = awful.screen.preferred,

@@ -2,21 +2,29 @@ local awful = require("awful")
 local gears = require("gears")
 local naughty = require("naughty")
 local utils = require("utils")
+local piglets = require("piglets")
+local audio_widget_module = require("piglets.audio")
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")                          ---------------- might take this out. have to see if it does anything
 
+local keys = {}
 
-keys = {}
+local shift = "Shift"
+local control = "Control"
+local superkey = "Mod4"
+local alt = "Mod1"
 
 
+-- put global variables in a file
+-- for k, _ in pairs(_G) do
+    -- file = io.open("/home/ciugamenn/awesome_globals.txt", "a")
+    -- file:write(tostring(k)..'\n')
+    -- file:close()
+-- end
 
-shift = "Shift"
-control = "Control"
-superkey = "Mod4"
-alt = "Mod1"
 
 
 -------------------
@@ -27,15 +35,15 @@ alt = "Mod1"
 -- tags: workspaces or "desktops"
 
 
-keys.desktopbuttons = gears.table.join(
-    awful.button({ }, 1, function ()
-
-        local function double_tap() end
-
-        utils.single_double_tap(function() end, double_tap)
-    end),
-    awful.button({ }, 3, function () mymainmenu:toggle() end)
-)
+-- keys.desktopbuttons = gears.table.join(
+    -- awful.button({ }, 1, function ()
+-- 
+        -- local function double_tap() end
+-- 
+        -- utils.single_double_tap(function() end, double_tap)
+    -- end),
+    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
+-- )
 
 keys.globalkeys = gears.table.join(
 
@@ -53,7 +61,7 @@ keys.globalkeys = gears.table.join(
 
 
     ---------------
-    -- Tabs
+    -- Tags
     ---------------
 
     -- superkey + q
@@ -151,17 +159,29 @@ keys.globalkeys = gears.table.join(
     ------ TABBING THROUGH CLIENTS 
 
     awful.key({ superkey, shift }, "q",
-            function() 
-                    awful.client.focus.byidx(1)
-            end,
-            { description = "focus next client", group = "client"}),
+        function() 
+            awful.client.focus.byidx(1)
+        end,
+        { description = "focus next client", group = "client"}),
 
 
     awful.key({ superkey, shift }, "w",
-            function()
-                    awful.client.focus.byidx(-1)
-            end,
-            { description = "focus previous client", group = "client"}),
+        function()
+            awful.client.focus.byidx(-1)
+        end,
+        { description = "focus previous client", group = "client"}),
+
+    awful.key({ superkey }, "Tab",
+        function()
+            awful.client.focus.byidx(1)
+        end,
+        { description = "focus next client", group = "client"}),
+            
+    awful.key({ superkey, shift }, "Tab",
+        function()
+            awful.client.focus.byidx(-1)
+        end,
+        { description = "focus previous client", group = "client"}),
 
     ------ LAYOUT MANIPULATION
 
@@ -170,88 +190,88 @@ keys.globalkeys = gears.table.join(
     -- superkey + Up
     -- focus client by direction: up
     awful.key({ superkey }, "Up",
-            function()
-                awful.client.focus.bydirection("up")
-                if client.focus then client.focus:raise() end
-            end,
-            {description = "focus up", group = "client"}),
+        function()
+            awful.client.focus.bydirection("up")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus up", group = "client"}),
 
     -- superkey + Right
     -- focus client by direction: right
     awful.key({ superkey }, "Right",
-            function()
-                awful.client.focus.bydirection("right")
-                if client.focus then client.focus:raise() end
-            end,
-            {description = "focus right", group = "client"}),
+        function()
+            awful.client.focus.bydirection("right")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus right", group = "client"}),
 
     -- superkey + Down
     -- focus client by direction: down
     awful.key({ superkey }, "Down",
-            function()
-                    awful.client.focus.bydirection("down")
-                    if client.focus then client.focus:raise() end
-            end,
-            { description = "focus down", group = "client" }),
+        function()
+            awful.client.focus.bydirection("down")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus down", group = "client" }),
 
     -- superkey + Left
     -- focus client by direction: left
     awful.key({ superkey }, "Left",
-            function()
-                    awful.client.focus.bydirection("left")
-                    if client.focus then client.focus:raise() end
-            end,
-            { description = "focus left", group = "client"}),
+        function()
+            awful.client.focus.bydirection("left")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus left", group = "client"}),
 
     ------ Swapping places between clients with superkey + shift + arrow keys
     
     -- superkey + shift + up
     -- swap places with the client above
     awful.key({ superkey, shift }, "Up", 
-            function () 
-                    awful.client.swap.bydirection("up")
-            end,
-            {description = "swap with the client above", group = "client"}),
+        function () 
+            awful.client.swap.bydirection("up")
+        end,
+        { description = "swap with the client above", group = "client"}),
 
     -- superkey + shift + right
     -- swap places with the client on the right
     awful.key({ superkey, shift }, 'Right',
-            function ()
-                    awful.client.swap.bydirection("right")
-            end,
-            { description = "swap with the client on the right", group = "client"}),
+        function ()
+            awful.client.swap.bydirection("right")
+        end,
+        { description = "swap with the client on the right", group = "client"}),
 
     -- superkey + shift + down
     -- swap places with the client below
     awful.key({ superkey, shift }, "Down", 
-            function () 
-                   awful.client.swap.bydirection("down")
-            end,
-            {description = "swap with the client below", group = "client"}),
+        function () 
+           awful.client.swap.bydirection("down")
+        end,
+        { description = "swap with the client below", group = "client"}),
 
     -- superkey + shift + left
     -- swap with the client on the left
     awful.key({ superkey, shift }, "Left",
-            function ()
-                    awful.client.swap.bydirection("left")
-            end,
-    { description = "swap with the client on the left", group = "client" }),
+        function ()
+            awful.client.swap.bydirection("left")
+        end,
+        { description = "swap with the client on the left", group = "client" }),
 
     ------ resizing clients with superkey + control + arrows
 
     -- superkey + control + right to increase window width
     awful.key({ superkey, control }, "Right",
-            function () 
-                    awful.tag.incmwfact( 0.03)
-            end,
-            {description = "increase master width factor", group = "client"}),
+        function () 
+                awful.tag.incmwfact( 0.03)
+        end,
+        { description = "increase master width factor", group = "client"}),
 
     -- superkey + control + left to decrease window width
     awful.key({ superkey, control }, "Left",
-            function () 
-                    awful.tag.incmwfact(-0.03) 
-            end,
-            {description = "decrease master width factor", group = "client"}),
+        function () 
+            awful.tag.incmwfact(-0.03) 
+        end,
+        { description = "decrease master width factor", group = "client"}),
     
 
 
@@ -260,38 +280,38 @@ keys.globalkeys = gears.table.join(
     -- superkey + Up
     -- focus client by direction: up
     awful.key({ superkey }, "k",
-            function()
-                awful.client.focus.bydirection("up")
-                if client.focus then client.focus:raise() end
-            end,
-            {description = "focus up", group = "client"}),
+        function()
+            awful.client.focus.bydirection("up")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus up", group = "client"}),
 
     -- superkey + Right
     -- focus client by direction: right
     awful.key({ superkey }, "l",
-            function()
-                awful.client.focus.bydirection("right")
-                if client.focus then client.focus:raise() end
-            end,
-            {description = "focus right", group = "client"}),
+        function()
+            awful.client.focus.bydirection("right")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus right", group = "client"}),
 
     -- superkey + Down
     -- focus client by direction: down
     awful.key({ superkey }, "j",
-            function()
-                    awful.client.focus.bydirection("down")
-                    if client.focus then client.focus:raise() end
-            end,
-            { description = "focus down", group = "client" }),
+        function()
+            awful.client.focus.bydirection("down")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus down", group = "client" }),
 
     -- superkey + Left
     -- focus client by direction: left
     awful.key({ superkey }, "h",
-            function()
-                    awful.client.focus.bydirection("left")
-                    if client.focus then client.focus:raise() end
-            end,
-            { description = "focus left", group = "client"}),
+        function()
+            awful.client.focus.bydirection("left")
+            if client.focus then client.focus:raise() end
+        end,
+        { description = "focus left", group = "client"}),
 
 
     ------ Swapping places between clients with superkey + [yuio]
@@ -299,51 +319,51 @@ keys.globalkeys = gears.table.join(
     -- superkey + i
     -- swap places with the client above
     awful.key({ superkey }, "i",
-            function () 
-                    awful.client.swap.bydirection("up")
-            end,
-            {description = "swap with the client above", group = "client"}),
+        function () 
+            awful.client.swap.bydirection("up")
+        end,
+        { description = "swap with the client above", group = "client"}),
 
     -- superkey + o
     -- swap places with the client on the right
     awful.key({ superkey }, 'o',
-            function ()
-                    awful.client.swap.bydirection("right")
-            end,
-            { description = "swap with the client on the right", group = "client"}),
+        function ()
+            awful.client.swap.bydirection("right")
+        end,
+        { description = "swap with the client on the right", group = "client"}),
 
     -- superkey + u
     -- swap places with the client below
     awful.key({ superkey }, "u",
-            function () 
-                   awful.client.swap.bydirection("down")
-            end,
-            {description = "swap with the client below", group = "client"}),
+        function () 
+           awful.client.swap.bydirection("down")
+        end,
+        { description = "swap with the client below", group = "client"}),
 
     -- superkey + y
     -- swap with the client on the left
     awful.key({ superkey }, "y",
-            function ()
-                    awful.client.swap.bydirection("left")
-            end,
-            { description = "swap with the client on the left", group = "client" }),
+        function ()
+            awful.client.swap.bydirection("left")
+        end,
+        { description = "swap with the client on the left", group = "client" }),
     
 
     ------ resizing clients with superkey + [n.]keys
 
     -- superkey + . to increase window width
     awful.key({ superkey }, "period",
-            function () 
-                    awful.tag.incmwfact( 0.03)
-            end,
-            {description = "increase master width factor", group = "client"}),
+        function () 
+            awful.tag.incmwfact( 0.03)
+        end,
+        { description = "increase master width factor", group = "client"}),
 
     -- superkey + n to decrease window width
     awful.key({ superkey }, "n",
-            function () 
-                    awful.tag.incmwfact(-0.03) 
-            end,
-            {description = "decrease master width factor", group = "client"}),
+        function () 
+            awful.tag.incmwfact(-0.03) 
+        end,
+        { description = "decrease master width factor", group = "client"}),
 
 
 
@@ -351,11 +371,11 @@ keys.globalkeys = gears.table.join(
 
     -- superkey + shift + e select previous layout for clients
     awful.key({ superkey, shift }, "e", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "client"}),
+              { description = "select previous", group = "client"}),
 
     -- superkey + shift + r select next layout for clients
     awful.key({ superkey, shift }, "r", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "client"}),
+              { description = "select next", group = "client"}),
 
 
     -- superkey + f 
@@ -368,7 +388,7 @@ keys.globalkeys = gears.table.join(
                 c:raise()
             end
         end,
-        {description = "toggle fullscreen", group = "client"}),
+        { description = "toggle fullscreen", group = "client"}),
 
     -- superkey + s
     -- minimize client
@@ -380,8 +400,8 @@ keys.globalkeys = gears.table.join(
             if c then
                 c.minimized = true
             end
-        end ,
-        {description = "minimize", group = "client"}),
+        end,
+        { description = "minimize", group = "client"}),
 
     -- superkey + d
     -- toggle maximized
@@ -393,54 +413,36 @@ keys.globalkeys = gears.table.join(
                 c:raise()
             end
         end ,
-        {description = "(un)maximize", group = "client"}),
-
-    -- superkey + control + m
-    -- de-maximize vertically
-    --awful.key({ superkey, control }, "m",
-    --    function (c)
-    --        c.maximized_vertical = not c.maximized_vertical
-    --        c:raise()
-    --    end ,
-    --    {description = "(un)maximize vertically", group = "client"}),
-
-    -- superkey + shift + m
-    -- de-maximize horisontally
-    --awful.key({ superkey, shift }, "m",
-    --    function (c)
-    --        c.maximized_horizontal = not c.maximized_horizontal
-    --        c:raise()
-    --    end ,
-    --    {description = "(un)maximize horizontally", group = "client"}),
+        { description = "(un)maximize", group = "client"}),
 
     -- superkey + a
     -- restore minimized client
     awful.key({ superkey }, "a",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                      client.focus = c
-                      c:raise()
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
+        function ()
+            local c = awful.client.restore()
+            -- Focus restored client
+            if c then
+                client.focus = c
+                c:raise()
+            end
+        end,
+        { description = "restore minimized", group = "client"}),
 
     -- kill current client
     awful.key({ superkey }, "Escape",
-            function ()
-                    local c = client.focus
-                    if c then
-                        c:kill()
-                    end
-            end,
-            { description = "close", group = "client" }),
+        function ()
+                local c = client.focus
+                if c then
+                    c:kill()
+                end
+        end,
+        { description = "close", group = "client" }),
 
 
     -- toggle floating layout mode
     awful.key({ superkey }, "space",  
-            awful.client.floating.toggle,
-            {description = "toggle floating", group = "client"}),
+        awful.client.floating.toggle,
+        { description = "toggle floating", group = "client"}),
 
     -- move to master
     --awful.key({ superkey, control }, "Return", function (c) c:swap(awful.client.getmaster())   end,
@@ -460,8 +462,13 @@ keys.globalkeys = gears.table.join(
     -- superkey + u
     -- jump to urgent client
     awful.key({ superkey }, "z", 
-            awful.client.urgent.jumpto,
-            {description = "jump to urgent client", group = "client"}),
+        awful.client.urgent.jumpto,
+        { description = "jump to urgent client", group = "client"}),
+
+
+
+
+
 
     -- superkey + Tab
     -- go to the previously visited client
@@ -482,8 +489,52 @@ keys.globalkeys = gears.table.join(
     -- superkey + shift + h
     -- show help
     awful.key({ superkey, shift }, "h",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"})
+              { description="show help", group="awesome"})
 )
+
+
+
+keys.globalkeys = gears.table.join(keys.globalkeys,
+
+    ---------------
+    -- Sidebar
+    ---------------
+
+    awful.key({ alt }, "s",
+        function()
+            piglets.sidebar.sidebar.visible = not piglets.sidebar.sidebar.visible
+            piglets.sidebar.sidebar.ontop = not piglets.sidebar.sidebar.ontop
+            audio_widget_module.notification_audio_bar_bg.visible = false
+        end,
+        { description = "toggle sidebar", group = "sidebar"}),
+
+
+
+    awful.key({ superkey }, "F1", 
+        function()
+            awful.spawn('volumectl down')
+        end,
+        { description = "decrease volume by 5%", group = "sidebar"}),
+
+    awful.key({ superkey }, "F2", 
+        function()
+            awful.spawn('volumectl up')
+        end,
+        { description = "increase volume by 5%", group = "sidebar"}),
+
+    awful.key({ superkey }, "F3", 
+        function()
+            awful.spawn('volumectl toggle')
+        end,
+        { description = "toggle volume", group = "sidebar"}),
+
+    awful.key({ superkey }, "F4", 
+        function()
+            awful.spawn('volumectl reset')
+        end,
+        { description = "reset volume to 50%", group = "sidebar"})
+)
+
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
@@ -536,21 +587,20 @@ for i = 1, 9 do
 end
 
 ------------------------------------------------------------------------------- MOUSE BINDINGS
-
 -- Mouse buttons on the client (whole window, not just titlebar)
 keys.clientbuttons = gears.table.join(
     awful.button({ }, 1, 
         function (c) 
-            client.focus = c
-            c:raise() 
-        end,
-
-        function ()
-            mymainmenu:hide()
-            -- sidebar.visible = false
             naughty.destroy_all_notifications()
+            piglets.sidebar.sidebar.visible = false
+            piglets.sidebar.sidebar.ontop = false
+            -- client.focus = c
+            -- c:raise()
+            c:connect_signal("button::press", function()
+                client.focus = c
+                c:raise()
+            end)
         end),
-
     awful.button({ superkey }, 1, awful.mouse.client.move),
     awful.button({ superkey }, 3, awful.mouse.client.resize),
     awful.button({ }, 3, function () mymainmenu:toggle() end)
@@ -564,6 +614,6 @@ keys.clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(keys.globalkeys)
-root.buttons(keys.desktopbuttons)
+root.buttons(keys.clientbuttons)
 
 return keys

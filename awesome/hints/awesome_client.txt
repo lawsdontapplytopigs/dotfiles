@@ -1,0 +1,44 @@
+_force_screen                       function: 0x55ecb208e910
+background_image                    lgi.rec0x55ecb47aca70:cairo.ImageSurface
+emit_signal                         function: 0x55ecb1f14660
+_do_complete_repaint                function: 0x55ecb270ce90
+_widget_context_skeleton            table: 0x55ecb2706e80
+_inform_visible                     function: 0x55ecb208d9d0
+_global_receivers                   table: 0x55ecb270b640
+_widgets_under_mouse                table: 0x55ecb270cf00
+_redraw_pending                     true
+_need_complete_repaint              true
+_connect_everything                 function: 0x55ecb1f14590
+set_widget                          function: 0x55ecb208e8b0
+draw                                function: 0x55ecb270ce50
+add_signal                          function: 0x55ecb1f0fde0
+_widget_hierarchy                   table: 0x55ecb29b7af0
+_visible                            true
+find_widgets                        function: 0x55ecb2095e40
+_widget_hierarchy_callback_arg      table: 0x55ecb29b7ab0
+_widget_context                     table: 0x55ecb29b79e0
+set_bgimage                         function: 0x55ecb20882c0
+get_children_by_id                  function: 0x55ecb1f18e70
+_by_id                              table: 0x55ecb2737ad0
+widgetwibox.layout.align            (table: 0x55ecb2737bc0)
+setup                               function: 0x55ecb1f18ea0
+disconnect_signal                   function: 0x55ecb1f14630
+background_image_args               table: 0x55ecb3e57cd0
+drawable_name                       awful.titlebar
+background_color                    lgi.rec 0x55ecb26e0800:cairo.SolidPattern
+_redraw_callback                    function: 0x55ecb270d110
+_need_relayout                      false
+_layout_callback                    function: 0x55ecb270d160
+_dirty_area                         lgi.rec 0x55ecb37e5a70:cairo.Region
+connect_signal                      function: 0x55ecb1f14550
+new                                 function: 0x55ecb2093700
+set_bg                              function: 0x55ecb2094340
+foreground_color                    lgi.rec 0x55ecb1d66700:cairo.SolidPattern
+_set_systray_widget                 function: 0x55ecb2092440
+_redraw_on_move                     false
+set_fg                              function: 0x55ecb2088300
+_signals                            table: 0x55ecb270b600
+drawable                            drawable: 0x55ecb2706d08
+_do_redraw                          function: 0x55ecb270cde0
+modulename                          function: 0x55ecb1f148c0
+weak_connect_signal                 function: 0x55ecb1f14430

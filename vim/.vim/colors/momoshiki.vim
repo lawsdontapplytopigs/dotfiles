@@ -1,0 +1,1 @@
+/home/ciugamenn/colors/momoshiki/implemented/vim/momoshiki.vim

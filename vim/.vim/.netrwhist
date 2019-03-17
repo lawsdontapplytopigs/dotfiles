@@ -1,10 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/ciugamenn/colors/blackcherries'
-let g:netrw_dirhist_2='/home/ciugamenn/.config/empress_rice/dotfiles/config/awesome'
-let g:netrw_dirhist_3='/home/ciugamenn/.config/empress_rice/dotfiles/config/awesome/themes/lovelace'
-let g:netrw_dirhist_4='/home/ciugamenn/.config/fontconfig'
-let g:netrw_dirhist_5='/usr/share/awesome/lib/naughty'
-let g:netrw_dirhist_6='/usr/share/awesome/lib/awful'
-let g:netrw_dirhist_7='/home/ciugamenn/repos/dotfiles/vim/.vim/plugins'
-let g:netrw_dirhist_8='/home/ciugamenn/repos/dotfiles/vim/.vim/autoload'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/ciugamenn/.config/compton'
+let g:netrw_dirhist_2='/home/ciugamenn/repos/dotfiles/vim/.vim/plugins/lightline.vim/autoload/lightline'
+let g:netrw_dirhist_3='/home/ciugamenn/repos/dotfiles/awesome/piglets'
+let g:netrw_dirhist_4='/usr/share/awesome/lib/beautiful'

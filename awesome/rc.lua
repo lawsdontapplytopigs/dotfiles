@@ -1,32 +1,49 @@
 
+-- Estetickks related
+-------------------------------------------------------------------------------
 
 
+-- Directory where themes are located
+local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 
-
+-- Themes
 local theme_collection = {
-    "ok"
+    "NebulaBlaze"
 }
 
--- local theme_dir = 
+-- Change this number to use a different theme
+local theme_name = theme_collection[1]
+
+-- Theme handling library
+local beautiful = require("beautiful")
+beautiful.init( theme_dir .. theme_name .. '/' .. "theme.lua" )
+
+-- Programs to start up automatically
 local startup_programs = require("startup")
-
-
-
--- Standard awesome library
+-- Math functions
 local gears = require("gears")
+-- Everything to do with controlling awesome
 local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
 
--- Load Debian menu entries
-local has_fdo, freedesktop = pcall(require, "freedesktop")
+cleanup = [[bash -c "ps aux | egrep '[0-9] pactl subscribe' | awk '{ print $2 }' | xargs kill"]]
 
+awful.spawn(cleanup)
+
+-- Load Debian menu entries -- might have to take this out, not on debian anymore
+-- local click_menu = require("freedesktop").menu
+
+-- local desktop = require("piglets").desktop
+local piglets = require("piglets")
+
+-- for k, v in pairs(desktop) do
+    -- naughty.notify({text = tostring(k)})
+-- end
 
 -- Key bindings
 local keys = require("keys")
@@ -40,14 +57,9 @@ local utils = require("utils")
 if awesome.startup_errors then
     naughty.notify({ title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors,
-                     font = "sans, 6",
-                     height = 80,
-                     width = 140 })
+                     font = beautful.font
+                     })
 end
-
-
-
-
 
 -- Handle runtime errors after startup
 do
@@ -60,16 +72,16 @@ do
 
         naughty.notify({ title = "OWIE",
                          text = tostring(err),
-                         font = 'sans 6',
-                         height = 200,
-                         width = 300,})
+                         font = beautiful.font
+                         })
         in_error = false
     end)
 end
-------------------------------------------------------------------------------- END ERROR HANDLING
+------------------------------------------------------------------------------- 
+-- END ERROR HANDLING
 
-
-------------------------------------------------------------------------------- VARIABLE DEFINITIONS
+-- VARIABLE DEFINITIONS
+------------------------------------------------------------------------------- 
 
 ------------------- TERMINAL AND EDITOR
 -- This is used later as the default terminal and editor to run.
@@ -77,18 +89,21 @@ terminal = "st"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
+
+
+
 -- autostart programs
 for _, v in pairs(startup_programs) do
-    awful.spawn(v)
+    awful.spawn.once(v)
 end
 
 
 
+-- desktop.add_icons()
 
 
 
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(os.getenv('HOME').."/.config/awesome/theme.lua")
 
 screen.connect_signal('refresh', function(c) return c end)
 
@@ -154,25 +169,19 @@ myawesomemenu = {
 local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
 local menu_terminal = { "open terminal", terminal }
 
-if has_fdo then
-    mymainmenu = freedesktop.menu.build({
-        before = { menu_awesome },
-        after =  { menu_terminal }
-    })
-else
-    mymainmenu = awful.menu({
-        items = {
-                  menu_awesome,
-                  { "Debian", debian.menu.Debian_menu.Debian },
-                  menu_terminal,
-                }
-    })
-end
+-- if has_fdo then
+    -- mymainmenu = freedesktop.menu.build({
+        -- before = { menu_awesome },
+        -- after =  { menu_terminal }
+    -- })
+mymainmenu = awful.menu({
+    items = {
+              menu_awesome,
+              menu_terminal,
+            }
+})
 
 ------------------- Widgets
-praisewidget = wibox.widget.textbox()
-praisewidget.text = "you are great!"
-
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
@@ -239,6 +248,7 @@ local function set_wallpaper(s)
             wallpaper = wallpaper(s)
         end
         gears.wallpaper.maximized(wallpaper, s, false)
+        -- awful.spawn.with_shell('/home/ciugamenn/.fegbg')
     end
 end
 
@@ -257,6 +267,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     awful.tag(names, s, layouts)
 
+
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -269,25 +280,27 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
     --------------- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
+    -- s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
 
     --------------- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
+    -- s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
+    -- s.taglist = piglets.bubbles.taglist
+    -- for k, v in pairs(piglets.bubbles.taglist) do
+        -- naughty.notify({text = tostring(k)})
+    -- end
 
     --------------- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
     --------------- Add widgets to the wibox
     s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
         { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
             mylauncher,
-            praisewidget,
-            s.mytaglist,
             s.mypromptbox,
+            layout = wibox.layout.fixed.horizontal,
         },
-        s.mytasklist, -- Middle widget
+        utils.pad_width(1), -- Middle widget -- Just leave it blank
+        
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
@@ -295,6 +308,7 @@ awful.screen.connect_for_each_screen(function(s)
             mytextclock,
             s.mylayoutbox,
         },
+        layout = wibox.layout.align.horizontal,
     }
 end)
 ------------------------------------------------------------------------------- WIBAR END
@@ -305,18 +319,23 @@ end)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = keys.globalkeys,
-                     buttons = keys.clientkeys,
-                     maximized_vertical = false,
-                     maximized_horisontal = false,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
-                     size_hints_honor = false
-     }
+        properties = { border_width = beautiful.border_width,
+                       border_color = beautiful.border_normal,
+                       focus = awful.client.focus.filter,
+                       raise = true,
+                       keys = keys.globalkeys,
+                       buttons = keys.clientkeys,
+                       maximized_vertical = false,
+                       maximized_horisontal = false,
+                       screen = awful.screen.preferred,
+                       placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                       size_hints_honor = false
+                     }
+    },
+
+    -- Add titlebars to normal clients and dialogs
+    { rule_any = {type = { "normal", "dialog" }
+      }, properties = { titlebars_enabled = true }
     },
 
     -- Floating clients.
@@ -343,12 +362,7 @@ awful.rules.rules = {
           "AlarmWindow",  -- Thunderbird's calendar.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
-
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
+      }, properties = { floating = true }}
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
@@ -372,10 +386,11 @@ client.connect_signal("manage", function (c)
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
+client.connect_signal("request::titlebars", function(c) -------------------------------- WHEN CONFIGURING MOUSE BUTTONS, I HAVE TO LOOK AT THIS
+
     -- buttons for the titlebar
     local buttons = gears.table.join(
-        awful.button({ }, 1, function()
+        awful.button({ }, 1, function() 
             client.focus = c
             c:raise()
             awful.mouse.client.move(c)
@@ -387,9 +402,23 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+    local top_titlebar = awful.titlebar(c, {
+            size = beautiful.titlebar_height,
+            font = beautiful.font,
+            bg_normal = beautiful.titlebar_bg_normal,
+            bg_urgent = beautiful.titlebar_bg_urgent,
+            fg_normal = beautiful.titlebar_fg_normal,
+            fg_urgent = beautiful.titlebar_fg_urgent,
+        })
+
+    top_titlebar : setup ({
         { -- Left
             -- awful.titlebar.widget.iconwidget(c),
+            utils.pad_width(14),
+            {
+                font = beautiful.font,
+                widget = awful.titlebar.widget.titlewidget(c),
+            },
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
@@ -403,15 +432,16 @@ client.connect_signal("request::titlebars", function(c)
         },
         { -- Right
             -- awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.minimizebutton(c),
-            awful.titlebar.widget.maximizedbutton(c),
             -- awful.titlebar.widget.stickybutton   (c),
             -- awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
+            awful.titlebar.widget.minimizebutton(c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.closebutton(c),
+            utils.pad_width(3),
+            layout = wibox.layout.fixed.horizontal,
         },
         layout = wibox.layout.align.horizontal
-    }
+    })
 end)
 
 
@@ -435,6 +465,25 @@ end
 
 
 
+-- If the layout is not floating, every floating client that appears is centered
+-- If the layout is floating, and there is no other client visible, center it
+client.connect_signal("manage", function (c)
+    if not awesome.startup then
+        if awful.layout.get(mouse.screen) ~= awful.layout.suit.floating then
+            awful.placement.centered(c,{honor_workarea=true})
+        else if #mouse.screen.clients == 1 then
+                awful.placement.centered(c,{honor_workarea=true})
+            end
+        end
+    end
+end)
+
+-- Hide titlebars if required by the theme
+client.connect_signal("manage", function (c)
+    if not beautiful.titlebars_enabled then
+        awful.titlebar.hide(c)
+    end
+end)
 
 
 
@@ -449,7 +498,10 @@ end
 --end)
 ------------------- Sloppy focus end
 
-------------------- this has to do with coloring the tabs of windows when focused
+
+
+
+
 
 naughty.notify({ title = "hey now",
                  text = tostring('ok this is epic'),
@@ -458,6 +510,7 @@ naughty.notify({ title = "hey now",
                  width = 160,
                  font = 'sans 14' })
 
+------------------- this has to do with coloring the borders of windows when focused
 -- these color client borders when focusing and unfocusing
 -- client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)    
 -- client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)

@@ -1,8 +1,6 @@
 
 local autostart = {
-'compton --config /home/ciugamenn/.config/compton/compton.conf',
-'plank --class=PLANK'
-
+'compton --config /home/ciugamenn/.config/compton/compton.conf'
 }
 return autostart
 

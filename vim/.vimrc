@@ -3,8 +3,6 @@
 " first, clear autocommands
 autocmd!
 
-
-
 " VIM-PLUG EXAMPLE
 
 " Specify a directory for plugins
@@ -52,9 +50,11 @@ autocmd!
 call plug#begin('~/.vim/plugins')
 "section for plugins
 "at least this vimplug thing helps keep things organized
-Plug '~/.vim/plugins/colorizer.vim'
+Plug 'lilydjwg/colorizer'
 Plug 'junegunn/goyo.vim'
-Plug 'https://github.com/Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
 call plug#end()
 
 
@@ -65,7 +65,7 @@ call plug#end()
 
 " set colorscheme and true colors in vim "
 ":colorscheme BlackCherriesExperiments
-:colorscheme Momoshiki
+:colorscheme momoshiki
 set termguicolors
 " i actually don't have a clue what this does
 " BUT if you modify the semicolons to colons
@@ -149,8 +149,17 @@ vnoremap <S-Tab> :call ToggleComment()<cr>
 
 
 
+set laststatus=2
 
-
-
+let g:lightline = {
+    \ 'colorscheme': 'momoshiki',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'gitbranch#name'
+    \ },
+    \ }
 
 

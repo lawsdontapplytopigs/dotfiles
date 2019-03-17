@@ -2,6 +2,7 @@ local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
+local padding_font = beautiful.padding_font
 
 local utils = {}
 
@@ -14,25 +15,31 @@ utils.rrect = function(radius)
     end
 end
 
-utils.rbar = function()
+utils.rounded_bar = function(width, height)
   return function(cr, width, height)
     gears.shape.rounded_bar(cr, width, height)
   end
 end
 
-utils.prrect = function(radius, tl, tr, br, bl)
-  return function(cr, width, height)
-    gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl, radius)
-  end
+utils.bubble = function(radius)
+    return function(cr, width, height)
+        gears.shape.circle(cr, radius, radius)
+    end
 end
+
+-- utils.prrect = function(radius, tl, tr, br, bl)
+  -- return function(cr, width, height)
+    -- gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl, radius)
+  -- end
+-- end
 
 -- Create info bubble shape
 -- TODO
-utils.infobubble = function(radius)
-  return function(cr, width, height)
-    gears.shape.infobubble(cr, width, height, radius)
-  end
-end
+-- utils.infobubble = function(radius)
+  -- return function(cr, width, height)
+    -- gears.shape.infobubble(cr, width, height, radius)
+  -- end
+-- end
 
 -- Create rectangle shape
 utils.rect = function()
@@ -58,12 +65,27 @@ function utils.client_menu_toggle()
     end
 end
 
-function utils.pad(size)
+function utils.pad_height(size)
+    local str = ""
+    for i=1, size do
+        str = str .. " \n"
+    end
+    local pad = wibox.widget({
+        font = beautiful.padding_font, 
+        widget = wibox.widget.textbox(str)
+        })
+    return pad
+end
+
+function utils.pad_width(size)
     local str = ""
     for i = 1, size do
         str = str .. " "
     end
-    local pad = wibox.widget.textbox(str)
+    local pad = wibox.widget({
+        font = beautiful.padding_font,
+        widget = wibox.widget.textbox(str),
+        })
     return pad
 end
 

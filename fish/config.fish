@@ -1,5 +1,5 @@
 # set keyboard to US !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-setxkbmap us
+# setxkbmap us
 # set alias for lua
 alias lua lua5.3
 # in elementary os outside-programs are installed in /usr/bin, such as ranger, the file manager.

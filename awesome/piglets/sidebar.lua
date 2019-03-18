@@ -11,6 +11,7 @@ local cpu_widget = require("piglets.cpu").cpu_widget
 local audio_widget = require("piglets.audio").audio_widget
 local notification_audio_bar_bg = require("piglets.audio").notification_audio_bar_bg
 local ram_widget = require("piglets.ram").ram_widget
+local weather_widget = require("piglets.weather").weather_widget
 
 
 local bar = {}
@@ -106,11 +107,13 @@ bar.sidebar:setup ({
     { -- top
         utils.pad_height(20),
         datetime,
+        utils.pad_height(10),
+        weather_widget,
         layout = wibox.layout.fixed.vertical,
     },
 
+    utils.pad_height(10),
     { -- middle
-        utils.pad_height(20),
         {
             utils.pad_width(30),
             audio_widget,
@@ -139,7 +142,7 @@ bar.sidebar:setup ({
         -- text = "foo",
         -- widget = wibox.widget.textbox
     -- },
-    layout = wibox.layout.align.vertical,
+    layout = wibox.layout.fixed.vertical,
 })
 
 return bar

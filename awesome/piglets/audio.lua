@@ -67,13 +67,16 @@ audio.notification_audio_bar = wibox.widget({
 -- the background for the sidebar audio bar, along where we also put the 
 -- notification audio bar
 audio.notification_audio_bar_bg = wibox({
-    x = awful.screen.focused().geometry.width - dpi(350),
+    x = awful.screen.focused().geometry.width - dpi(400),
     y = awful.screen.focused().geometry.height - dpi(100),
     height = dpi(30),
     width = dpi(300),
     shape = gears.shape.rounded_bar,
     widget = audio.notification_audio_bar,
     visible = false,
+    -- setting the type as dock allows compton to recognize it as dock
+    -- and not draw shadows for it
+    type = 'dock',
     -- the bg color should hopefully not be seen at all.
     -- but I'll leave it here for debugging later
     bg = beautiful.bottom_audio_bar_color
@@ -112,12 +115,14 @@ local function update_widget(event)
                 _bottom_color = bottom_color_muted
             end
 
+            -- the sidebar audio widget
             local wid = audio.audio_bar_widget
             -- local wid = audio.audio_widget.get_children_by_id(audio.audio_widget, 'audio_bar')[1]
             wid.value = tonumber(volume)
             wid.color = _top_color
             wid.background_color = _bottom_color
 
+            -- the notification audio widget
             local bottom_wid = audio.notification_audio_bar
             bottom_wid.value = tonumber(volume)
             bottom_wid.color = _top_color

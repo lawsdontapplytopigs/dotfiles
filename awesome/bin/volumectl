@@ -1,0 +1,62 @@
+#!/bin/bash
+# Control volume
+# Requires pulseaudio
+# AwesomeWM: Only sends a notification if the sidebar is not visible
+# --------------------------
+
+# Steps for raising/lowering volume
+STEP=5
+
+# Notification config
+VOLUME_ICON=~/.config/awesome/themes/NebulaBlaze/icons/audio.png
+MUTED_ICON=~/.config/awesome/themes/NebulaBlaze/icons/audio.png
+NOTIF_ID=/tmp/volume-daemon-notification
+
+if [[ "$1" = "up" ]]; then
+    pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +$STEP%
+elif [[ "$1" = "down" ]]; then
+    pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -$STEP%
+elif [[ "$1" = "toggle" ]]; then
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+elif [[ "$1" = "reset" ]]; then
+    pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ 50%
+else
+    echo "No argument."
+fi
+
+SIDEBAR_VISIBLE="$(awesome-client 'sidebar = require("piglets").sidebar.sidebar; return sidebar.visible' | awk '{print $2}')"
+# echo $SIDEBAR_VISIBLE
+if [[ "$SIDEBAR_VISIBLE" == "false" ]]; then
+    awesome-client "
+    local notification_audio_bar = require('piglets.audio').notification_audio_bar_bg
+    local gears = require('gears')
+    local naughty = require('naughty')
+
+    time = 2
+
+    -- if it's visible, stop the timer and we're going to make another one later
+    if notification_audio_bar.visible then
+        if t and t.started then
+            t:stop()
+        end
+    end
+
+    notification_audio_bar.visible = true
+    notification_audio_bar.ontop = true
+
+    -- make the timer regardless, so that each time we invoke this script,
+    -- the timer's basically going to be reset to be the amount \`time\` specifies
+    t = gears.timer({ timeout = time })
+
+    t:connect_signal('timeout',
+        function()
+            t:stop()
+            notification_audio_bar.visible = false
+        end
+    )
+
+    t:start()
+    "
+fi
+
+

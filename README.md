@@ -9,10 +9,15 @@
     [x]  Keybindings
     [x]  Terminal configuration
     [x]  Good colorscheme and overall consistent "theme"
-    [ ]  Titlebars
-    [ ]  Menubar
-    [ ]  Widgets
+    [x]  Titlebars
+    [ ]  Sidebar
+    [ ]  Remove wibar
     [ ]  Notifications
     [ ]  Other trivial functionality through the 'alt' modifier
+    [ ]  Anti-aliased rounded corners af
+    [ ]  Custom mpv frontend
+    [ ]  ncmpcpp (nincompoop) configuration
+    [ ]  Youtube-to-mp3 with a keybind
+
 
 

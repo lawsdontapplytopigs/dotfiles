@@ -17,7 +17,8 @@
     [ ]  Anti-aliased rounded corners af
     [ ]  Custom mpv frontend
     [ ]  ncmpcpp (nincompoop) configuration
-    [ ]  Youtube-to-mp3 with a keybind
+    [ ]  Youtube-to-mp3 with a keybind [1] [2]
 
 
-
+[1]: https://stackoverflow.com/questions/46079716/firefox-webextension-api-how-to-get-the-url-of-the-active-tab
+[2]: https://stackoverflow.com/questions/41940986/get-tab-url-from-page-action-webextensions-android

@@ -31,15 +31,18 @@ local bar = {}
 local clock = wibox.widget({
     align = 'center',
     -- valign = 'center',
-    font = 'RobotoCondensed 80',
+    font = 'TTCommons DemiBold 70',
     widget = wibox.widget.textclock('%H %M'),
     })
 
 local date = wibox.widget({
     align = 'center',
     -- valign = 'center',
-    font = 'Roboto Medium 17',
-    widget = wibox.widget.textclock('%A %B %d')
+    -- font = 'Gilroy-Medium 20',
+    -- font = 'Mont,Mont Medium 20',
+    font = 'TTCommons 26',
+    -- widget = wibox.widget.textbox('Wednesday, September, 29') -- for testing
+    widget = wibox.widget.textclock('%A, %B, %d')
     })
 
 local datetime = wibox.widget({
@@ -83,11 +86,6 @@ local sidebar_displayer = wibox({
     opacity = 0,
 })
 
--- local function toggle_bar()
-    -- bar.sidebar.visible = not bar.sidebar.visible
-    -- bar.sidebar.ontop = not bar.sidebar.ontop
--- end
-
 sidebar_displayer:connect_signal( "mouse::enter", 
     function()
         bar.sidebar.visible = true
@@ -96,7 +94,7 @@ sidebar_displayer:connect_signal( "mouse::enter",
     end
 )
 
-bar.sidebar:connect_signal("mouse::leave", 
+bar.sidebar:connect_signal( "mouse::leave", 
     function()
         bar.sidebar.visible = false
         bar.sidebar.ontop = false
@@ -104,16 +102,25 @@ bar.sidebar:connect_signal("mouse::leave",
 )
 
 bar.sidebar:setup ({
-    { -- top
+    { -- Time & date widget
         utils.pad_height(20),
         datetime,
-        utils.pad_height(10),
-        weather_widget,
         layout = wibox.layout.fixed.vertical,
     },
+    utils.pad_height(3),
 
-    utils.pad_height(10),
-    { -- middle
+    { -- Weather widget
+        {
+            weather_widget,
+            utils.pad_width(20),
+            layout = wibox.layout.fixed.horizontal,
+        },
+        halign = 'center',
+        widget = wibox.container.place,
+    },
+
+    utils.pad_height(20),
+    { -- Infobars
         {
             utils.pad_width(30),
             audio_widget,

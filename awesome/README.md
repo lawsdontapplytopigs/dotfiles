@@ -19,7 +19,8 @@ will be here
         [x]  Cpu widget
         [x]  Ram widget
         [x]  Audio widget
-        [ ]  Weather widget
+        [x]  Weather widget
+        [ ]  Mpd client widget
         [ ]  Diskspace widget
     [ ]  Exit screen
         

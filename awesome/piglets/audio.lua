@@ -42,7 +42,7 @@ audio.audio_bar_widget = wibox.widget({
     background_color    = bottom_color,
     shape               = beautiful.bottom_infobar_shape or gears.shape.rectangle,
     widget              = wibox.widget.progressbar,
-    })
+})
 
 -- this is where we put together the icon and the sidebar audio bar
 audio.audio_widget = wibox.widget({
@@ -57,20 +57,23 @@ audio.notification_audio_bar = wibox.widget({
     max_value           = 100,
     bar_shape           = beautiful.top_infobar_shape or gears.shape.rectangle,
     color               = top_color,
-    forced_height       = beautiful.infobar_height or dpi(10),
-    forced_width        = beautiful.infobar_width or dpi(35),
+    -- forced height and width don't do anything in this context
+    -- because the widget stretches to meet the geometry of the
+    -- parent widget (the widget it's nested in)
+    -- forced_height       = beautiful.infobar_height or dpi(10),
+    -- forced_width        = beautiful.infobar_width or dpi(35),
     background_color    = bottom_color,
     shape               = beautiful.bottom_infobar_shape or gears.shape.rectangle,
     widget              = wibox.widget.progressbar,
-    })
+})
 
 -- the background for the sidebar audio bar, along where we also put the 
 -- notification audio bar
 audio.notification_audio_bar_bg = wibox({
     x = awful.screen.focused().geometry.width - dpi(400),
     y = awful.screen.focused().geometry.height - dpi(100),
-    height = dpi(30),
-    width = dpi(300),
+    height = beautiful.infobar_height or dpi(30),
+    width = beautiful.infobar_width or dpi(300),
     shape = gears.shape.rounded_bar,
     widget = audio.notification_audio_bar,
     visible = false,
@@ -80,7 +83,7 @@ audio.notification_audio_bar_bg = wibox({
     -- the bg color should hopefully not be seen at all.
     -- but I'll leave it here for debugging later
     bg = beautiful.bottom_audio_bar_color
-    })
+})
 
 
 local function update_widget(event)
@@ -117,7 +120,6 @@ local function update_widget(event)
 
             -- the sidebar audio widget
             local wid = audio.audio_bar_widget
-            -- local wid = audio.audio_widget.get_children_by_id(audio.audio_widget, 'audio_bar')[1]
             wid.value = tonumber(volume)
             wid.color = _top_color
             wid.background_color = _bottom_color

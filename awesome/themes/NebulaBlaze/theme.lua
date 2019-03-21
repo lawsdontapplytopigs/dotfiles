@@ -243,7 +243,7 @@ theme.titlebar_height = 36
 theme.titlebar_title_enabled = false
 theme.titlebar_font = theme.font
 -- Titlebar text alignment : left, right, center
-theme.titlebar_title_align = "center"
+theme.titlebar_title_align = "left"
 theme.titlebar_position = "top"
 -- Titlebar color
 theme.titlebar_bg_normal = bg_light

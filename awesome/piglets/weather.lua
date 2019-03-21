@@ -3,7 +3,6 @@ local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local personal = require("piglets.personal_dont_put_on_github")
 local dpi = require("beautiful").xresources.apply_dpi
 local utils = require("utils")
 
@@ -20,8 +19,6 @@ local weather_text = wibox.widget{
     widget = wibox.widget.textbox
 }
 
-naughty.notify({text = tostring(weather_text:get_preferred_size(1))})
-
 local weather_icon = wibox.widget.imagebox(beautiful.whatever_icon)
 weather_icon.resize = true
 weather_icon.visible = true
@@ -34,9 +31,6 @@ weather.weather_widget = wibox.widget({
     weather_text,
     layout = wibox.layout.fixed.horizontal,
 })
-
-
--- weather.weather_widget = wibox.container.constraint(_weather_widget, 'min', dpi(170))
 
 local function update_widget(icon_code, weather_details)
   -- Set icon

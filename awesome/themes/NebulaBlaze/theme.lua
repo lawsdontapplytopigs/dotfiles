@@ -35,7 +35,8 @@ local theme = {}
 -- The `whatever` font name just loads the default font, since `whatever` is
 -- not a valid font name. At least not installed on this system.
 theme.padding_font = 'whatever 2'
-theme.font  = "Roboto Medium 12"
+-- theme.font = "TTCommons Medium 14"
+theme.font = "Roboto Medium 12"
 theme.monospace_font = "RobotoMono 13"
 
 -- theme.icon1 = "/home/ciugamenn/adobe_color_cc.png"
@@ -156,48 +157,75 @@ theme.menu_width  = dpi(100)
 -------------------
 -- Rounded corners
 -------------------
-theme.border_radius = dpi(9) -- set roundness of corners
-
+theme.border_radius = dpi(7) -- set roundness of corners
 
 -------------------
 -- Sidebar
 -------------------
 -- Colors
+-- theme.sidebar_bg = "#242430"
 theme.sidebar_bg = bg
 theme.sidebar_fg = "#ffffff"
+
+local theme_folder = '~/.config/awesome/themes/'..theme_name..'/'
+
+-- Weather
+local weather_dir = theme_folder .. 'weather/'
+theme.sun_icon = weather_dir .. 'sun.png'
+theme.moon_icon = weather_dir .. 'moon.png'
+theme.dclouds_icon = weather_dir .. 'dcloud.png'
+theme.nclouds_icon = weather_dir .. 'ncloud.png'
+theme.cloud_icon = weather_dir .. 'cloud.png'
+theme.dark_cloud_icon = weather_dir .. 'cloud.png'
+theme.rain_icon = weather_dir .. 'rain.png'
+theme.storm_icon = weather_dir .. 'storm.png'
+theme.snow_icon = weather_dir .. 'snow.png'
+theme.mist_icon = weather_dir .. 'mist.png'
+theme.whatever_icon = weather_dir .. 'whatever.png'
+
+theme.weather_font = 'TTCommons 22' or 'Roboto 24' or theme.font
+
+
+-- Mpd client
+theme.song_status_font = 'TTCommons Medium 18' or 'Roboto Bold 20' or theme.font
+theme.music_info_font = 'TTCommons 16' or 'Roboto Light 18' or theme.font
+
+theme.next_button_icon = theme_folder .. 'sidebar/playerctl_next.png'
+theme.prev_button_icon = theme_folder .. 'sidebar/playerctl_prev.png'
+theme.toggle_button_icon = theme_folder .. 'sidebar/playerctl_toggle.png'
+
+-- Icons 
+-- note: this will impact how big the bars will appear. set them with caution
+-- and yes, I should fix this
+theme.icon_size = dpi(55)
 
 -- the bars geometry
 theme.top_infobar_shape = gears.shape.rounded_bar
 theme.bottom_infobar_shape = gears.shape.rounded_bar
-
--- dimensions
 theme.infobar_width = dpi(330)
-theme.infobar_height = dpi(35)
-
--- Icon size
--- note: this will impact how big the widget will appear. set them with caution
-theme.icon_size = dpi(45)
+theme.infobar_height = dpi(40)
 
 -- Audio
-
-icon_folder = '~/.config/awesome/themes/'..theme_name..'/icons/'
-
-theme.audio_icon = icon_folder .. 'audio.png'
+theme.audio_icon = theme_folder .. 'sidebar/volume.png'
 theme.audio_bar_top_color = '#ffd143'
 theme.audio_bar_bottom_color = '#b48800'
-
 theme.audio_bar_top_color_muted = gray4
 theme.audio_bar_bottom_color_muted = gray2
 
+-- 
+
 -- Cpu
-theme.cpu_icon = icon_folder .. 'cpu.png'
-theme.cpu_bar_top_color = '#8860ed'
-theme.cpu_bar_bottom_color = '#432b6b'
+theme.cpu_icon = theme_folder .. 'sidebar/cpu.png'
+theme.cpu_bar_top_color = '#00cece'
+theme.cpu_bar_bottom_color = '#007676'
+
+-- theme.cpu_bar_top_color = '#8860ed'
+-- theme.cpu_bar_bottom_color = '#432b6b'
 
 -- Ram
-theme.ram_icon = icon_folder .. 'ram.png'
-theme.ram_bar_top_color = '#50ffff'
-theme.ram_bar_bottom_color = '#009999'
+theme.ram_icon = theme_folder .. 'sidebar/ram.png'
+theme.ram_bar_top_color     = '#551383'
+theme.ram_bar_bottom_color  = '#2f0a49'
 
 
 
@@ -290,6 +318,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 )
 
 theme.wallpaper = '/home/ciugamenn/images/21_9_wallpapers/Swe2Jap.png'
+-- theme.wallpaper = '/home/ciugamenn/images/21_9_wallpapers/y1ycMG2.jpg'
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "/usr/share/icons/Paper"

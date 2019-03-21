@@ -10,6 +10,7 @@ will be here
     i still want the widgets from the wibar, but I don't like the wibar
     that's why I'll have to implement the widgets in some other way,
     before I can take the wibar out completely
+    EDIT: I'll first try to make it look good and then maybe I won't take it out
     -->
     [ ]  Removing the wibar
         [ ]  Taglist widget
@@ -22,13 +23,16 @@ will be here
         [x]  Audio widget
         [x]  Weather widget
         [x]  Mpd client widget
-        [ ]  Temperature widget
+        [x]  Temperature widget
         [ ]  Diskspace widget
+
+    [ ]  Titlebars
+        [ ] Change the current button icons with round ones
 
     [ ]  Exit screen
 
     [ ]  General
-        [ ]  Clean up keybindings and implement the ones
+        [ ]  Clean up keybindings and implement additional ones
         [ ]  Set window minimum resizing values
         
     [ ]  Cleaning up (setting theme colors universally, setting proper icons, etc)
@@ -41,5 +45,6 @@ will be here
 
     [ ] Trivial things
         [ ] Create 'muted' icon for the sidebar volume bar 
+        [ ] Create a fire icon that's actually the color of the temperature bar
 
 

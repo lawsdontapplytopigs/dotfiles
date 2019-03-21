@@ -212,6 +212,11 @@ theme.audio_bar_bottom_color = '#b48800'
 theme.audio_bar_top_color_muted = gray4
 theme.audio_bar_bottom_color_muted = gray2
 
+-- Cpu Temperature
+theme.temperature_icon = theme_folder .. 'sidebar/temperature.png'
+theme.temperature_bar_top_color = '#e92f52'
+theme.temperature_bar_bottom_color = '#8b0039'
+
 -- Cpu
 theme.cpu_icon = theme_folder .. 'sidebar/cpu.png'
 theme.cpu_bar_top_color = '#00cece'

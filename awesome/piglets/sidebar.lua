@@ -7,16 +7,17 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local utils = require("utils")
 
-local cpu_widget = require("piglets.cpu").cpu_widget
-local audio_widget = require("piglets.audio").audio_widget
 local notification_audio_bar_bg = require("piglets.audio").notification_audio_bar_bg
-local ram_widget = require("piglets.ram").ram_widget
 local weather_widget = require("piglets.weather").weather_widget
+local music_widget = require("piglets.music").music_widget
+local audio_widget = require("piglets.audio").audio_widget
+local temperature_widget = require("piglets.temperature").temperature_widget
+local cpu_widget = require("piglets.cpu").cpu_widget
+local ram_widget = require("piglets.ram").ram_widget
 
 
 local bar = {}
 
-local music_widget = require("piglets.music").music_widget
 
 -- Sometimes fonts have to be configured with weird names, different than the
 -- names we usually use to refer to them. That's why, after I find a name that
@@ -119,19 +120,23 @@ bar.sidebar:setup ({
         widget = wibox.container.place,
     },
 
-    utils.pad_height(3),
-    -- {
-        -- utils.pad_width(100),
-    music_widget,
-        -- utils.pad_width(100),
-        -- layout = wibox.layout.fixed.horizontal,
-    -- },
+    utils.pad_height(6),
 
-    utils.pad_height(20),
+    music_widget,
+
+    utils.pad_height(12),
     { -- Infobars
         {
             utils.pad_width(30),
             audio_widget,
+            utils.pad_width(45),
+            layout = wibox.layout.align.horizontal,
+        },
+        utils.pad_height(1),
+        {
+            -- utils.pad_width(15),
+            utils.pad_width(30),
+            temperature_widget,
             utils.pad_width(45),
             layout = wibox.layout.align.horizontal,
         },
@@ -153,10 +158,6 @@ bar.sidebar:setup ({
         layout = wibox.layout.fixed.vertical,
     },
 
-    -- { -- down
-        -- text = "foo",
-        -- widget = wibox.widget.textbox
-    -- },
     layout = wibox.layout.fixed.vertical,
 })
 

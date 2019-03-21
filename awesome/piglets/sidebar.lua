@@ -16,7 +16,7 @@ local weather_widget = require("piglets.weather").weather_widget
 
 local bar = {}
 
-
+local music_widget = require("piglets.music").music_widget
 
 -- Sometimes fonts have to be configured with weird names, different than the
 -- names we usually use to refer to them. That's why, after I find a name that
@@ -118,6 +118,14 @@ bar.sidebar:setup ({
         halign = 'center',
         widget = wibox.container.place,
     },
+
+    utils.pad_height(3),
+    -- {
+        -- utils.pad_width(100),
+    music_widget,
+        -- utils.pad_width(100),
+        -- layout = wibox.layout.fixed.horizontal,
+    -- },
 
     utils.pad_height(20),
     { -- Infobars

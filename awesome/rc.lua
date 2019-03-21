@@ -31,9 +31,15 @@ local wibox = require("wibox")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
-cleanup = [[bash -c "ps aux | egrep '[0-9] pactl subscribe' | awk '{ print $2 }' | xargs kill"]]
+-- kill the previously running 'subscribed' scripts
+-- otherwise they'll accumulate across awesome-wm restarts
+-- pactl subscribe
+local pactl_cleanup = [[bash -c "ps aux | grep '[0-9] pactl subscribe' | awk '{ print $2 }' | xargs kill"]]
+awful.spawn(pactl_cleanup)
 
-awful.spawn(cleanup)
+local mpc_cleanup = [[bash -c "ps aux | grep '[0-9] mpc idleloop player' | awk '{ print $2 }' | xargs kill"]]
+awful.spawn(mpc_cleanup)
+
 
 -- Load Debian menu entries -- might have to take this out, not on debian anymore
 -- local click_menu = require("freedesktop").menu
@@ -290,7 +296,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- end
 
     --------------- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, })
 
     --------------- Add widgets to the wibox
     s.mywibox:setup {

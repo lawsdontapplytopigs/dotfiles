@@ -14,15 +14,32 @@ will be here
     [ ]  Removing the wibar
         [ ]  Taglist widget
         [ ]  Layout widget
+
     [ ]  Sidebar
         [x]  Clock widget
         [x]  Cpu widget
         [x]  Ram widget
         [x]  Audio widget
         [x]  Weather widget
-        [ ]  Mpd client widget
+        [x]  Mpd client widget
+        [ ]  Temperature widget
         [ ]  Diskspace widget
+
     [ ]  Exit screen
+
+    [ ]  General
+        [ ]  Clean up keybindings and implement the ones
+        [ ]  Set window minimum resizing values
         
     [ ]  Cleaning up (setting theme colors universally, setting proper icons, etc)
+
+    [ ]  Maybe (Things I'm not sure I'll implement)
+        [ ] Write some sort of mpd frontend
+        [ ] Write some sort of scheduling wiget
+        [ ] Write some sort of settings widget
+        [ ] Hotplugging: automatically mounting devices when they get plugged in
+
+    [ ] Trivial things
+        [ ] Create 'muted' icon for the sidebar volume bar 
+
 

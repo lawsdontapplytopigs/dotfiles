@@ -1,6 +1,0 @@
-1. Set up downloading youtube videos with a keybind.
-    RESOURCES:
-        https://stackoverflow.com/questions/46079716/firefox-webextension-api-how-to-get-the-url-of-the-active-tab
-        https://stackoverflow.com/questions/41940986/get-tab-url-from-page-action-webextensions-android
-
-2. Add variable assignment to linklink config file, so I can set up fonts

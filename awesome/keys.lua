@@ -596,18 +596,17 @@ keys.clientbuttons = gears.table.join(
             piglets.sidebar.sidebar.ontop = false
             -- client.focus = c
             -- c:raise()
-            c:connect_signal("button::press", function()
-                client.focus = c
-                c:raise()
-            end)
+            if c then
+                c:connect_signal("button::press", function()
+                    client.focus = c
+                    c:raise()
+                end)
+            end
         end),
     awful.button({ superkey }, 1, awful.mouse.client.move),
     awful.button({ superkey }, 3, awful.mouse.client.resize),
     awful.button({ }, 3, function () mymainmenu:toggle() end)
 )
-
-
-
 
 ------------------------------------------------------------------------------- MOUSE BINDINGS END
 

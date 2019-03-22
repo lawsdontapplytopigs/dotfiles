@@ -12,7 +12,7 @@ will be here
     before I can take the wibar out completely
     EDIT: I'll first try to make it look good and then maybe I won't take it out
     -->
-    [ ]  Removing the wibar
+    [ ]  Redesign or remove the wibar
         [ ]  Taglist widget
         [ ]  Layout widget
 
@@ -25,17 +25,16 @@ will be here
         [x]  Mpd client widget
         [x]  Temperature widget
         [ ]  Diskspace widget
-
-    [ ]  Titlebars
-        [ ] Change the current button icons with round ones
+        [ ]  Search widget
+        [ ]  Exit widget
 
     [ ]  Exit screen
+    [ ]  Titlebars
+        [ ] Change the current button icons with round ones
 
     [ ]  General
         [ ]  Clean up keybindings and implement additional ones
         [ ]  Set window minimum resizing values
-        
-    [ ]  Cleaning up (setting theme colors universally, setting proper icons, etc)
 
     [ ]  Maybe (Things I'm not sure I'll implement)
         [ ] Write some sort of mpd frontend
@@ -43,8 +42,13 @@ will be here
         [ ] Write some sort of settings widget
         [ ] Hotplugging: automatically mounting devices when they get plugged in
 
+    [ ]  Notifications
     [ ] Trivial things
         [ ] Create 'muted' icon for the sidebar volume bar 
         [ ] Create a fire icon that's actually the color of the temperature bar
+        [ ] Make it so when you click an actual client window, that client gets focus
+    [ ]  Cleaning up (setting theme colors universally, setting proper icons, etc)
+    [ ]  Bugs
+        [ ] Fix sidebar mpc widget to show something when mpc is stopped
 
 

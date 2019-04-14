@@ -1,7 +1,7 @@
 
 -- simple library with helpful functions to debug my config of awesome
 
-spells = {}
+local spells = {}
 
 
 local function match(str, other_string)
@@ -34,7 +34,8 @@ function spells.exists_in(thing, string)
 
     if type(thing) == 'string' then
 
-        if io.open(thing) ~= nil then -- if it's a file
+        -- if we can open it, it's a file
+        if io.open(thing) ~= nil then 
             line_nr = 1
             for line in io.lines(thing) do
                 if match(line, string) then
@@ -44,7 +45,7 @@ function spells.exists_in(thing, string)
             end
         end
         -- if it's not a file, it's a regular string
-        if string.match(thing, string) ~= nil then
+        elseif string.match(thing, string) ~= nil then
             return true
         end
     end
@@ -76,5 +77,4 @@ function spells.file_difference(file1, file2)
 end
 
 return spells
-
 

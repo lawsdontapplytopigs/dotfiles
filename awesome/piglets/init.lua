@@ -1,10 +1,8 @@
 
-piglets = {}
+local piglets = {}
 
 piglets.sidebar = require('piglets.sidebar')
--- piglets.bubbles = require('piglets.tag_bubbles')
--- piglets.audio = require('piglets.audio')
--- piglets.desktop = require('piglets.desktop')
--- piglets.launcher = require('piglets.launcher')
+piglets.piggyprompt = require('piglets.piggyprompt')
+piglets.hogbar = require('piglets.hogbar')
 
 return piglets

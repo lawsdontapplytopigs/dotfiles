@@ -12,11 +12,14 @@ will be here
     before I can take the wibar out completely
     EDIT: I'll first try to make it look good and then maybe I won't take it out
     -->
-    [ ]  Redesign or remove the wibar
+    [ ] Redesign or remove the wibar
         [ ]  Taglist widget
         [ ]  Layout widget
+        [ ]  Clock widget
+        [ ]  Make it change appearance based on what color the background is
+        [ ]  Open programs widget
 
-    [ ]  Sidebar
+    [ ] Sidebar
         [x]  Clock widget
         [x]  Cpu widget
         [x]  Ram widget
@@ -27,28 +30,58 @@ will be here
         [ ]  Diskspace widget
         [ ]  Search widget
         [ ]  Exit widget
+        [ ]  Fill the bottom part up with something (its pretty barebones right now)
 
-    [ ]  Exit screen
-    [ ]  Titlebars
+    [ ] Write some sort of scheduling wiget
+
+    [ ] Exit screen
+
+    [ ] Titlebars
         [ ] Change the current button icons with round ones
 
-    [ ]  General
-        [ ]  Clean up keybindings and implement additional ones
-        [ ]  Set window minimum resizing values
+    [ ] Clients
+        [ ] have each client show the same types of thin shlick borders that mac os has
 
-    [ ]  Maybe (Things I'm not sure I'll implement)
+    [ ] Notifications
+
+    [ ] A menu for each widget that should have it and the options that make
+        sense for that particular widget
+
+    [ ] General
+        [ ] Clean up keybindings and implement additional ones
+        [ ] Create 'muted' icon for the sidebar volume bar 
+        [ ] Create a fire icon that's actually the color of the temperature bar
+        [x] Make it so when you click an actual client window, that client gets focus
+        [ ] Make it so when you press 'mod + shift + [qw]` the client will get sent
+            to the previous tag or the next one, respectively
+
+    [ ] Maybe (Things I'm not sure I'll implement)
         [ ] Write some sort of mpd frontend
-        [ ] Write some sort of scheduling wiget
         [ ] Write some sort of settings widget
         [ ] Hotplugging: automatically mounting devices when they get plugged in
 
-    [ ]  Notifications
-    [ ] Trivial things
-        [ ] Create 'muted' icon for the sidebar volume bar 
-        [ ] Create a fire icon that's actually the color of the temperature bar
-        [ ] Make it so when you click an actual client window, that client gets focus
-    [ ]  Cleaning up (setting theme colors universally, setting proper icons, etc)
-    [ ]  Bugs
-        [ ] Fix sidebar mpc widget to show something when mpc is stopped
+    [ ] Cleaning up (setting theme colors universally, setting proper icons, etc)
+        [ ] Making global variables that should be local local
+        [ ] Reimplement the way widget spacing for the sidebar works. At the moment it's
+            an extemely hacky way of doing it, based on textboxes with
+            a font that has the size '2'
+        [ ] Put the weather file somewhere in my awesome config files.
+            It makes more sense for it to be there, instead of my home directory.
+        [ ] Take out the `luafilesystem` dependency, and use the `gears.filesystem`
+            library built into Awesome
 
+    [ ] Refactoring
+        [ ] Refactor the piggyprompt
+
+    [ ] Bugs
+        [ ] When the mpc client on the sidebar is stopped, nothing is shown as the song. fix that
+        [ ] Make sidebar weather widget get data when the pc is first powered up too
+        [ ] Sometimes(a lot of times, acutally, if you have a window maximized,
+            after rebooting the pc, if you start that program again, 
+            it starts maximized and occupies a half of the wibar
+        [ ] Make the text in the titlebars discontinue at some point with 
+            three dots at the end
+        [ ] Set window minimum resizing values so the buttons never get resized
+        [ ] Set a forced resize on sidebar weather widget icons, 
+            and the preffered size along with it
 

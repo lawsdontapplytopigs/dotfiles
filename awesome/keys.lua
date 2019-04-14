@@ -18,6 +18,10 @@ local superkey = "Mod4"
 local alt = "Mod1"
 
 
+-- for k, v in pairs(piglets.custom_prompt) do
+    -- naughty.notify({text = tostring(k)})
+-- end
+
 -- put global variables in a file
 -- for k, _ in pairs(_G) do
     -- file = io.open("/home/ciugamenn/awesome_globals.txt", "a")
@@ -35,15 +39,21 @@ local alt = "Mod1"
 -- tags: workspaces or "desktops"
 
 
--- keys.desktopbuttons = gears.table.join(
-    -- awful.button({ }, 1, function ()
--- 
-        -- local function double_tap() end
--- 
-        -- utils.single_double_tap(function() end, double_tap)
-    -- end),
-    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
--- )
+keys.desktopbuttons = gears.table.join(
+    awful.button({ }, 1, function (c)
+
+        if c then
+            client.focus = c
+            c:raise()
+        end
+        local function double_tap() 
+            naughty.notify({text = tostring("ses")})
+        end
+
+        utils.single_double_tap(function() end, double_tap)
+    end),
+    awful.button({ }, 3, function () mymainmenu:toggle() end)
+)
 
 keys.globalkeys = gears.table.join(
 
@@ -101,12 +111,12 @@ keys.globalkeys = gears.table.join(
     -- STANDARD PROGRAM
     
     -- alt + 'grave' to start a terminal
-    awful.key({ alt }, "grave", function () awful.spawn(terminal) end,
+    awful.key({ alt }, "grave", function () awful.spawn('st') end,
               { description = "open a terminal", group = "awesome"}),
 
 
     -- superkey + 'grave' to start a terminal
-    awful.key({ superkey }, "grave", function () awful.spawn(terminal) end,
+    awful.key({ superkey }, "grave", function () awful.spawn('st') end,
               { description = "open a terminal", group = "awesome"}),
 
 
@@ -126,13 +136,27 @@ keys.globalkeys = gears.table.join(
     --awful.key({ superkey, control }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
     --          {description = "decrease the number of columns", group = "layout"}),
 
-
     -- superkey + r
     -- program-running prompt
-    --awful.key({ superkey }, "r",
-    --        function () 
-    --            awful.screen.focused().mypromptbox:run() end,
-    --            {description = "run prompt", group = "awesome"}),
+    -- awful.key({ alt }, "r",
+        -- function () 
+            -- awful.screen.focused().mypromptbox:run() 
+            -- piglets.sidebar.sidebar.promptbox:run()
+            -- for k, v in pairs(piglets.sidebar.sidebar:get_children_by_id("launcher")[1]) do
+                -- naughty.notify({text = tostring(k)})
+            -- end
+            -- piglets.sidebar.sidebar:get_children_by_id("launcher")[1]:run()
+            -- if not piglets.sidebar.sidebar.visible then
+                -- piglets.sidebar.sidebar.visible = true
+                -- piglets.sidebar.sidebar.ontop = true
+            -- end
+            -- piglets.sidebar.promptbox:run()
+        -- end,
+    -- {description = "run prompt", group = "awesome"}),
+
+
+    awful.key({ alt }, "r", piglets.piggyprompt.launch,
+        { description = "Run programs", group = "awesome"}),
 
     -- superkey + x
     -- run-lua-code prompt
@@ -148,8 +172,13 @@ keys.globalkeys = gears.table.join(
         {description = "lua execute prompt", group = "awesome"}),
 
     -- Menubar
-    awful.key({ superkey }, "x", function() menubar.show() end,
-              {description = "show the menubar", group = "awesome"}),
+    -- this is broken currently (30, march, 2019)
+    -- awful.key({ superkey }, "x", 
+        -- function() 
+            -- menubar.show() 
+            -- naughty.notify({text = tostring(capi.selection())})
+        -- end,
+    -- {description = "show the clipboard contents", group = "awesome"}),
 
 
     ---------------
@@ -489,7 +518,14 @@ keys.globalkeys = gears.table.join(
     -- superkey + shift + h
     -- show help
     awful.key({ superkey, shift }, "h",      hotkeys_popup.show_help,
-              { description="show help", group="awesome"})
+              { description="show help", group="awesome"}),
+
+    awful.key({ alt }, "d", 
+        function()
+            awful.spawn("rofi -show")
+        end,
+        { description="show rofi", group="rofi"})
+
 )
 
 
@@ -590,22 +626,18 @@ end
 -- Mouse buttons on the client (whole window, not just titlebar)
 keys.clientbuttons = gears.table.join(
     awful.button({ }, 1, 
-        function (c) 
+        function (c)
             naughty.destroy_all_notifications()
             piglets.sidebar.sidebar.visible = false
             piglets.sidebar.sidebar.ontop = false
-            -- client.focus = c
-            -- c:raise()
-            if c then
-                c:connect_signal("button::press", function()
-                    client.focus = c
-                    c:raise()
-                end)
-            end
+            -- mymainmenu:hide()
+
+            client.focus = c
+            c:raise()
         end),
     awful.button({ superkey }, 1, awful.mouse.client.move),
-    awful.button({ superkey }, 3, awful.mouse.client.resize),
-    awful.button({ }, 3, function () mymainmenu:toggle() end)
+    awful.button({ superkey }, 3, awful.mouse.client.resize)
+    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
 )
 
 ------------------------------------------------------------------------------- MOUSE BINDINGS END
@@ -613,6 +645,7 @@ keys.clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(keys.globalkeys)
-root.buttons(keys.clientbuttons)
+-- the buttons are just for the titlebars apparently
+root.buttons(keys.desktopbuttons)
 
 return keys

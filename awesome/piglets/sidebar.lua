@@ -14,6 +14,7 @@ local audio_widget = require("piglets.audio").audio_widget
 local temperature_widget = require("piglets.temperature").temperature_widget
 local cpu_widget = require("piglets.cpu").cpu_widget
 local ram_widget = require("piglets.ram").ram_widget
+-- local launcher = require("piglets.launcher").text_widget
 
 
 local bar = {}
@@ -102,6 +103,8 @@ bar.sidebar:connect_signal( "mouse::leave",
     end
 )
 
+bar.promptbox = awful.widget.prompt()
+
 bar.sidebar:setup ({
     { -- Time & date widget
         utils.pad_height(20),
@@ -157,6 +160,7 @@ bar.sidebar:setup ({
         },
         layout = wibox.layout.fixed.vertical,
     },
+    bar.promptbox,
 
     layout = wibox.layout.fixed.vertical,
 })

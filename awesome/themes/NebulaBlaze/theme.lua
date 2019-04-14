@@ -12,7 +12,7 @@ local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 local gears = require("gears")
 
--- get naughty for debugging ;)
+-- get naughty for debugging ;;;;)
 local naughty = require("naughty")
 
 local home = os.getenv("HOME")
@@ -55,11 +55,13 @@ local gray6       = "#d4d0d8"
 local pretty_gray = '#9290a0'
 
 
-local bg          = "#1f1e2a"
+local bg          = "#201e2a"
+local bg1         = "#1f1e2a"
 local bg_light    = "#2f2e3a"
 local gamer_pink  = "#e92f52"
 local red         = "#9a3049"
-local blue        = "#77ffff"
+local blue        = "#77ffdd"
+-- local blue        = "#77ffff"
 local pink        = "#ff8bff"
 local purple      = "#8860ed"
 local beige       = "#e6c098"
@@ -74,7 +76,7 @@ local fg          = "#fffdd8"
 -- certain aspects of the theme like the titlebars
 -- I'll have to see if I can configure everything specifically 
 -- and then maybe remove them
-theme.bg_dark       = bg
+theme.bg            = bg -- this is not an awesomewm fallback color. I added it
 theme.bg_normal     = bg_light
 theme.bg_focus      = bg_light
 theme.bg_urgent     = gamer_red
@@ -82,10 +84,21 @@ theme.bg_minimize   = bg_light
 theme.bg_systray    = bg_light
 
 -- this is basically the text on titlebars
+theme.fg            = fg -- this is not an awesomewm fallback color. I added it
 theme.fg_normal     = fg
 theme.fg_focus      = fg
 theme.fg_urgent     = fg
 theme.fg_minimize   = fg
+
+
+theme.gray1       = gray1       
+theme.gray2       = gray2       
+theme.gray3       = gray3       
+theme.gray4       = gray4       
+theme.gray5       = gray5       
+theme.gray6       = gray6       
+theme.pretty_gray = pretty_gray 
+
 
 -------------------
 -- Gaps
@@ -172,7 +185,7 @@ local theme_folder = '~/.config/awesome/themes/'..theme_name..'/'
 -- Weather
 local weather_dir = theme_folder .. 'weather/'
 theme.sun_icon = weather_dir .. 'sun.png'
-theme.moon_icon = weather_dir .. 'moon.png'
+theme.moon_icon = weather_dir .. 'moon.svg'
 theme.dclouds_icon = weather_dir .. 'dcloud.png'
 theme.nclouds_icon = weather_dir .. 'ncloud.png'
 theme.cloud_icon = weather_dir .. 'cloud.png'
@@ -321,10 +334,14 @@ theme.awesome_icon = theme_assets.awesome_icon(
 )
 
 theme.wallpaper = '/home/ciugamenn/images/21_9_wallpapers/Swe2Jap.png'
--- theme.wallpaper = '/home/ciugamenn/images/21_9_wallpapers/y1ycMG2.jpg'
+-- theme.wallpaper = '/home/ciugamenn/images/21_9_wallpapers/1y1cMG2.jpg'
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "/usr/share/icons/Paper"
+
+-- Launcher theme
+theme.launcher_radius = 33
+
 
 return theme
 

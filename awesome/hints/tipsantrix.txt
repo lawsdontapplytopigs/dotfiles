@@ -1,0 +1,38 @@
+
+# things I wish I knew sooner
+
+* if you want to get the font height you can use the `beautiful` module for that.
+    The function is `beautiful.get_font_height(font)`.
+
+* to use the X11 clipboard inside the awesome window manager, you have to use its c api.
+    So to display as a notification what you currently have in your clipboard you can do:
+    ```lua
+    local naughty = require("naughty")
+    local capi = { selection }
+
+    naughty.notify({text = tostring(capi.selection())})
+    ```
+    !!! NOTE: apparently you can't use that code to do that. 
+    But I know making it work still has to do with that piece of the c api.
+    When I tried that code and restarted awesome, it just showed everything blank.
+    Or at least that was the case in the `Xephyr` utility.
+
+* apparently, the radical package that Elv wrote uses the `radical.object` module
+    to make the '''object''', whatever that means. I'm guessing that it's just the
+    basic setup of a general object he's trying to use. So from this general structure
+    then maybe he wants to set it up afterwards. In all the widgets he's created.
+
+* UNDOCUMMENTED! The `wibox.container.background` widget also takes an undocummented
+    parameter: `spacing`, which, of course, just tells the widget how much spacing
+    to put between widgets
+
+* UNDOCUMMENTED! (or if it is, it's buried somewhere deep down in the docs),
+    but you can add spacing to widgets, and ALSO you can add an aditional property
+    `spacing_widget` where you can construct a whole another widget, inline.
+
+* ITEMS IN RADICAL: it seems items in the `radical system are first and foremost
+    made in the `radical/item/init.lua` file. I think this handles the color
+    changing, the selection, automatic redrawing, etc.
+* For really customizing titlebars, I'll have to look at this:
+[link](https://github.com/awesomeWM/awesome/issues/2637)
+

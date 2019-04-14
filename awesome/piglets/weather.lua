@@ -7,7 +7,7 @@ local dpi = require("beautiful").xresources.apply_dpi
 local utils = require("utils")
 
 -- update as much as you want. Awesome just reads the weather from a file ;)
-update_interval = 7200 -- in secs (he said sex haha)
+update_interval = 3600 -- in secs (he said sex haha)
 
 local weather = {}
 

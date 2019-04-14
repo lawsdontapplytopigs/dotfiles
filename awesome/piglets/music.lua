@@ -2,15 +2,12 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
 local xresources = require("beautiful.xresources")
 local utils = require("utils")
 local dpi = xresources.apply_dpi
 local gears = require("gears")
 
 local music = {}
-
-
 
 local song_status = wibox.widget.textbox("Current song:")
 song_status.font = beautiful.song_status_font
@@ -77,7 +74,6 @@ local toggle_buttons = gears.table.join(
     awful.button({ }, 1,
         function()
             awful.spawn([[ bash -c "mpc toggle" ]])
-            naughty.notify({text = tostring('toggle')})
         end
     )
 )
@@ -87,7 +83,6 @@ local next_buttons = gears.table.join(
     awful.button({ }, 1, 
         function()
             awful.spawn([[ bash -c "mpc next" ]])
-            naughty.notify({text = tostring('next')})
         end
     )
 )
@@ -97,7 +92,6 @@ local prev_buttons = gears.table.join(
     awful.button({ }, 1,
         function()
             awful.spawn([[ bash -c "mpc prev" ]])
-            naughty.notify({text = tostring('prev')})
         end
     )
 )

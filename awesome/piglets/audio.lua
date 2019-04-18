@@ -74,15 +74,13 @@ audio.notification_audio_bar_bg = wibox({
     y = awful.screen.focused().geometry.height - dpi(100),
     height = beautiful.infobar_height or dpi(30),
     width = beautiful.infobar_width or dpi(300),
-    shape = gears.shape.rounded_bar,
+    shape = gears.shape.rectangle,
+    bg = "#00000000",
     widget = audio.notification_audio_bar,
     visible = false,
     -- setting the type as dock allows compton to recognize it as dock
     -- and not draw shadows for it
     type = 'dock',
-    -- the bg color should hopefully not be seen at all.
-    -- but I'll leave it here for debugging later
-    bg = beautiful.bottom_audio_bar_color
 })
 
 

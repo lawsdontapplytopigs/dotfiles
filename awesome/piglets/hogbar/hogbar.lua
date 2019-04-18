@@ -13,8 +13,8 @@ local terminal = "st"
 local editor = "vim"
 local editor_cmd = terminal .. ' -e ' .. editor
 
-local font = 'Roboto Bold 13'
--- local font = 'TTCommons Bold 16'
+-- local font = 'Roboto Bold 14'
+local font = 'TTCommons DemiBold 16'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -166,14 +166,13 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
     local screen_width = awful.screen.focused().geometry.width
     -- local timebox_width = 3 -- ???? If only you could get its natural width
-    local wibar_height = 30
+    local wibar_height = 40
     local font_height = beautiful.get_font_height(beautiful.font)
 
 ------------------- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
-
 
     -- Taglist
 
@@ -190,11 +189,6 @@ awful.screen.connect_for_each_screen(function(s)
         screen = s, 
         filter = awful.widget.taglist.filter.all, 
         buttons = taglist_buttons,
-        -- style = {
-            -- shape = gears.shape.rounded_bar,
-            -- forced_width = 200,
-            -- forced_height = 30,
-        -- },
         layout = wibox.layout.fixed.horizontal,
         widget_template = {
             {
@@ -275,33 +269,29 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     -- Tasklist
-    s.mytasklist = awful.widget.tasklist ({
+    tasklist = awful.widget.tasklist ({
         screen   = s,
         filter   = awful.widget.tasklist.filter.currenttags,
         buttons  = tasklist_buttons,
         style    = {
             shape = gears.shape.circle,
+            bg_normal = '#00000000',
+            bg_focus = '#00000000',
         },
         layout   = {
             layout  = wibox.layout.fixed.horizontal,
         },
-        -- Notice that there is *NO* wibox.wibox prefix, it is a template,
-        -- not a widget instance.
         widget_template = {
             {
                 {
                     {
                         {
-                            id     = 'icon_role',
-                            widget = wibox.widget.imagebox,
+                            widget = awful.widget.clienticon,
+                            id = 'clienticon',
                         },
                         margins = 6,
                         widget  = wibox.container.margin,
                     },
-                    -- {
-                        -- id     = 'text_role',
-                        -- widget = wibox.widget.textbox,
-                    -- },
                     layout = wibox.layout.fixed.horizontal,
                 },
                 -- left  = 10,
@@ -311,16 +301,17 @@ awful.screen.connect_for_each_screen(function(s)
             id     = 'background_role',
             bg = '#00000000',
             widget = wibox.container.background,
+            create_callback = function(self, c, index, objects)
+                self:get_children_by_id('clienticon')[1].client = c
+            end,
         },
     })
-    --------------- Create a tasklist widget
-    -- s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     --------------- Add widgets to the wibox
     s.mywibox:setup ({
         {
             taglist,
-            s.mytasklist,
+            tasklist,
             layout = wibox.layout.fixed.horizontal,
         },
         utils.pad_width(1),

@@ -17,6 +17,7 @@ local naughty = require("naughty")
 
 local home = os.getenv("HOME")
 local titlebar_icon_path = home .. "/.config/awesome/themes/" .. theme_name .. "/titlebar/"
+local theme_folder = '~/.config/awesome/themes/'..theme_name..'/'
 
 local theme = {}
 
@@ -180,7 +181,6 @@ theme.border_radius = dpi(7) -- set roundness of corners
 theme.sidebar_bg = bg
 theme.sidebar_fg = "#ffffff"
 
-local theme_folder = '~/.config/awesome/themes/'..theme_name..'/'
 
 -- Weather
 local weather_dir = theme_folder .. 'weather/'
@@ -235,13 +235,12 @@ theme.cpu_icon = theme_folder .. 'sidebar/cpu.png'
 theme.cpu_bar_top_color = '#00cece'
 theme.cpu_bar_bottom_color = '#007676'
 
--- theme.cpu_bar_top_color = '#8860ed'
--- theme.cpu_bar_bottom_color = '#432b6b'
-
 -- Ram
 theme.ram_icon = theme_folder .. 'sidebar/ram.png'
 theme.ram_bar_top_color     = '#551383'
 theme.ram_bar_bottom_color  = '#2f0a49'
+-- theme.ram_bar_top_color = '#8860ed'
+-- theme.ram_bar_bottom_color = '#432b6b'
 
 
 
@@ -252,7 +251,7 @@ theme.ram_bar_bottom_color  = '#2f0a49'
 -- Titlebars
 -------------------
 theme.titlebars_enabled = true
-theme.titlebar_height = 36
+theme.titlebar_height = 42
 theme.titlebar_title_enabled = false
 theme.titlebar_font = theme.font
 -- Titlebar text alignment : left, right, center
@@ -268,47 +267,70 @@ theme.titlebar_fg_focus = pretty_gray
 -- Titlebar buttons
 -- Define the images to load
 local tip = titlebar_icon_path -- alias to save time/space
-theme.titlebar_close_button_normal = tip .. "close_normal.svg"
-theme.titlebar_close_button_focus  = tip .. "close_focus.svg"
-theme.titlebar_minimize_button_normal = tip .. "minimize_normal.svg"
-theme.titlebar_minimize_button_focus  = tip .. "minimize_focus.svg"
-theme.titlebar_ontop_button_normal_inactive = tip .. "ontop_normal_inactive.svg"
-theme.titlebar_ontop_button_focus_inactive  = tip .. "ontop_focus_inactive.svg"
-theme.titlebar_ontop_button_normal_active = tip .. "ontop_normal_active.svg"
-theme.titlebar_ontop_button_focus_active  = tip .. "ontop_focus_active.svg"
-theme.titlebar_sticky_button_normal_inactive = tip .. "sticky_normal_inactive.svg"
-theme.titlebar_sticky_button_focus_inactive  = tip .. "sticky_focus_inactive.svg"
-theme.titlebar_sticky_button_normal_active = tip .. "sticky_normal_active.svg"
-theme.titlebar_sticky_button_focus_active  = tip .. "sticky_focus_active.svg"
-theme.titlebar_floating_button_normal_inactive = tip .. "floating_normal_inactive.svg"
-theme.titlebar_floating_button_focus_inactive  = tip .. "floating_focus_inactive.svg"
-theme.titlebar_floating_button_normal_active = tip .. "floating_normal_active.svg"
-theme.titlebar_floating_button_focus_active  = tip .. "floating_focus_active.svg"
-theme.titlebar_maximized_button_normal_inactive = tip .. "maximized_normal_inactive.svg"
-theme.titlebar_maximized_button_focus_inactive  = tip .. "maximized_focus_inactive.svg"
-theme.titlebar_maximized_button_normal_active = tip .. "maximized_normal_active.svg"
-theme.titlebar_maximized_button_focus_active  = tip .. "maximized_focus_active.svg"
+-- theme.titlebar_close_button_normal = tip .. "close_normal.svg"
+-- theme.titlebar_close_button_focus  = tip .. "close_focus.svg"
+-- local ex_tip = home .. "/.conifg/awesome/themes/" .. theme_name .. "/titlebar2/"
+local ex_tip = theme_folder .. "titlebar2/"
+
+-- regular
+theme.titlebar_close_button_normal = ex_tip .. "close/close_1.svg"
+theme.titlebar_close_button_focus = ex_tip .. "close/close_2.svg"
+theme.titlebar_maximized_button_normal_inactive = ex_tip .. "maximize/maximize_1.svg"
+theme.titlebar_maximized_button_focus_inactive  = ex_tip .. "maximize/maximize_2.svg"
+theme.titlebar_maximized_button_normal_active = ex_tip .. "maximize/maximize_3.svg"
+theme.titlebar_maximized_button_focus_active  = ex_tip .. "maximize/maximize_3.svg"
+theme.titlebar_minimize_button_normal = ex_tip .. "minimize/minimize_1.svg"
+theme.titlebar_minimize_button_focus  = ex_tip .. "minimize/minimize_2.svg"
+
+-- hover
+theme.titlebar_close_button_normal_hover = ex_tip .. "close/close_3.svg"
+theme.titlebar_close_button_focus_hover = ex_tip .. "close/close_3.svg"
+theme.titlebar_maximized_button_normal_inactive_hover = ex_tip .. "maximize/maximize_3.svg"
+theme.titlebar_maximized_button_focus_inactive_hover  = ex_tip .. "maximize/maximize_3.svg"
+theme.titlebar_maximized_button_normal_active_hover = ex_tip .. "maximize/maximize_3.svg"
+theme.titlebar_maximized_button_focus_active_hover  = ex_tip .. "maximize/maximize_3.svg"
+theme.titlebar_minimize_button_normal_hover = ex_tip .. "minimize/minimize_3.svg"
+theme.titlebar_minimize_button_focus_hover  = ex_tip .. "minimize/minimize_3.svg"
+
+-- theme.titlebar_minimize_button_normal = tip .. "minimize_normal.svg"
+-- theme.titlebar_minimize_button_focus  = tip .. "minimize_focus.svg"
+-- theme.titlebar_ontop_button_normal_inactive = tip .. "ontop_normal_inactive.svg"
+-- theme.titlebar_ontop_button_focus_inactive  = tip .. "ontop_focus_inactive.svg"
+-- theme.titlebar_ontop_button_normal_active = tip .. "ontop_normal_active.svg"
+-- theme.titlebar_ontop_button_focus_active  = tip .. "ontop_focus_active.svg"
+-- theme.titlebar_sticky_button_normal_inactive = tip .. "sticky_normal_inactive.svg"
+-- theme.titlebar_sticky_button_focus_inactive  = tip .. "sticky_focus_inactive.svg"
+-- theme.titlebar_sticky_button_normal_active = tip .. "sticky_normal_active.svg"
+-- theme.titlebar_sticky_button_focus_active  = tip .. "sticky_focus_active.svg"
+-- theme.titlebar_floating_button_normal_inactive = tip .. "floating_normal_inactive.svg"
+-- theme.titlebar_floating_button_focus_inactive  = tip .. "floating_focus_inactive.svg"
+-- theme.titlebar_floating_button_normal_active = tip .. "floating_normal_active.svg"
+-- theme.titlebar_floating_button_focus_active  = tip .. "floating_focus_active.svg"
+-- theme.titlebar_maximized_button_normal_inactive = tip .. "maximized_normal_inactive.svg"
+-- theme.titlebar_maximized_button_focus_inactive  = tip .. "maximized_focus_inactive.svg"
+-- theme.titlebar_maximized_button_normal_active = tip .. "maximized_normal_active.svg"
+-- theme.titlebar_maximized_button_focus_active  = tip .. "maximized_focus_active.svg"
 -- (hover)
-theme.titlebar_close_button_normal_hover = tip .. "close_normal_hover.svg"
-theme.titlebar_close_button_focus_hover  = tip .. "close_focus_hover.svg"
-theme.titlebar_minimize_button_normal_hover = tip .. "minimize_normal_hover.svg"
-theme.titlebar_minimize_button_focus_hover  = tip .. "minimize_focus_hover.svg"
-theme.titlebar_ontop_button_normal_inactive_hover = tip .. "ontop_normal_inactive_hover.svg"
-theme.titlebar_ontop_button_focus_inactive_hover  = tip .. "ontop_focus_inactive_hover.svg"
-theme.titlebar_ontop_button_normal_active_hover = tip .. "ontop_normal_active_hover.svg"
-theme.titlebar_ontop_button_focus_active_hover  = tip .. "ontop_focus_active_hover.svg"
-theme.titlebar_sticky_button_normal_inactive_hover = tip .. "sticky_normal_inactive_hover.svg"
-theme.titlebar_sticky_button_focus_inactive_hover  = tip .. "sticky_focus_inactive_hover.svg"
-theme.titlebar_sticky_button_normal_active_hover = tip .. "sticky_normal_active_hover.svg"
-theme.titlebar_sticky_button_focus_active_hover  = tip .. "sticky_focus_active_hover.svg"
-theme.titlebar_floating_button_normal_inactive_hover = tip .. "floating_normal_inactive_hover.svg"
-theme.titlebar_floating_button_focus_inactive_hover  = tip .. "floating_focus_inactive_hover.svg"
-theme.titlebar_floating_button_normal_active_hover = tip .. "floating_normal_active_hover.svg"
-theme.titlebar_floating_button_focus_active_hover  = tip .. "floating_focus_active_hover.svg"
-theme.titlebar_maximized_button_normal_inactive_hover = tip .. "maximized_normal_inactive_hover.svg"
-theme.titlebar_maximized_button_focus_inactive_hover  = tip .. "maximized_focus_inactive_hover.svg"
-theme.titlebar_maximized_button_normal_active_hover = tip .. "maximized_normal_active_hover.svg"
-theme.titlebar_maximized_button_focus_active_hover  = tip .. "maximized_focus_active_hover.svg"
+-- theme.titlebar_close_button_normal_hover = tip .. "close_normal_hover.svg"
+-- theme.titlebar_close_button_focus_hover  = tip .. "close_focus_hover.svg"
+-- theme.titlebar_minimize_button_normal_hover = tip .. "minimize_normal_hover.svg"
+-- theme.titlebar_minimize_button_focus_hover  = tip .. "minimize_focus_hover.svg"
+-- theme.titlebar_ontop_button_normal_inactive_hover = tip .. "ontop_normal_inactive_hover.svg"
+-- theme.titlebar_ontop_button_focus_inactive_hover  = tip .. "ontop_focus_inactive_hover.svg"
+-- theme.titlebar_ontop_button_normal_active_hover = tip .. "ontop_normal_active_hover.svg"
+-- theme.titlebar_ontop_button_focus_active_hover  = tip .. "ontop_focus_active_hover.svg"
+-- theme.titlebar_sticky_button_normal_inactive_hover = tip .. "sticky_normal_inactive_hover.svg"
+-- theme.titlebar_sticky_button_focus_inactive_hover  = tip .. "sticky_focus_inactive_hover.svg"
+-- theme.titlebar_sticky_button_normal_active_hover = tip .. "sticky_normal_active_hover.svg"
+-- theme.titlebar_sticky_button_focus_active_hover  = tip .. "sticky_focus_active_hover.svg"
+-- theme.titlebar_floating_button_normal_inactive_hover = tip .. "floating_normal_inactive_hover.svg"
+-- theme.titlebar_floating_button_focus_inactive_hover  = tip .. "floating_focus_inactive_hover.svg"
+-- theme.titlebar_floating_button_normal_active_hover = tip .. "floating_normal_active_hover.svg"
+-- theme.titlebar_floating_button_focus_active_hover  = tip .. "floating_focus_active_hover.svg"
+-- theme.titlebar_maximized_button_normal_inactive_hover = tip .. "maximized_normal_inactive_hover.svg"
+-- theme.titlebar_maximized_button_focus_inactive_hover  = tip .. "maximized_focus_inactive_hover.svg"
+-- theme.titlebar_maximized_button_normal_active_hover = tip .. "maximized_normal_active_hover.svg"
+-- theme.titlebar_maximized_button_focus_active_hover  = tip .. "maximized_focus_active_hover.svg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
@@ -328,13 +350,19 @@ theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
+-- Hogbar theme
+-- theme.tasklist_bg_normal = '#00000000'
+-- themetasklist_bg_urgent = '#22000022'
+
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )
 
-theme.wallpaper = '/home/ciugamenn/images/21_9_wallpapers/Swe2Jap.png'
--- theme.wallpaper = '/home/ciugamenn/images/21_9_wallpapers/1y1cMG2.jpg'
+-- theme.wallpaper = home ..'/images/elementaryos/wallpapers/Ashim_DSilva.jpg'
+-- theme.wallpaper = home .. '/EHGgqUq.jpg'
+theme.wallpaper = home .. '/images/21_9_wallpapers/Swe2Jap.png'
+-- theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "/usr/share/icons/Paper"

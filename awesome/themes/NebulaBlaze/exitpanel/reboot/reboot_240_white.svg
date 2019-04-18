@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg4"
+   version="1.1"
+   class="jam jam-refresh-reverse"
+   preserveAspectRatio="xMinYMin"
+   height="240"
+   width="240"
+   viewBox="-1.5 -2.5 240 240"
+   sodipodi:docname="reboot_240_white.svg"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1266"
+     inkscape:window-height="980"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="0.98333333"
+     inkscape:cx="-55.932203"
+     inkscape:cy="120"
+     inkscape:window-x="8"
+     inkscape:window-y="48"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4" />
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8">
+    <linearGradient
+       id="linearGradient842">
+      <stop
+         id="stop838"
+         offset="0"
+         style="stop-color:#005c4f;stop-opacity:1" />
+      <stop
+         id="stop840"
+         offset="1"
+         style="stop-color:#005c30;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="52.261993"
+       x2="19.209839"
+       y1="160.98865"
+       x1="214.80276"
+       id="linearGradient844"
+       xlink:href="#linearGradient842" />
+    <clipPath
+       id="clipPath846"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         style="stroke-width:11.7953558"
+         id="path848"
+         d="m 47.788461,69.016913 18.801798,-5.756134 a 11.798001,11.798001 0 0 1 6.900284,22.564517 L 28.373306,99.62587 a 11.795355,11.795355 0 0 1 -14.7324,-7.84392 L -0.1596603,46.664714 A 11.798001,11.798001 0 1 1 22.404855,39.764431 l 5.189957,16.997108 C 55.99803,13.012563 112.34444,-5.8010308 162.36855,14.699299 A 110.65223,110.65223 0 0 1 225.82756,83.478021 11.795355,11.795355 0 1 1 203.3574,90.649597 87.061523,87.061523 0 0 0 47.800258,69.016913 Z m 145.401349,96.662927 -20.93675,5.22535 A 11.795355,11.795355 0 1 1 166.5441,148.0222 l 42.97048,-10.72198 a 11.759969,11.759969 0 0 1 7.19517,-0.94363 11.795355,11.795355 0 0 1 9.9081,8.84652 l 11.41791,45.76599 a 11.795355,11.795355 0 0 1 -22.883,5.70895 L 211.2603,181.08459 A 110.65223,110.65223 0 0 1 18.005188,159.90013 l -3.066793,-7.47826 A 11.796484,11.796484 0 1 1 36.7716,143.48099 l 3.066792,7.46646 a 87.061523,87.061523 0 0 0 153.351418,14.7442 z" />
+    </clipPath>
+  </defs>
+  <rect
+     clip-path="url(#clipPath846)"
+     ry="0"
+     y="-2.4999988"
+     x="-1.4999995"
+     height="240"
+     width="240"
+     id="rect817"
+     style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ef1266;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+</svg>

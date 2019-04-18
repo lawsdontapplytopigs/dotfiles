@@ -33,6 +33,12 @@
 * ITEMS IN RADICAL: it seems items in the `radical system are first and foremost
     made in the `radical/item/init.lua` file. I think this handles the color
     changing, the selection, automatic redrawing, etc.
+
+* INTROSPECTION: I'll have to take a look at the awesome drawable api. Sometimes
+    I want to get the geometry of displayed widgets, but that task has always been
+    a bitch. The drawable api seems to have signals related to geometry so maybe
+    that'll save me
+
 * For really customizing titlebars, I'll have to look at this:
 [link](https://github.com/awesomeWM/awesome/issues/2637)
 

@@ -96,8 +96,12 @@ screen.connect_signal('refresh', function(c) return c end)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-        properties = { border_width = beautiful.border_width,
-                       border_color = beautiful.border_normal,
+        properties = { 
+                       -- border_width = beautiful.border_width,
+                       -- border_color = beautiful.border_normal,
+                       border_width = 1,
+                       -- border_color = "#161a13",
+                       border_color = '#201e2a',
                        focus = awful.client.focus.filter,
                        raise = true,
                        keys = keys.globalkeys,
@@ -189,35 +193,88 @@ client.connect_signal("request::titlebars", function(c) ------------------------
         })
 
     top_titlebar : setup ({
-        { -- Left
-            -- awful.titlebar.widget.iconwidget(c),
-            utils.pad_width(14),
+        layout = wibox.layout.fixed.vertical,
+        {
+            widget = wibox.widget.separator,
+            color  = '#ffffff10',
+            forced_height = 1,
+        },
+        {
+            widget = wibox.container.margin,
+            bottom = 1,
             {
-                font = beautiful.font,
-                widget = awful.titlebar.widget.titlewidget(c),
+                { -- Left
+                    -- awful.titlebar.widget.iconwidget(c),
+                    utils.pad_width(14),
+                    {
+                        font = beautiful.font,
+                        widget = awful.titlebar.widget.titlewidget(c),
+                    },
+                    buttons = buttons,
+                    layout  = wibox.layout.fixed.horizontal
+                },
+                { -- Middle
+                    -- { -- Title -- ( I don't like how the title looks on top, so I took it out )
+                        -- align  = "center"
+                        -- widget = awful.titlebar.widget.titlewidget(c)
+                    -- },
+                    buttons = buttons,
+                    layout  = wibox.layout.flex.horizontal
+                },
+                { -- Right
+                    -- awful.titlebar.widget.floatingbutton (c),
+                    -- awful.titlebar.widget.stickybutton   (c),
+                    -- awful.titlebar.widget.ontopbutton    (c),
+                    {
+                        widget = wibox.container.place,
+                        {
+                            widget = wibox.container.margin,
+                            -- margins = 12,
+                            top = 13,
+                            bottom = 13,
+                            left = 6,
+                            right = 6,
+                            {
+                                layout = wibox.layout.fixed.horizontal,
+                                awful.titlebar.widget.minimizebutton(c),
+                            },
+                        },
+                    },
+                    {
+                        widget = wibox.container.place,
+                        {
+                            widget = wibox.container.margin,
+                            -- margins = 12,
+                            top = 13,
+                            bottom = 13,
+                            left = 6,
+                            right = 6,
+                            {
+                                layout = wibox.layout.fixed.horizontal,
+                                awful.titlebar.widget.maximizedbutton(c),
+                            },
+                        },
+                    },
+                    {
+                        widget = wibox.container.place,
+                        {
+                            widget = wibox.container.margin,
+                            -- margins = 12,
+                            top = 13,
+                            bottom = 13,
+                            left = 6,
+                            right = 10,
+                            {
+                                layout = wibox.layout.fixed.horizontal,
+                                awful.titlebar.widget.closebutton(c),
+                            },
+                        },
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                layout = wibox.layout.align.horizontal
             },
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
         },
-        { -- Middle
-            -- { -- Title -- ( I don't like how the title looks on top, so I took it out )
-                -- align  = "center"
-                -- widget = awful.titlebar.widget.titlewidget(c)
-            -- },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            -- awful.titlebar.widget.floatingbutton (c),
-            -- awful.titlebar.widget.stickybutton   (c),
-            -- awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.minimizebutton(c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton(c),
-            utils.pad_width(3),
-            layout = wibox.layout.fixed.horizontal,
-        },
-        layout = wibox.layout.align.horizontal
     })
 end)
 
@@ -268,9 +325,6 @@ end)
 --    end
 --end)
 ------------------- Sloppy focus end
-
-
-
 
 
 

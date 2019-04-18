@@ -40,12 +40,13 @@ will be here
         [ ] Change the current button icons with round ones
 
     [ ] Clients
-        [ ] have each client show the same types of thin shlick borders that mac os has
+        [x] have each client show the same types of thin shlick borders that mac os has
 
     [ ] Notifications
 
-    [ ] A menu for each widget that should have it and the options that make
-        sense for that particular widget
+    [ ] Menus (Have a menu with settings particular settings for most widgets)
+        [ ] The hogbar
+        [ ] The desktop files
 
     [ ] General
         [ ] Clean up keybindings and implement additional ones
@@ -54,24 +55,34 @@ will be here
         [x] Make it so when you click an actual client window, that client gets focus
         [ ] Make it so when you press 'mod + shift + [qw]` the client will get sent
             to the previous tag or the next one, respectively
+        [ ] Don't forget to credit the authors of the icons.
+            Currently the list is:
+                * Freepik
+        [ ] Replace current cpu-indicator heart icon with a light bulb
+
+    [ ] Cleaning up (setting theme colors universally, setting proper icons, etc)
+        [ ] Making global variables that should be local local
+        [ ] Put the weather file somewhere in my awesome config files.
+            It makes more sense for it to be there, instead of my home directory.
+        [ ] Take out the `luafilesystem` dependency, and use the `gears.filesystem`
+            library built into Awesome
+        [ ] There are places where I used the full path with my username.
+            I have to go, take those out and replace them with os.getenv('PATH')
+        [ ] Go back in the exitpanel and rename all of the stupidly named icons used there,
+            along with the (few) stupidly named variable names used there
 
     [ ] Maybe (Things I'm not sure I'll implement)
         [ ] Write some sort of mpd frontend
         [ ] Write some sort of settings widget
         [ ] Hotplugging: automatically mounting devices when they get plugged in
 
-    [ ] Cleaning up (setting theme colors universally, setting proper icons, etc)
-        [ ] Making global variables that should be local local
+    [ ] Refactoring
+        [ ] Refactor the piggyprompt
+            [ ] Make it so when you type in too much text, the textbox scrolls
+                along with where the cursor is
         [ ] Reimplement the way widget spacing for the sidebar works. At the moment it's
             an extemely hacky way of doing it, based on textboxes with
             a font that has the size '2'
-        [ ] Put the weather file somewhere in my awesome config files.
-            It makes more sense for it to be there, instead of my home directory.
-        [ ] Take out the `luafilesystem` dependency, and use the `gears.filesystem`
-            library built into Awesome
-
-    [ ] Refactoring
-        [ ] Refactor the piggyprompt
 
     [ ] Bugs
         [ ] When the mpc client on the sidebar is stopped, nothing is shown as the song. fix that
@@ -84,4 +95,10 @@ will be here
         [ ] Set window minimum resizing values so the buttons never get resized
         [ ] Set a forced resize on sidebar weather widget icons, 
             and the preffered size along with it
+        [ ] After suspending and resuming the pc, the audio controls do some sketchy
+            things like uhhHHH not work anymore??? You have to restart awesome to
+            continue to use them so I'll have to fix this.
+        [ ] Sometimes, it seems that the exitscreen doesn't show up. I don't
+            really know why.
 
+    [ ] Unorganized

@@ -4,6 +4,7 @@ local naughty = require("naughty")
 local utils = require("utils")
 local piglets = require("piglets")
 local audio_widget_module = require("piglets.audio")
+local porkerpanel = require("piglets.porkerpanel")
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
@@ -571,7 +572,17 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
         { description = "reset volume to 50%", group = "sidebar"})
 )
 
+keys.globalkeys = gears.table.join(keys.globalkeys,
 
+    ----------------
+    -- Hogbar
+    ----------------
+
+    awful.key({ superkey }, 'F9', porkerpanel.show_panel,
+        { description = "show exit panel", group = "sidebar"})
+)
+
+-- naughty.notify({text = tostring(type(porkerpanel.porkerpanel))})
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.

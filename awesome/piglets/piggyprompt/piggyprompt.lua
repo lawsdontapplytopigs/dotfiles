@@ -216,7 +216,7 @@ local row_template = {
                 id = "suggestion_text",
                 font = launcher_font,
                 widget = wibox.widget.textbox,
-                text = 'UR NOT SUPPOSED TO SEE THIS',
+                text = 'YOU SHOULDNT BE ABLE TO SEE THIS',
             },
         },
     },
@@ -266,32 +266,24 @@ local row_imgs = the_rows:get_children_by_id("suggestion_selected_image")
 local row_txts = the_rows:get_children_by_id("suggestion_text")
 
 local function reset_rows_text(rows_table)
-
     for i=1, num_rows do
         row_txts[i].text = ''
     end
-
 end
 
 local function unset_selected_row(rows_table)
-    
     row_bgs[the_rows.sel].bg = unselected_color
     row_imgs[the_rows.sel].visible = false
-
 end
 
 local function redraw_rows(rows_table)
-
     row_bgs[the_rows.sel].bg = selected_color
     row_imgs[the_rows.sel].visible = true
-
 end
 
 local function update_rows(rows_table)
-
     row_bgs[the_rows.sel].bg = selected_color
     row_imgs[the_rows.sel].visible = true
-
 end
 
 update_rows(the_rows)

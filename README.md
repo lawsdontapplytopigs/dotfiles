@@ -28,4 +28,3 @@
 * `jq` : cli tool for parsing json, used by weather widget
 * `pulseaudio` : used by (entire system???) for sound outputting. also used by volume widget
 * openweathermap ID : (you need their ID to use their API...) used by weather widget
-* `xclip` : utility to access X clipboards. Used by porkerprompt.

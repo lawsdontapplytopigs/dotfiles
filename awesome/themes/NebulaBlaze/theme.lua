@@ -47,7 +47,7 @@ theme.monospace_font = "RobotoMono 13"
 -- local potential_gray1 = '#6c6a80'
 -- local potential_gray2 = "#34333f"
 
-local gray1       = "#201c24"
+local gray1       = "#201e24"
 local gray2       = "#343038"
 local gray3       = "#5c5860"
 local gray4       = "#8e8a92"
@@ -150,6 +150,8 @@ theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
     taglist_square_size, theme.fg_normal
 )
+-- theme.taglist_fg_focus = "#ff0077"
+-- theme.taglist_font = "TTCommons Bold 15"
 
 -------------------
 -- Notifications
@@ -359,9 +361,9 @@ theme.awesome_icon = theme_assets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
 )
 
--- theme.wallpaper = home ..'/images/elementaryos/wallpapers/Ashim_DSilva.jpg'
+theme.wallpaper = home ..'/images/elementaryos/wallpapers/Ashim_DSilva.jpg'
 -- theme.wallpaper = home .. '/EHGgqUq.jpg'
-theme.wallpaper = home .. '/images/21_9_wallpapers/Swe2Jap.png'
+-- theme.wallpaper = home .. '/images/21_9_wallpapers/Swe2Jap.png'
 -- theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

@@ -13,31 +13,34 @@ will be here
     EDIT: I'll first try to make it look good and then maybe I won't take it out
     -->
     [ ] Redesign or remove the wibar
-        [ ]  Taglist widget
-        [ ]  Layout widget
-        [ ]  Clock widget
-        [ ]  Make it change appearance based on what color the background is
-        [ ]  Open programs widget
+        [x] Clock widget
+        [ ] Taglist widget
+        [ ] Networking widget
+        [ ] Bluetooth widget
+        [ ] Exit widget
+        [ ] Layout widget
+        [ ] Make it change appearance based on what color the background is
+        [ ] Open programs widget (Tasklist widget)
 
     [ ] Sidebar
-        [x]  Clock widget
-        [x]  Cpu widget
-        [x]  Ram widget
-        [x]  Audio widget
-        [x]  Weather widget
-        [x]  Mpd client widget
-        [x]  Temperature widget
-        [ ]  Diskspace widget
-        [ ]  Search widget
-        [ ]  Exit widget
-        [ ]  Fill the bottom part up with something (its pretty barebones right now)
+        [x] Clock widget
+        [x] Cpu widget
+        [x] Ram widget
+        [x] Audio widget
+        [x] Weather widget
+        [x] Mpd client widget
+        [x] Temperature widget
+        [ ] Diskspace widget
+        [ ] Search widget
+        [ ] Exit widget
+        [ ] Fill the bottom part up with something (its pretty barebones right now)
+
+    [x] Exit screen
+
+    [x] Titlebars
+        [x] Change the current button icons with round ones
 
     [ ] Write some sort of scheduling wiget
-
-    [ ] Exit screen
-
-    [ ] Titlebars
-        [ ] Change the current button icons with round ones
 
     [ ] Clients
         [x] have each client show the same types of thin shlick borders that mac os has
@@ -59,6 +62,7 @@ will be here
             Currently the list is:
                 * Freepik
         [ ] Replace current cpu-indicator heart icon with a light bulb
+        [ ] Change theme variables of the "aero"-like feature implemented in awesome
 
     [ ] Cleaning up (setting theme colors universally, setting proper icons, etc)
         [ ] Making global variables that should be local local
@@ -77,9 +81,11 @@ will be here
         [ ] Hotplugging: automatically mounting devices when they get plugged in
 
     [ ] Refactoring
-        [ ] Refactor the piggyprompt
+        [ ] Piggyprompt
             [ ] Make it so when you type in too much text, the textbox scrolls
                 along with where the cursor is
+            [ ] Add a rectangular background behind the widget and make the
+                background transparent so you get anti-aliased rounded corners
         [ ] Reimplement the way widget spacing for the sidebar works. At the moment it's
             an extemely hacky way of doing it, based on textboxes with
             a font that has the size '2'
@@ -91,7 +97,7 @@ will be here
             after rebooting the pc, if you start that program again, 
             it starts maximized and occupies a half of the wibar
         [ ] Make the text in the titlebars discontinue at some point with 
-            three dots at the end
+            three dots at the end so it doensn't wrap and do weird stuff
         [ ] Set window minimum resizing values so the buttons never get resized
         [ ] Set a forced resize on sidebar weather widget icons, 
             and the preffered size along with it

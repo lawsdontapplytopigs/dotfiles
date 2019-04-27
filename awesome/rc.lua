@@ -43,6 +43,8 @@ local keys = require("keys")
 -- utility functions
 local utils = require("utils")
 
+local cairo = require("lgi").cairo
+
 ------------------------------------------------------------------------------- ERROR HANDLING
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -89,7 +91,6 @@ for _, v in pairs(startup_programs) do
 end
 
 screen.connect_signal('refresh', function(c) return c end)
-
 
 ------------------------------------------------------------------------------- RULES
 -- Rules to apply to new clients (through the "manage" signal).
@@ -169,6 +170,22 @@ end)
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c) -------------------------------- WHEN CONFIGURING MOUSE BUTTONS, I HAVE TO LOOK AT THIS
 
+    -- Code that shows how to add multiple titlebars.
+    -- also shows some stuff about cairo, whici I might look at later
+    -- local my_widget = wibox.widget.base.make_widget()
+    -- function my_widget:draw(_, cr, width, height)
+        -- cr:set_operator(cairo.Operator.SOURCE)
+        -- cr:set_source(gears.color.create_linear_pattern{
+            -- from = { 0, 0 },
+            -- to = { width, 0 },
+            -- stops = {
+                -- { 0, "#f000" },
+                -- { 1, "#0f0f" },
+            -- },
+        -- })
+        -- cr:paint()
+    -- end
+    -- awful.titlebar(c, { position = "bottom" }):set_widget(my_widget)
     -- buttons for the titlebar
     local buttons = gears.table.join(
         awful.button({ }, 1, function() 
@@ -341,3 +358,57 @@ end)
 -- client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 ------------------------------------------------------------------------------- SIGNALS END
 
+-- 
+-- local keygrabber = awful.keygrabber
+-- local panel = wibox({
+    -- x = 80,
+    -- y = 80,
+    -- color = '#20102088',
+    -- width = 200,
+    -- height = 200,
+    -- visible = true,
+-- })
+-- 
+-- panel:setup({
+    -- widget = wibox.container.background,
+    -- bg = '#83830033',
+    -- {
+        -- id = 'vi_textbox',
+        -- layout = wibox.layout.fixed.horizontal,
+        -- wibox = wibox.widget.textbox,
+        -- font = "TTCommons 18",
+        -- text = ' ok then ',
+    -- },
+-- })
+-- 
+-- local tbox = wibox.widget.textbox("hey there")
+-- 
+-- local vi_textbox = panel:get_children_by_id("vi_textbox")[1]
+-- naughty.notify({text = tostring(tbox.set_font)})
+-- local grab = keygrabber.run(
+-- function(modifiers, key, event)
+    -- naughty.notify({text = tostring('hmm')})
+    -- if key == "q" or key == "Escape" then
+        -- keygrabber.stop(grab)
+        -- panel.visible = false
+        -- fake_bar.visible = false
+
+    -- elseif key == "l" then
+        -- select_button( "+1" )
+
+    -- elseif key == "h" then
+        -- select_button( "-1" )
+
+    -- elseif key == "Return" then
+        -- press_button()
+
+    -- elseif key == ":" then
+        -- awful.prompt:run ({
+            -- -- font = "TTCommons Medium 14",
+            -- textbox = vi_textbox,
+            -- exe_callback = function( command )
+                -- naughty.notify({text = tostring(command)})
+            -- end
+        -- })
+    -- end
+-- end)

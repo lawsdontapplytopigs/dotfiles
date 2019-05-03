@@ -5,6 +5,7 @@ local utils = require("utils")
 local piglets = require("piglets")
 local audio_widget_module = require("piglets.audio")
 local porkerpanel = require("piglets.porkerpanel")
+local trufflequest = require("piglets.trufflequest.trufflequest")
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
@@ -497,9 +498,6 @@ keys.globalkeys = gears.table.join(
 
 
 
-
-
-
     -- superkey + Tab
     -- go to the previously visited client
     -- awful.key({ superkey }, "Tab",
@@ -580,6 +578,22 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
 
     awful.key({ superkey }, 'F9', porkerpanel.show_panel,
         { description = "show exit panel", group = "sidebar"})
+)
+
+-- naughty.notify({text = tostring(type(trufflequest))})
+keys.globalkeys = gears.table.join(keys.globalkeys,
+
+    awful.key({ superkey }, 'F10', 
+        function ()
+            if not trufflequest.trufflebar.visible then
+                trufflequest.trufflebar.visible = true
+                trufflequest.trufflebar.ontop = true
+            else
+                trufflequest.trufflebar.visible = false
+            end
+        end,
+        { description = "show exit panel", group = "sidebar"})
+
 )
 
 -- naughty.notify({text = tostring(type(porkerpanel.porkerpanel))})

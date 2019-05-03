@@ -1,5 +1,19 @@
 
-# Colors that I like that I may use in the configuration
+# Colors that I may use in the configuration
+
+#Red
+#fe363c
+#fe3f52
+#782121
+#580c19
+#450914
+#8b0039
+#9a3049
+#e02f52
+
+#Orange
+#ff9832
+#9e3700
 
 #Yellow
 #ffd143
@@ -8,19 +22,20 @@
 #e6c098 #probably will change this one
 #fffdd8
 
-#Red
-#fe363c
-#782121
-#580c19
-#450914
-#9a3049
-#e02f52
-
 #Pink
+#9e2f42
+#ff7882
+#ff6680
+#773042
+
+#Pink2
 #ff8bff
+#9f4bef
 
 #Purple
 #c8b0ff
+#804fd8 # this one's good
+#40306c # good
 #8860ed
 #5820ad
 #551383 #might have to change this one
@@ -28,10 +43,23 @@
 #2f0a49 #this one too
 
 #Blue
+#cceeff
 #50ffd3 #probably will have to find a better blue
+#40cfd8
+#40aff0
+#08678c
+#004f63
+#204058
+#28677c
 
 #Green
+#c0ff20
+#68ff70
 #12bd80
+#4a7430
+#385c40
+#3a8f03
+#1a7400
 #005c30
 
 #Gray

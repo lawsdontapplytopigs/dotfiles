@@ -67,8 +67,8 @@ audio.notification_audio_bar = wibox.widget({
     widget              = wibox.widget.progressbar,
 })
 
--- the background for the sidebar audio bar, along where we also put the 
--- notification audio bar
+-- the background for the notification audio bar, on top of which 
+-- we acutally put the notification
 audio.notification_audio_bar_bg = wibox({
     x = awful.screen.focused().geometry.width - dpi(400),
     y = awful.screen.focused().geometry.height - dpi(100),

@@ -4,12 +4,12 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local gears = require("gears")
 local naughty = require("naughty")
-local menu = require("piglets.trufflequest.trufflebar.menu")
+local menu_layout = require("piglets.trufflequest.trufflebar.menu_project")
 local make_top_widget = require("piglets.trufflequest.trufflebar.make_top_widget")
 local make_middle_widget = require("piglets.trufflequest.trufflebar.make_middle_widget")
 local make_bottom_widget = require("piglets.trufflequest.trufflebar.make_bottom_widget")
 
-naughty.notify({text = tostring(type(menu))})
+-- naughty.notify({text = tostring(type(menu))})
 
 local function make_trufflebar( args )
 
@@ -26,7 +26,10 @@ local function make_trufflebar( args )
 
     -- setup middle widget
     local middle_widget = { 
+        -- id = "middle_widget_nested",
         layout = wibox.layout.fixed.vertical, 
+        -- layout = wibox.layout.fixed.horizontal,
+        -- layout = menu_layout.vertical,
         spacing = 1,
         spacing_widget = wibox.widget({
             widget = wibox.widget.separator,
@@ -36,6 +39,7 @@ local function make_trufflebar( args )
             color = "#ffffff33",
         })
     }
+
 
     local tasks = make_middle_widget({
         task_width = Twidth,
@@ -59,6 +63,7 @@ local function make_trufflebar( args )
         visible = args.visible,
     })
 
+    -- naughty.notify({text = tostring(type(middle_widget))})
     trufflebar:setup({
         layout = wibox.layout.manual,
         {
@@ -75,18 +80,20 @@ local function make_trufflebar( args )
         },
         {
             id = "middle_widget",
-            -- widget = wibox.container.scroll.vertical,
-            widget = menu.vertical,
+            layout = menu_layout.vertical,
+            -- layout = menu_layout.vertical,
+            -- layout = menu_layout.horizontal,
+            -- layout = wibox.layout.fixed.vertical,
             point = { x = 0, y = height_top_widget},
             forced_height = height_middle_widget,
             forced_width = Twidth,
-            max_size = height_middle_widget,
             step_function = wibox.container.scroll.step_functions
                             .linear_back_and_forth,
             speed = 100,
             fps = 60,
-            bg = "#ff888800",
+            bg = "#ff8888ff",
             fg = "#ffffff",
+            -- expand = true,
                 middle_widget,
         },
         {
@@ -139,8 +146,13 @@ local function make_trufflebar( args )
         },
     })
 
-    -- local made_middle_widget = trufflebar:get_children_by_id("middle_widget")[1]
+    -- local made_mid_wid = trufflebar:get_children_by_id("middle_widget")[1]
+    -- made_mid_wid:reset()
     -- made_middle_widget:pause()
+    -- naughty.notify({text = tostring(type(made_middle_widget:get_children()))})
+    -- for k, v in pairs(made_mid_wid:get_all_children()) do
+        -- naughty.notify({text = tostring(k) .. '     ' .. tostring(v), timeout = 0})
+    -- end
 
     return trufflebar
 end

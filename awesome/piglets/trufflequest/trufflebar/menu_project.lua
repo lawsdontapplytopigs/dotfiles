@@ -17,11 +17,57 @@ local timer = require("gears.timer")
 local hierarchy = require("wibox.hierarchy")
 local base = require("wibox.widget.base")
 local gtable = require("gears.table")
+local gears = require("gears")
 local lgi = require("lgi")
 local GLib = lgi.GLib
+local naughty = require("naughty")
 
 local scroll = {}
 local _need_scroll_redraw
+
+-- function scroll:layout(context, width, height)
+    -- local result = {}
+    -- local pos,spacing = 0, self._private.spacing
+    -- local spacing_widget = self._private.spacing_widget
+    -- local is_y = self._private.dir == "y"
+    -- local is_x = not is_y
+    -- local abspace = math.abs(spacing)
+    -- local spoffset = spacing < 0 and 0 or spacing
+-- 
+    -- for k, v in pairs(self._private.widgets) do
+        -- local x, y, w, h, _
+        -- if is_y then
+            -- x, y = 0, pos
+            -- w, h = width, height - pos
+            -- if k ~= #self._private.widgets or not self._private.fill_space then
+                -- _, h = base.fit_widget(self, context, v, w, h);
+            -- end
+            -- pos = pos + h + spacing
+        -- else
+            -- x, y = pos, 0
+            -- w, h = width - pos, height
+            -- if k ~= #self._private.widgets or not self._private.fill_space then
+                -- w, _ = base.fit_widget(self, context, v, w, h);
+            -- end
+            -- pos = pos + w + spacing
+        -- end
+-- 
+        -- if (is_y and pos-spacing > height) or
+            -- (is_x and pos-spacing > width) then
+            -- break
+        -- end
+-- 
+        -- -- Add the spacing widget
+        -- if k > 1 and abspace > 0 and spacing_widget then
+            -- table.insert(result, base.place_widget_at(
+                -- spacing_widget, is_x and (x - spoffset) or x, is_y and (y - spoffset) or y,
+                -- is_x and abspace or w, is_y and abspace or h
+            -- ))
+        -- end
+        -- table.insert(result, base.place_widget_at(v, x, y, w, h))
+    -- end
+    -- return result
+-- end
 
 -- "Strip" a context so that we can use it for our own drawing
 local function cleanup_context(context)
@@ -46,7 +92,17 @@ local hierarchy_cache = cache.new(function(context, widget, width, height)
     local function do_pending_updates(layout)
         layouts[layout] = true
         hier:update(context, widget, width, height, nil)
+        -- naughty.notify({text = tostring(type(layout))})
+        -- naughty.notify({text = tostring
+        -- for k, v in pairs(layout) do
+            -- naughty.notify({text = tostring(k)})
+        -- end
     end
+
+    -- for k, v in pairs(layouts) do
+        -- naughty.notify({text = tostring(v)})
+    -- end
+
     local function emit(signal)
         -- Make the scroll layouts redraw
         for w in pairs(layouts) do
@@ -124,8 +180,10 @@ local function calculate_info(self, context, width, height)
         end
         if self._private.dir == "h" then
             x = -get_scroll_offset(surface_width - extra, width)
+            -- naughty.notify({text = tostring(x)})
         else
             y = -get_scroll_offset(surface_height - extra, height)
+            -- naughty.notify({text = tostring(y)})
         end
         result.first_x, result.first_y = x, y
         -- Was the extra space already included elsewhere?
@@ -148,6 +206,7 @@ local function calculate_info(self, context, width, height)
     result.context = ctx
     do_pending_updates(self)
 
+    -- naughty.notify({text = tostring(result.first_y)})
     return result
 end
 
@@ -156,30 +215,30 @@ end
 -- @param cr The cairo context to draw to.
 -- @param width The available width.
 -- @param height The available height.
-function scroll:draw(context, cr, width, height)
-    if not self._private.widget then
-        return
-    end
+-- function scroll:draw(context, cr, width, height)
+    -- if not self._private.widget then
+        -- return
+    -- end
 
-    local info = calculate_info(self, context, width, height)
+    -- local info = calculate_info(self, context, width, height)
 
     -- Draw the first instance of the child
-    cr:save()
-    cr:translate(info.first_x, info.first_y)
-    cr:rectangle(0, 0, info.surface_width, info.surface_height)
-    cr:clip()
-    info.hierarchy:draw(info.context, cr)
-    cr:restore()
+    -- cr:save()
+    -- cr:translate(info.first_x, info.first_y)
+    -- cr:rectangle(0, 0, info.surface_width, info.surface_height)
+    -- cr:clip()
+    -- info.hierarchy:draw(info.context, cr)
+    -- cr:restore()
 
     -- If there is one, draw the second instance (same code as above, minus the
     -- clip)
-    if info.second_x and info.second_y then
-        cr:translate(info.second_x, info.second_y)
-        cr:rectangle(0, 0, info.surface_width, info.surface_height)
-        cr:clip()
-        info.hierarchy:draw(info.context, cr)
-    end
-end
+    -- if info.second_x and info.second_y then
+        -- cr:translate(info.second_x, info.second_y)
+        -- cr:rectangle(0, 0, info.surface_width, info.surface_height)
+        -- cr:clip()
+        -- info.hierarchy:draw(info.context, cr)
+    -- end
+-- end
 
 -- Fit the scroll layout into the given space.
 -- @param context The context in which we are fit.
@@ -190,7 +249,9 @@ function scroll:fit(context, width, height)
         return 0, 0
     end
     local info = calculate_info(self, context, width, height)
+    -- naughty.notify({text = tostring(info.fit_width) .. '    ' .. tostring(info.fit_height)})
     return info.fit_width, info.fit_height
+    -- return 80, 100
 end
 
 -- Internal function used for triggering redraws for scrolling.
@@ -204,8 +265,70 @@ _need_scroll_redraw = function(self)
         self._private.scroll_timer = timer.start_new(1 / self._private.fps, function()
             self._private.scroll_timer = nil
             self:emit_signal("widget::redraw_needed")
+            self:emit_signal("widget::layout_changed")
         end)
     end
+end
+
+-- function scroll:geometry()
+    -- local g = {}
+    -- g.width = 30
+    -- g.height = 150
+    -- return g
+-- end
+
+function scroll:layout(context, width, height)
+
+    assert(self._private.widget, "hey there's no widget for me to display")
+    local result = {}
+    local info = calculate_info(self, context, width, height)
+    table.insert(result, base.place_widget_at(
+        self._private.widget, info.first_x, info.first_y, info.surface_width, info.surface_height 
+    ))
+    -- gears.surface.apply_shape_bounding(self, 
+        -- function(cr, width, height)
+            -- cr:rectangle(30, 130)
+            -- cr:fill()
+            -- 
+        -- end)
+        -- function (width, height)
+            -- return gears.shape.
+    return result
+end
+
+function scroll:before_draw_children(context, cr, width, height)
+-- 
+    local info = calculate_info(self, context, width, height)
+    -- cr:translate(info.first_x, info.first_y)
+    
+    cr:rectangle(0, 0, info.surface_width, info.surface_height)
+    -- cr:fill()
+    cr:clip()
+    -- info.hierarchy:draw(context, cr)
+    cr:push_group()
+end
+
+function scroll:after_draw_children(context, cr, width, height)
+
+    -- if not self._private.widget then
+        -- return
+    -- end
+-- 
+
+    local info = calculate_info(self, context, width, height)
+    cr:pop_group_to_source()
+    cr:rectangle(0, 0, info.surface_width, height)
+    cr:fill()
+    -- cr:clip()
+    -- cr:paint()
+    -- cr:paint()
+    -- cr:translate(info.first_x, info.first_y)
+    -- cr:rectangle(0, 0, 60, 200)
+    -- cr:clip()
+    -- info.hierarchy:draw(info.context, cr)
+    -- cr:paint_with_alpha(0.7)
+    -- cr:restore()
+
 end
 
 --- Pause the scrolling animation.
@@ -278,6 +401,7 @@ end
 -- @treturn table The children
 function scroll:get_children()
     return {self._private.widget}
+    -- return self._private.widgets
 end
 
 --- Replace the layout children
@@ -346,6 +470,9 @@ function scroll:set_max_size(max_size)
     self._private.max_size = max_size
     self:emit_signal("widget::layout_changed")
 end
+
+-------------------------------------------------------------------------------
+
 
 --- Set the step function that determines the exact behaviour of the scrolling
 -- animation.
@@ -721,5 +848,5 @@ end
 
 return scroll
 
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
+-- vimm: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
 

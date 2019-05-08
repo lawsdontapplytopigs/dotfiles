@@ -106,5 +106,13 @@ will be here
             continue to use them so I'll have to fix this.
         [ ] Sometimes, it seems that the exitscreen doesn't show up. I don't
             really know why.
+        [ ] Sometimes when I test stuff with `Xephyr` the `pactl subscribe`
+            daemon gets killed (I Think???). but what happens is that the
+            bar that should show the volume doesn't update anymore. And
+            I just noticed that this happens when I start `Xephyr` and in the
+            terminal it also says something like "kill: not enough arguments".
+            EDIT: it also happens when I don't see that message.
+            ALSO: it also happens while the `pactl subscribe` daemon is still 
+            running. Owie.
 
     [ ] Unorganized

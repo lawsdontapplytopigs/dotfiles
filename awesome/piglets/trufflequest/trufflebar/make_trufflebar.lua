@@ -26,7 +26,7 @@ local function make_trufflebar( args )
 
     -- setup middle widget
     local middle_widget = { 
-        -- id = "middle_widget_nested",
+        id = "middle_widget_nested",
         layout = wibox.layout.fixed.vertical, 
         -- layout = wibox.layout.fixed.horizontal,
         -- layout = menu_layout.vertical,
@@ -39,6 +39,10 @@ local function make_trufflebar( args )
             color = "#ffffff33",
         })
     }
+
+    -- button_signal("button::press")
+    -- button_signal("button::release")
+
 
 
     local tasks = make_middle_widget({
@@ -146,7 +150,14 @@ local function make_trufflebar( args )
         },
     })
 
-    -- local made_mid_wid = trufflebar:get_children_by_id("middle_widget")[1]
+    -- local mid_wid_outer = trufflebar:get_children_by_id("middle_widget")[1]
+    -- local mid_wid_inner = trufflebar:get_children_by_id("middle_widget_nested")[1]
+
+    -- gears.timer.start_new(1, function()
+        -- naughty.notify({text = tostring(mid_wid_outer.my_width)})
+        -- return true
+    -- end)
+
     -- made_mid_wid:reset()
     -- made_middle_widget:pause()
     -- naughty.notify({text = tostring(type(made_middle_widget:get_children()))})

@@ -24,7 +24,6 @@ weather_icon.resize = true
 weather_icon.visible = true
 weather_icon.forced_width = dpi(80)
 weather_icon.forced_height = dpi(80)
-naughty.notify({text = tostring(weather_icon.width)})
 
 weather.weather_widget = wibox.widget({
     weather_icon,

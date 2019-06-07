@@ -16,7 +16,7 @@ local tbar_resources = {
     height = awful.screen.focused().geometry.height,
     bg = beautiful.bg,
     visible = false,
-    tasks = tasks_resources,
+    tasks_resources = tasks_resources,
 }
 -- local tpanel_resources = {}
 

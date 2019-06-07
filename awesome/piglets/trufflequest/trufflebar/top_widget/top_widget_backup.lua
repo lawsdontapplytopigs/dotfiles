@@ -52,7 +52,6 @@ local function make_top_widget ()
             ring_3,
         }
     }
-
     return setup_widget
 end
 

@@ -6,8 +6,6 @@ local tasks_resources = {
         description = "Delete Fortnite",
         task_starts = "21:00",
         task_ends = "21:30",
-        bg = "#fffeee",
-        fg = "#000000",
     },
     {
         group = "Daily",
@@ -36,18 +34,24 @@ local tasks_resources = {
         description = "Write scrollable widget",
         task_starts = "08:35",
         task_ends = "10:00",
+        bg = "#b07af0",
+        fg = "#000000",
     },
     {
         group = "Habit",
         description = "Train",
         task_starts = "08:35",
         task_ends = "10:00",
+        -- bg = "#e02f52",
+        -- fg = "#000000",
     },
     {
         group = "habit",
         description = "grind",
         task_starts = "08:35",
         task_ends = "10:00",
+        -- bg = "#b0ef40",
+        -- fg = "#000000",
     },
     {
         group = "Life-changers",

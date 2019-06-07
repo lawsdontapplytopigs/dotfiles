@@ -17,10 +17,9 @@ will be here
         [ ] Taglist widget
         [ ] Networking widget
         [ ] Bluetooth widget
-        [ ] Exit widget
+        [x] Exit widget
         [ ] Layout widget
         [ ] Make it change appearance based on what color the background is
-        [ ] Open programs widget (Tasklist widget)
 
     [ ] Sidebar
         [x] Clock widget
@@ -44,6 +43,8 @@ will be here
 
     [ ] Clients
         [x] have each client show the same types of thin shlick borders that mac os has
+
+    [ ] Client-managing bar
 
     [ ] Notifications
 
@@ -86,9 +87,17 @@ will be here
                 along with where the cursor is
             [ ] Add a rectangular background behind the widget and make the
                 background transparent so you get anti-aliased rounded corners
+            [ ] Fuck it, rewrite the whole thing
         [ ] Reimplement the way widget spacing for the sidebar works. At the moment it's
             an extemely hacky way of doing it, based on textboxes with
             a font that has the size '2'
+        [ ] Rewrite the utils library to have the shape functions be in a `shape`
+            table. So instead of having `utils.circle` I'll have `utils.shape.circle`.
+        [ ] Also, the shape functions that I have in the `utils` library are 
+            named like garbage. Why are they `utils.rrect` for "rounded rectangle"
+            when in awesomewm that function is named `rounded_rect`? I'll have to
+            change those to be consistent with the respective awesome window manager
+            shape functions.
 
     [ ] Bugs
         [ ] When the mpc client on the sidebar is stopped, nothing is shown as the song. fix that
@@ -116,3 +125,24 @@ will be here
             running. Owie.
 
     [ ] Unorganized
+        [ ] Everywhere where I have widgets comprized of subwidgets comprized 
+            of subwidgets I should change things to ACTUALLY be controled only 
+            at the TOP-MOST level of the whole hierarchy. What this means is that
+            I have functions which make subwidgets, etc and they're all in a
+            dependency hierarchy. And I thought "hey I'm going to allow these
+            widgets to be more general and I'm going to allow them to take parameters
+            and then I'll just control everything from the top-most level where
+            the widget actually gets made.
+            EDIT: I'm actually not really sure what to do about this. Maybe I'm
+            just not seeing something. It makes sense to have a hierarchical
+            structure. At the same time the deeper this hierarchy goes, the more
+            the code *feels* like spaghetti. I'll just have to go with one and
+            probably fail and see what the best way to do things is:
+            [ ] Either hardcode everything except for things that I REALLY can't
+            [ ] Or have almose everything be passed in as argument except for
+                things where it really doesn't make sense to pass in as an argument
+            
+
+
+
+

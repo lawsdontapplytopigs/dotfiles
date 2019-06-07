@@ -4,18 +4,41 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local gears = require("gears")
 local naughty = require("naughty")
-local menu_layout = require("piglets.trufflequest.trufflebar.menu_project")
-local make_top_widget = require("piglets.trufflequest.trufflebar.make_top_widget")
-local make_middle_widget = require("piglets.trufflequest.trufflebar.make_middle_widget")
-local make_bottom_widget = require("piglets.trufflequest.trufflebar.make_bottom_widget")
+-- local menu = require("brickware.layout.menu")
+-- local menu = require("brickware.layout.custom_fixed")
+local menu = require("brickware.layout.menu")
+local cpaint = require("candypaint")
+local make_top_widget = require("piglets.trufflequest.trufflebar.top_widget.make_top_widget")
+local make_middle_widget = require("piglets.trufflequest.trufflebar.middle_widget.make_middle_widget")
+local make_bottom_widget = require("piglets.trufflequest.trufflebar.bottom_widget.make_bottom_widget")
 
--- naughty.notify({text = tostring(type(menu))})
+local function setup_middle_widget (args)
+
+    local tasks_width = args.tasks_width
+    local tasks_res = args.tasks_resources
+    -- this is just a table containing tables (which can be turned into widgets),
+    -- but they first need a layout.
+    local tasks = make_middle_widget({
+        task_width = tasks_width,
+        tasks_resources = tasks_res,
+    })
+
+    local middle_widget = {
+        id = "middle_widget_nested",
+        layout = menu.vertical,
+        table.unpack(tasks),
+    }
+
+    return middle_widget
+
+end
 
 local function make_trufflebar( args )
 
     local Theight = args.height or awful.screen.focused().geometry.height
     local Twidth = args.width or 30
     local Tbg = args.bg or "#00FF00"
+    local tasks_resources = args.tasks_resources
 
     local height_top_widget = 360
     local height_middle_widget = 600
@@ -25,34 +48,11 @@ local function make_trufflebar( args )
     local top_widget = make_top_widget()
 
     -- setup middle widget
-    local middle_widget = { 
-        id = "middle_widget_nested",
-        layout = wibox.layout.fixed.vertical, 
-        -- layout = wibox.layout.fixed.horizontal,
-        -- layout = menu_layout.vertical,
-        spacing = 1,
-        spacing_widget = wibox.widget({
-            widget = wibox.widget.separator,
-            orientation = "horizontal",
-            thickness = 1,
-            -- span_ratio = 0.7,
-            color = "#ffffff33",
-        })
-    }
-
-    -- button_signal("button::press")
-    -- button_signal("button::release")
-
-
-
-    local tasks = make_middle_widget({
-        task_width = Twidth,
-        tasks_resources = args.tasks,
+    local middle_widget = setup_middle_widget({
+        tasks_width = Twidth,
+        tasks_resources = tasks_resources,
     })
 
-    for k, v in ipairs(tasks) do 
-        table.insert(middle_widget, #middle_widget + 1, v) 
-    end
 
     -- setup bottom widget
     local bottom_widget = make_bottom_widget()
@@ -84,24 +84,14 @@ local function make_trufflebar( args )
         },
         {
             id = "middle_widget",
-            layout = menu_layout.vertical,
-            -- layout = menu_layout.vertical,
-            -- layout = menu_layout.horizontal,
             -- layout = wibox.layout.fixed.vertical,
+            widget = wibox.container.background,
             point = { x = 0, y = height_top_widget},
             forced_height = height_middle_widget,
             forced_width = Twidth,
-            step_function = wibox.container.scroll.step_functions
-                            .linear_back_and_forth,
-            speed = 100,
-            fps = 60,
-            bg = "#ff8888ff",
-            fg = "#ffffff",
-            -- expand = true,
                 middle_widget,
         },
         {
-            -- id = "bottom_widget"
             widget = wibox.container.background,
             point = { x = 0, y = height_top_widget + height_middle_widget },
             forced_height = height_bottom_widget,
@@ -151,18 +141,85 @@ local function make_trufflebar( args )
     })
 
     -- local mid_wid_outer = trufflebar:get_children_by_id("middle_widget")[1]
-    -- local mid_wid_inner = trufflebar:get_children_by_id("middle_widget_nested")[1]
+    local mid_wid_inner = trufflebar:get_children_by_id("middle_widget_nested")[1]
+    local tsks = trufflebar:get_children_by_id("TASK")
 
+    for k, task in ipairs(tsks) do
+        task:buttons(gears.table.join(
+            awful.button({ }, 1, function() naughty.notify({text = "widget " .. tostring(k)}) end)
+        ))
+    end
+
+    local function select_next_row()
+        local i = mid_wid_inner:get_selected_row() + 1
+        mid_wid_inner:select_row(i)
+    end
+
+    local function select_prev_row()
+        local i = mid_wid_inner:get_selected_row() - 1
+        mid_wid_inner:select_row(i)
+    end
+
+    -- local direction = false
     -- gears.timer.start_new(1, function()
-        -- naughty.notify({text = tostring(mid_wid_outer.my_width)})
+        -- if mid_wid_inner:get_selected_row() == 1 then
+            -- naughty.notify({text = tostring("changed to false")})
+            -- direction = false
+        -- elseif #mid_wid_inner:get_children() == mid_wid_inner:get_selected_row() then
+            -- direction = true
+            -- naughty.notify({text = tostring("just changed direction to true")})
+        -- end
+        -- if direction == false then
+            -- select_next_row()
+        -- else
+            -- select_prev_row()
+        -- end
         -- return true
     -- end)
 
-    -- made_mid_wid:reset()
-    -- made_middle_widget:pause()
-    -- naughty.notify({text = tostring(type(made_middle_widget:get_children()))})
-    -- for k, v in pairs(made_mid_wid:get_all_children()) do
-        -- naughty.notify({text = tostring(k) .. '     ' .. tostring(v), timeout = 0})
+    -- these most likeky work, it's just that the 
+    -- layout I'm using isn't set up to handle mouse events yet
+    local close_buttons = trufflebar:get_children_by_id("close_bg")
+    local postpone_buttons = trufflebar:get_children_by_id("postpone_bg")
+    local done_buttons = trufflebar:get_children_by_id("done_bg")
+
+    for _, bttn in pairs(close_buttons) do 
+        bttn:connect_signal("mouse::enter", function() -- I'm really not sure, but this might just give me a stack overflow if I change the signal to `"mouse::move"`
+            bttn.backup_bg = bttn.bg
+            -- bttn.bg = cpaint.lighten(bttn.bg, 40)
+            bttn.bg = "#ff4455"
+            naughty.notify({text = tostring("mouse broke")})
+        end)
+        bttn:connect_signal("mouse::leave", function()
+            if bttn.backup_bg then
+                bttn.bg = backup_bg
+            end
+            naughty.notify({text = tostring("mouse broke")})
+        end)
+    end
+
+    -- for _, bttn in pairs(postpone_buttons) do
+        -- bttn:connect_signal("mouse::enter", function()
+            -- bttn.backup_bg = bttn.bg
+            -- bttn.bg = cpaint.lighten(bttn.bg, 40)
+        -- end)
+        -- bttn:connect_signal("mouse::leave", function()
+            -- if bttn.backup_bg then
+                -- bttn.bg = backup_bg
+            -- end
+        -- end)
+    -- end
+-- 
+    -- for _, bttn in pairs(done_buttons) do
+        -- bttn:connect_signal("mouse::enter", function()
+            -- bttn.backup_bg = bttn.bg
+            -- bttn.bg = cpaint.lighten(bttn.bg, 40)
+        -- end)
+        -- bttn:connect_signal("mouse::leave", function()
+            -- if bttn.backup_bg then
+                -- bttn.bg = backup_bg
+            -- end
+        -- end)
     -- end
 
     return trufflebar

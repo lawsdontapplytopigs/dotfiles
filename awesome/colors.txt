@@ -40,7 +40,7 @@
 #5820ad
 #551383 #might have to change this one
 #432b6b
-#2f0a49 #this one too
+#2f0a49 #might change this one too
 
 #Blue
 #cceeff
@@ -54,6 +54,7 @@
 
 #Green
 #c0ff20
+#a0df20
 #68ff70
 #12bd80
 #4a7430
@@ -62,7 +63,7 @@
 #1a7400
 #005c30
 
-#Gray
+#Gray (that actually has a very slight shade of purple)
 #201e24
 #343038
 #5c5860

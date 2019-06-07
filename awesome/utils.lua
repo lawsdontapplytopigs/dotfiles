@@ -29,11 +29,11 @@ utils.bubble = function(radius)
     end
 end
 
--- utils.prrect = function(radius, tl, tr, br, bl)
-  -- return function(cr, width, height)
-    -- gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl, radius)
-  -- end
--- end
+utils.prrect = function(radius, tl, tr, br, bl)
+  return function(cr, width, height)
+    gears.shape.partially_rounded_rect(cr, width, height, tl, tr, br, bl, radius)
+  end
+end
 
 -- Create info bubble shape
 -- TODO
@@ -172,7 +172,5 @@ function utils.get_files_recursively(storage_place, path)
         end
     end
 end
-
-
 
 return utils

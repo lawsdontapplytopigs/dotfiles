@@ -363,8 +363,8 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- theme.wallpaper = home ..'/images/elementaryos/wallpapers/Ashim_DSilva.jpg'
 -- theme.wallpaper = home .. '/EHGgqUq.jpg'
-theme.wallpaper = home .. '/images/21_9_wallpapers/Swe2Jap.png'
--- theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
+-- theme.wallpaper = home .. '/images/21_9_wallpapers/Swe2Jap.png'
+theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = "/usr/share/icons/Paper"

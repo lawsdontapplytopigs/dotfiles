@@ -1,0 +1,1 @@
+/home/ldap/colors/black_cherries/implemented/vim/black_cherries.vim

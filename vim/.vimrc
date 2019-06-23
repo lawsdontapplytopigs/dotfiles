@@ -66,8 +66,7 @@ call plug#end()
 " write ':colorscheme ' and press [TAB] to cycle through color schemes 
 
 " set colorscheme and true colors in vim "
-":colorscheme BlackCherriesExperiments
-:colorscheme momoshiki
+:colorscheme black_cherries
 set termguicolors
 " i actually don't have a clue what this does
 " BUT if you modify the semicolons to colons

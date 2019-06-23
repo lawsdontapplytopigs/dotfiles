@@ -1,1 +1,0 @@
-/home/ldap/colors/momoshiki/implemented/vim/momoshiki.vim

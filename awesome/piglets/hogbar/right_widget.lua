@@ -32,6 +32,8 @@ local system_widgets_resources = {
             top = 13,
             bottom = 13,
         -- },
+        command = function()
+        end,
     },
     {
         name = "power",

@@ -4,7 +4,6 @@ local wibox = require("wibox")
 local naughty = require("naughty")
 local utils = require("utils")
 local gears = require("gears")
-local show_porkerpanel = require("piglets.porkerpanel.porkerpanel")
 
 local home = os.getenv("HOME")
 
@@ -13,16 +12,16 @@ local system_widgets_resources = {
         name = "bluetooth",
         normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/bluetooth/bluetooth_240_white.svg",
         -- margins = {
-            top = 11,
-            bottom = 11,
+            top = 13,
+            bottom = 13,
         -- },
     },
     {
         name = "networking",
         normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/networking/wifi_240_white.svg",
         -- margins = {
-            top = 11,
-            bottom = 11,
+            top = 13,
+            bottom = 13,
         -- },
     },
     {
@@ -30,8 +29,8 @@ local system_widgets_resources = {
         normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/notifications/bell_240_white.svg",
         hover_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/notifications/bell_240_bright.svg",
         -- margins = {
-            top = 11,
-            bottom = 11,
+            top = 13,
+            bottom = 13,
         -- },
     },
     {
@@ -39,11 +38,10 @@ local system_widgets_resources = {
         normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/power/power_240_white.svg",
         hover_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/power/power_240_bright.svg",
         -- margins = {
-            top = 11,
-            bottom = 11,
+            top = 13,
+            bottom = 13,
         -- },
         command = function()
-            show_porkerpanel()
         end,
         -- TODO: add command
     },
@@ -111,8 +109,8 @@ local function make_system_buttons(s)
 
     local mylayoutbox = wibox.widget({
         widget = wibox.container.margin,
-        top = 9,
-        bottom = 9,
+        top = 12,
+        bottom = 12,
         {
             layout = wibox.layout.fixed.horizontal,
             awful.widget.layoutbox(s),

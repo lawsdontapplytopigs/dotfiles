@@ -14,12 +14,12 @@
         [x] Everytime you power up the prompt, reset the text in the rows
         [x] Make the `Control + Up` and `Control + Down` do something
 
-    [ ] Uhhhhh make the button work???
+    [ ] Uhhhhh make the buttons work???
 
 [ ] Refactoring TODO TODO (I'll do it when I get done with the whole thing)
     [ ] Separate the prompt from the widgets I made
     [ ] Separate the widgets I made and put them into functions
-    [ ] put underscores in front of variables that should be private
+    [ ] put underscores in front of variables that should be private (EDIT: VERY rarely should variables be private, idiot)
     [ ] refactor the `update` functions that make the row selection happen
 
 [ ] Bugs

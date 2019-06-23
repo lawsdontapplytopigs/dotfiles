@@ -9,4 +9,5 @@ alias lua lua5.3
 set PYTHONPATH /usr/bin
 
 set fish_greeting
-set GOPATH $HOME/scripts/go
+set PATH /usr/local/go/bin $PATH
+set PATH /usr/local/nodejs/ $PATH

@@ -41,11 +41,12 @@ local piglets = require("piglets")
 local keys = require("keys")
 
 -- utility functions
-local utils = require("utils")
+local utils = require("utils") -- TODO: this name is garbage. 
+-- there's a bunch of stuff in there that can be split into modules.
 
-local cairo = require("lgi").cairo
-
-------------------------------------------------------------------------------- ERROR HANDLING
+-------------------
+-- Error handling
+-------------------
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -71,19 +72,6 @@ do
         in_error = false
     end)
 end
-------------------------------------------------------------------------------- 
--- END ERROR HANDLING
-
--- local wb = wibox({
-    -- x = 0,
-    -- y = 30,
-    -- height = awful.screen.focused().geometry.height- 30,
-    -- width = 40,
-    -- visible = true,
-    -- bg = '#883300',
--- })
-
--- wb:struts({x = 0, y = 30, height = awful.screen.focused().geometry.height - 30, width = 40,})
 
 -- autostart programs
 for _, v in pairs(startup_programs) do
@@ -92,7 +80,9 @@ end
 
 screen.connect_signal('refresh', function(c) return c end)
 
-------------------------------------------------------------------------------- RULES
+-------------------
+-- RULES
+-------------------
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -333,83 +323,31 @@ client.connect_signal("manage", function (c)
     end
 end)
 
-------------------- Sloppy focus
--- Enable sloppy focus, so that focus follows mouse.
---client.connect_signal("mouse::enter", function(c)
---    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
---        and awful.client.focus.filter(c) then
---        client.focus = c
---    end
---end)
-------------------- Sloppy focus end
-
-
-
--- naughty.notify({ title = "hey now",
-                 -- text = tostring('ok this is epic'),
-                 -- timeout = 10,
-                 -- height = 140,
-                 -- width = 160,
-                 -- font = 'sans 14' })
-
 ------------------- this has to do with coloring the borders of windows when focused
 -- these color client borders when focusing and unfocusing
 -- client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)    
 -- client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 ------------------------------------------------------------------------------- SIGNALS END
 
--- 
--- local keygrabber = awful.keygrabber
--- local panel = wibox({
-    -- x = 80,
-    -- y = 80,
-    -- color = '#20102088',
-    -- width = 200,
-    -- height = 200,
-    -- visible = true,
+-- local shapem = wibox({
+--     x = 20,
+--     y = 40,
+--     width = 300,
+--     height = 400,
+--     visible = true,
+--     bg = "#88ffdd",
 -- })
--- 
--- panel:setup({
-    -- widget = wibox.container.background,
-    -- bg = '#83830033',
-    -- {
-        -- id = 'vi_textbox',
-        -- layout = wibox.layout.fixed.horizontal,
-        -- wibox = wibox.widget.textbox,
-        -- font = "TTCommons 18",
-        -- text = ' ok then ',
-    -- },
+
+-- local grab = awful.keygrabber({
+--     keybindings = {
+--         {{"Mod1"}, "F11", function() end}
+--     },
+--     stop_key = {{"Mod1"}, "F12"},
+--     stop_event = "release",
+--     keypressed_callback = function(_, modifiers, key)
+--         if key == "k" then
+--             shapem.visible = not shapem.visible
+--         end
+--     end,
+--     export_keybindings = true,
 -- })
--- 
--- local tbox = wibox.widget.textbox("hey there")
--- 
--- local vi_textbox = panel:get_children_by_id("vi_textbox")[1]
--- naughty.notify({text = tostring(tbox.set_font)})
--- local grab = keygrabber.run(
--- function(modifiers, key, event)
-    -- naughty.notify({text = tostring('hmm')})
-    -- if key == "q" or key == "Escape" then
-        -- keygrabber.stop(grab)
-        -- panel.visible = false
-        -- fake_bar.visible = false
-
-    -- elseif key == "l" then
-        -- select_button( "+1" )
-
-    -- elseif key == "h" then
-        -- select_button( "-1" )
-
-    -- elseif key == "Return" then
-        -- press_button()
-
-    -- elseif key == ":" then
-        -- awful.prompt:run ({
-            -- -- font = "TTCommons Medium 14",
-            -- textbox = vi_textbox,
-            -- exe_callback = function( command )
-                -- naughty.notify({text = tostring(command)})
-            -- end
-        -- })
-    -- end
--- end)
-

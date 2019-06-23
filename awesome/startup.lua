@@ -1,6 +1,6 @@
 
 local autostart = {
-'compton --config /home/ciugamenn/.config/compton/compton.conf'
+"compton --config ".. os.getenv("HOME") .. "/.config/compton/compton.conf"
 }
 return autostart
 

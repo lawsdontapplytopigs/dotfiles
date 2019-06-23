@@ -1,1 +1,1 @@
-/home/ciugamenn/colors/momoshiki/implemented/vim/momoshiki.vim
+/home/ldap/colors/momoshiki/implemented/vim/momoshiki.vim

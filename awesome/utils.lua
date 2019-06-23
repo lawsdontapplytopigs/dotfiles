@@ -8,6 +8,9 @@ local naughty = require("naughty")
 
 local utils = {}
 
+-- TODO: actually separate this file. The name is garbage, it's not specific,
+-- and a bunch of this stuff should be separate files.
+
 -- Create rounded rectangle shape
 utils.rrect = function(radius)
     return function(cr, width, height)

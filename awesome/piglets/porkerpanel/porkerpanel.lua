@@ -10,7 +10,7 @@ local dpi = beautiful.xresources.apply_dpi
 local home = os.getenv("HOME")
 
 -- setting up the background for the panel
-local surf = gears.surface("/home/ciugamenn/EHGgqUq.jpg")
+local surf = gears.surface( home .. "/EHGgqUq.jpg")
 local img_width, img_height = gears.surface.get_size(surf)
 -- local scale = searchbox_width / img_width
 local bg_wid = awful.screen.focused().geometry.width / 2
@@ -97,15 +97,15 @@ local close_panel_button = wibox.widget({
     forced_height = 18,
     forced_width = 18,
     widget = wibox.widget.imagebox,
-    image = '/home/ciugamenn/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_2.svg',
+    image = home .. '/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_2.svg',
 })
 -- mouse enter
 close_panel_button:connect_signal("mouse::enter", function()
-    close_panel_button.image = "/home/ciugamenn/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_3.svg"
+    close_panel_button.image = home .. "/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_3.svg"
 end)
 -- mouse leave
 close_panel_button:connect_signal("mouse::leave", function()
-    close_panel_button.image = "/home/ciugamenn/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_2.svg"
+    close_panel_button.image = home .. "/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_2.svg"
 end)
 -- mouse button release
 close_panel_button:connect_signal("button::release", function()

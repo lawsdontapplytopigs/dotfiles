@@ -55,6 +55,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 
@@ -97,8 +99,6 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
-
-
 
 
 " Commenting/uncommenting code automatically with Shift + Tab"
@@ -144,8 +144,11 @@ function! ToggleComment()
     endif
 endfunction
 
-nnoremap <S-Tab> :call ToggleComment()<cr>
-vnoremap <S-Tab> :call ToggleComment()<cr>
+autocmd FileType lua setlocal commentstring=\--%s
+autocmd FileType vim setlocal commentstring=\"%s
+
+nnoremap <S-Tab> :Commentary<cr>
+vnoremap <S-Tab> :Commentary<cr>
 
 
 

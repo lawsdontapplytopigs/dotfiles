@@ -353,7 +353,6 @@ end)
 
 -- local mymenu = radical.context({ })
 -- mymenu:add_item ({text = "ses1", button1 = function(_menu,item,mods) print("Hello world") end})
--- mymenu:add_item ({text = "saes8", icon = '/home/ciugamenn/search.svg', bg = '#ffffff', fg='#000000'})
 -- mymenu:add_item ({text = "Submenu", sub_menu = function()
     -- local smenu = radical.context({})
     -- smenu:add_item({text = "submenu string1"})

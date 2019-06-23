@@ -37,8 +37,6 @@ local desktop = {
         [2] = {
             label = "Home",
             icon  = "terminal",
-            -- icon  = "/home/ciugamenn/terminal.png",
-            -- onclick = awful.spawn('st')
         },
         [3] = {
             label = "Trash",

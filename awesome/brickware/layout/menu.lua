@@ -7,6 +7,8 @@ local naughty = require("naughty")
 local gtimer = require("gears.timer")
 local gears = require("gears")
 
+-- just because I don't know how to do it any other way,
+-- I'll do it like this
 local fr = base.make_widget(nil, nil, {enable_properties = true})
 gtable.crush(fr, free, true)
 fr._private.widgets = {}
@@ -85,26 +87,6 @@ local function emit_difference(name, list, skip)
             v.widget:emit_signal(name, v)
         end
     end
-end
-
-local function handle_leave(drawable) -- for some reason this gave me a stack overflow
-    emit_difference("mouse::leave", drawable._widgets_under_mouse, {})
-    drawable._widgets_under_mouse = {}
-end
-
-local function handle_motion(drawable, x, y)
-    if x < 0 or y < 0 
-    or x > drawable.drawable:geometry().width 
-    or y > drawable.drawable:geometry().height then
-        return handle_leave(drawable)
-    end
-    local widgets_list = drawable:find_widgets(x, y)
-    emit_difference("mouse::leave", drawable._widgets_under_mouse, widgets_list)
-    emit_difference("mouse::enter", widgets_list, drawable._widgets_under_mouse)
-    naughty.notify({text = tostring(#widgets_list) .. '    ' .. tostring(#drawable._widgets_under_mouse),
-        id = 22,
-        replaces_id = 22})
-    drawable._widgets_under_mouse = widgets_list
 end
 
 local function make_hierarchy(context, child, width, height)

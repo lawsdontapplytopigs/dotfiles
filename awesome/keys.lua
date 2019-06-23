@@ -26,7 +26,7 @@ local alt = "Mod1"
 
 -- put global variables in a file
 -- for k, _ in pairs(_G) do
-    -- file = io.open("/home/ciugamenn/awesome_globals.txt", "a")
+    -- file = io.open(os.getenv("HOME").."/awesome_globals.txt", "a")
     -- file:write(tostring(k)..'\n')
     -- file:close()
 -- end
@@ -543,8 +543,6 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
         end,
         { description = "toggle sidebar", group = "sidebar"}),
 
-
-
     awful.key({ superkey }, "F1", 
         function()
             awful.spawn('volumectl down')
@@ -580,21 +578,23 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
         { description = "show exit panel", group = "sidebar"})
 )
 
--- naughty.notify({text = tostring(type(trufflequest))})
-keys.globalkeys = gears.table.join(keys.globalkeys,
+-- keys.globalkeys = gears.table.join(keys.globalkeys,
 
-    awful.key({ superkey }, 'F10', 
-        function ()
-            if not trufflequest.trufflebar.visible then
-                trufflequest.trufflebar.visible = true
-                trufflequest.trufflebar.ontop = true
-            else
-                trufflequest.trufflebar.visible = false
-            end
-        end,
-        { description = "show exit panel", group = "sidebar"})
+    ---------------
+    -- trufflebar
+    ---------------
+    -- awful.key({ superkey }, 'F10', 
+    --     function ()
+    --         if not trufflequest.trufflebar.visible then
+    --             trufflequest.trufflebar.visible = true
+    --             trufflequest.trufflebar.ontop = true
+    --         else
+    --             trufflequest.trufflebar.visible = false
+    --         end
+    --     end,
+    --     { description = "show exit panel", group = "sidebar"})
 
-)
+-- )
 
 -- naughty.notify({text = tostring(type(porkerpanel.porkerpanel))})
 -- Bind all key numbers to tags.

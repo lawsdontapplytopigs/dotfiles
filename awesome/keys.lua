@@ -6,6 +6,7 @@ local piglets = require("piglets")
 local audio_widget_module = require("piglets.audio")
 local porkerpanel = require("piglets.porkerpanel")
 local trufflequest = require("piglets.trufflequest.trufflequest")
+local dpi = require("beautiful.xresources").apply_dpi
 
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable hotkeys help widget for VIM and other apps
@@ -19,6 +20,7 @@ local control = "Control"
 local superkey = "Mod4"
 local alt = "Mod1"
 
+local floating_terminal = "st -c fst"
 
 -- for k, v in pairs(piglets.custom_prompt) do
     -- naughty.notify({text = tostring(k)})
@@ -31,112 +33,85 @@ local alt = "Mod1"
     -- file:close()
 -- end
 
-
-
--------------------
--- glossary
--------------------
-
--- client: basically, the windows of programs
--- tags: workspaces or "desktops"
-
-
-keys.desktopbuttons = gears.table.join(
-    awful.button({ }, 1, function (c)
-
-        if c then
-            client.focus = c
-            c:raise()
-        end
-        local function double_tap() 
-            naughty.notify({text = tostring("ses")})
-        end
-
-        utils.single_double_tap(function() end, double_tap)
-    end),
-    awful.button({ }, 3, function () mymainmenu:toggle() end)
-)
-
 keys.globalkeys = gears.table.join(
 
     ---------------
     -- Screens
     ---------------
-
-    -- superkey + 'Control' + 'k' focus the prev screen
+    -- focus the prev screen
     awful.key({ superkey }, "e", function () awful.screen.focus_relative(-1) end,
               { description = "focus the previous screen", group = "screen"}),
 
-    -- superkey + 'Control' + 'j' focus the next screen
+    -- focus the next screen
     awful.key({ superkey }, "r", function () awful.screen.focus_relative( 1) end,
-              { description = "focus the next screen", group = "screen"}),
+              { description = "focus the next screen", group = "screen"})
+)
 
+keys.globalkeys = gears.table.join( keys.globalkeys,
 
     ---------------
     -- Tags
     ---------------
-
-    -- superkey + q
     -- view previous tag
     awful.key({ superkey }, "q", awful.tag.viewprev,
             {description = "view previous", group = "tag"}),
 
-    -- superkey + w
     -- view next tag
     awful.key({ superkey }, "w",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
+              {description = "view next", group = "tag"})
+)
 
-    -- superkey + 'Escape' 
-    -- go back to the previous tag you visited
-    -- awful.key({ superkey }, "Escape", awful.tag.history.restore,
-    --          {description = "go back", group = "tag"}),
-
-
+keys.globalkeys = gears.table.join( keys.globalkeys,
     ---------------
     -- Program-related
     ---------------
     
-    -- superkey + 'Shift' + 'r' to restart awesomeWM
+    -- restart awesomeWM
     -- PRO TIP: 'Shift_L' doesn't work ;)
     awful.key({ superkey, shift }, "t", awesome.restart,
               { description = "reload awesome", group = "awesome"}),
 
-    -- superkey + 'Shift' + 'Escape' to quit awesome
+    -- quit awesome
     awful.key({ superkey, shift }, "Escape", awesome.quit,
               { description = "quit awesome", group = "awesome"}),
 
-    -- superkey + o
     -- show main menu
-    awful.key({ superkey }, "c", function () mymainmenu:show() end,
-              { description = "show main menu", group = "awesome"}),
+    -- awful.key({ superkey }, "c", function () mymainmenu:show() end, -- this keybind is used to center clients
+    --           { description = "show main menu", group = "awesome"}),
 
-    -- STANDARD PROGRAM
-    
-    -- alt + 'grave' to start a terminal
-    awful.key({ alt }, "grave", function () awful.spawn('st') end,
-              { description = "open a terminal", group = "awesome"}),
-
+    -- alt + 'grave' to start a FLOATING terminal
+    awful.key({ alt }, "grave", function () awful.spawn("st -c fst") end,
+              { description = "open a floating terminal", group = "awesome"}),
 
     -- superkey + 'grave' to start a terminal
     awful.key({ superkey }, "grave", function () awful.spawn('st') end,
               { description = "open a terminal", group = "awesome"}),
 
 
-    -- superkey + 'Shift' + 'h'
     --awful.key({ superkey, shift }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
     --          {description = "increase the number of master clients", group = "layout"}),
 
-    -- superkey + 'Shift' + 'l'
     --awful.key({ superkey, shift }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
     --          {description = "decrease the number of master clients", group = "layout"}),
 
-    -- superkey + 'Control' + 'h'
-    --awful.key({ superkey, control }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-    --          {description = "increase the number of columns", group = "layout"}),
+    awful.key({ superkey, control }, "h",
+        function () awful.tag.incncol( 1, nil, false ) end,
+        {
+            description = "increase the number of columns", 
+            group = "layout"
+        }
+    ),
 
-    -- superkey + 'Control' + 'l' 
-    --awful.key({ superkey, control }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-    --          {description = "decrease the number of columns", group = "layout"}),
+    awful.key({ superkey, control }, "l",
+        function () awful.tag.incncol(-1, nil, true) end,
+        {
+            description = "decrease the number of columns", 
+            group = "layout"
+        }
+    ),
+
+    awful.key({ alt }, "r", piglets.piggyprompt.launch,
+        { description = "Run programs", group = "awesome"})
 
     -- superkey + r
     -- program-running prompt
@@ -156,22 +131,18 @@ keys.globalkeys = gears.table.join(
         -- end,
     -- {description = "run prompt", group = "awesome"}),
 
-
-    awful.key({ alt }, "r", piglets.piggyprompt.launch,
-        { description = "Run programs", group = "awesome"}),
-
     -- superkey + x
     -- run-lua-code prompt
-    awful.key({ alt }, "l",
-        function ()
-            awful.prompt.run {
-                prompt       = "Run Lua code: ",
-                textbox      = awful.screen.focused().mypromptbox.widget,
-                exe_callback = awful.util.eval,
-                history_path = awful.util.get_cache_dir() .. "/history_eval"
-            }
-        end,
-        {description = "lua execute prompt", group = "awesome"}),
+    -- awful.key({ alt }, "l",
+    --     function ()
+    --         awful.prompt.run {
+    --             prompt       = "Run Lua code: ",
+    --             textbox      = awful.screen.focused().mypromptbox.widget,
+    --             exe_callback = awful.util.eval,
+    --             history_path = awful.util.get_cache_dir() .. "/history_eval"
+    --         }
+    --     end,
+    --     {description = "lua execute prompt", group = "awesome"})
 
     -- Menubar
     -- this is broken currently (30, march, 2019)
@@ -181,44 +152,89 @@ keys.globalkeys = gears.table.join(
             -- naughty.notify({text = tostring(capi.selection())})
         -- end,
     -- {description = "show the clipboard contents", group = "awesome"}),
+)
 
-
-    ---------------
-    -- Clients
-    ---------------
-
+---------------
+-- Clients
+---------------
+keys.globalkeys = gears.table.join( keys.globalkeys,
     ------ TABBING THROUGH CLIENTS 
-
     awful.key({ superkey, shift }, "q",
         function() 
             awful.client.focus.byidx(1)
         end,
         { description = "focus next client", group = "client"}),
-
-
     awful.key({ superkey, shift }, "w",
         function()
             awful.client.focus.byidx(-1)
         end,
         { description = "focus previous client", group = "client"}),
-
     awful.key({ superkey }, "Tab",
         function()
             awful.client.focus.byidx(1)
         end,
         { description = "focus next client", group = "client"}),
-            
     awful.key({ superkey, shift }, "Tab",
         function()
             awful.client.focus.byidx(-1)
         end,
-        { description = "focus previous client", group = "client"}),
+        { description = "focus previous client", group = "client"})
+)
 
-    ------ LAYOUT MANIPULATION
+-- Swapping/moving clients with arrow keys
+keys.globalkeys = gears.table.join( keys.globalkeys,
+    -- swap with client above
+    awful.key({ superkey, shift }, "Up",
+        function () 
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(0, dpi(-30), 0, 0)
+            else
+                awful.client.swap.bydirection("up")
+            end
+        end,
+        { description = "swap with the client above", group = "client"}),
+    -- swap with client on the right
+    awful.key({ superkey, shift }, 'Right',
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(dpi(30), 0, 0, 0)
+            else
+                awful.client.swap.bydirection("right")
+            end
+        end,
+        { description = "swap with the client on the right", group = "client"}),
+    -- swap places with the client below
+    awful.key({ superkey, shift }, "Down",
+        function () 
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(0, dpi(30), 0, 0)
+            else
+                awful.client.swap.bydirection("down")
+            end
+        end,
+        { description = "swap with the client below", group = "client"}),
+    -- swap with the client on the left
+    awful.key({ superkey, shift }, "Left",
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(dpi(-30), 0, 0, 0)
+            else
+                awful.client.swap.bydirection("left")
+            end
+        end,
+        { description = "swap with the client on the left", group = "client" })
+)
 
-    ------ use superkey + arrow keys to focus clients
-
-    -- superkey + Up
+-- Focusing clients with arrow keys
+keys.globalkeys = gears.table.join( keys.globalkeys,
     -- focus client by direction: up
     awful.key({ superkey }, "Up",
         function()
@@ -226,8 +242,6 @@ keys.globalkeys = gears.table.join(
             if client.focus then client.focus:raise() end
         end,
         { description = "focus up", group = "client"}),
-
-    -- superkey + Right
     -- focus client by direction: right
     awful.key({ superkey }, "Right",
         function()
@@ -235,8 +249,6 @@ keys.globalkeys = gears.table.join(
             if client.focus then client.focus:raise() end
         end,
         { description = "focus right", group = "client"}),
-
-    -- superkey + Down
     -- focus client by direction: down
     awful.key({ superkey }, "Down",
         function()
@@ -244,71 +256,113 @@ keys.globalkeys = gears.table.join(
             if client.focus then client.focus:raise() end
         end,
         { description = "focus down", group = "client" }),
-
-    -- superkey + Left
     -- focus client by direction: left
     awful.key({ superkey }, "Left",
         function()
             awful.client.focus.bydirection("left")
             if client.focus then client.focus:raise() end
         end,
-        { description = "focus left", group = "client"}),
+        { description = "focus left", group = "client"})
+)
 
-    ------ Swapping places between clients with superkey + shift + arrow keys
-    
-    -- superkey + shift + up
-    -- swap places with the client above
-    awful.key({ superkey, shift }, "Up", 
-        function () 
-            awful.client.swap.bydirection("up")
-        end,
-        { description = "swap with the client above", group = "client"}),
-
-    -- superkey + shift + right
-    -- swap places with the client on the right
-    awful.key({ superkey, shift }, 'Right',
+-- resizing clients with arrow keys
+keys.globalkeys = gears.table.join(keys.globalkeys,
+    awful.key({ superkey, control }, "Up", 
         function ()
-            awful.client.swap.bydirection("right")
-        end,
-        { description = "swap with the client on the right", group = "client"}),
-
-    -- superkey + shift + down
-    -- swap places with the client below
-    awful.key({ superkey, shift }, "Down", 
-        function () 
-           awful.client.swap.bydirection("down")
-        end,
-        { description = "swap with the client below", group = "client"}),
-
-    -- superkey + shift + left
-    -- swap with the client on the left
-    awful.key({ superkey, shift }, "Left",
-        function ()
-            awful.client.swap.bydirection("left")
-        end,
-        { description = "swap with the client on the left", group = "client" }),
-
-    ------ resizing clients with superkey + control + arrows
-
-    -- superkey + control + right to increase window width
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move( 0, 0, 0, dpi(-30) )
+            else
+                awful.client.incwfact(0.05, c)
+            end
+        end),
     awful.key({ superkey, control }, "Right",
         function () 
-                awful.tag.incmwfact( 0.03)
-        end,
-        { description = "increase master width factor", group = "client"}),
-
-    -- superkey + control + left to decrease window width
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move( 0, 0, dpi(30), 0 )
+            else
+                awful.client.incwfact(0.05, c)
+            end
+        end),
+    awful.key({ superkey, control }, "Down", 
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move(  0,  0,  0, dpi(30) )
+            else
+                awful.client.incwfact(-0.05, c)
+            end
+        end),
     awful.key({ superkey, control }, "Left",
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move( 0, 0, dpi(-30), 0 )
+            else
+                awful.client.incwfact(-0.05, c)
+            end
+        end)
+)
+
+------ Swapping/moving between clients with superkey + [yuio]
+keys.globalkeys = gears.table.join( keys.globalkeys,
+    -- swap with client above
+    awful.key({ superkey }, "i",
         function () 
-            awful.tag.incmwfact(-0.03) 
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(0, dpi(-30), 0, 0)
+            else
+                awful.client.swap.bydirection("up")
+            end
         end,
-        { description = "decrease master width factor", group = "client"}),
-    
+        { description = "swap with the client above", group = "client"}),
+    -- swap with client on the right
+    awful.key({ superkey }, 'o',
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(dpi(30), 0, 0, 0)
+            else
+                awful.client.swap.bydirection("right")
+            end
+        end,
+        { description = "swap with the client on the right", group = "client"}),
+    -- swap places with the client below
+    awful.key({ superkey }, "u",
+        function () 
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(0, dpi(30), 0, 0)
+            else
+                awful.client.swap.bydirection("down")
+            end
+        end,
+        { description = "swap with the client below", group = "client"}),
+    -- swap with the client on the left
+    awful.key({ superkey }, "y",
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating then
+                c:relative_move(dpi(-30), 0, 0, 0)
+            else
+                awful.client.swap.bydirection("left")
+            end
+        end,
+        { description = "swap with the client on the left", group = "client" })
+)
 
-
-    ------ use superkey + vim navigation keys to focus clients
-
-    -- superkey + Up
+-- focus clients with vim keys
+keys.globalkeys = gears.table.join( keys.globalkeys,
     -- focus client by direction: up
     awful.key({ superkey }, "k",
         function()
@@ -316,8 +370,6 @@ keys.globalkeys = gears.table.join(
             if client.focus then client.focus:raise() end
         end,
         { description = "focus up", group = "client"}),
-
-    -- superkey + Right
     -- focus client by direction: right
     awful.key({ superkey }, "l",
         function()
@@ -325,8 +377,6 @@ keys.globalkeys = gears.table.join(
             if client.focus then client.focus:raise() end
         end,
         { description = "focus right", group = "client"}),
-
-    -- superkey + Down
     -- focus client by direction: down
     awful.key({ superkey }, "j",
         function()
@@ -334,82 +384,104 @@ keys.globalkeys = gears.table.join(
             if client.focus then client.focus:raise() end
         end,
         { description = "focus down", group = "client" }),
-
-    -- superkey + Left
     -- focus client by direction: left
     awful.key({ superkey }, "h",
         function()
             awful.client.focus.bydirection("left")
             if client.focus then client.focus:raise() end
         end,
-        { description = "focus left", group = "client"}),
+        { description = "focus left", group = "client"})
+)
 
+------ resizing clients with superkey + [n.]keys
+keys.globalkeys = gears.table.join( keys.globalkeys,
 
-    ------ Swapping places between clients with superkey + [yuio]
-
-    -- superkey + i
-    -- swap places with the client above
-    awful.key({ superkey }, "i",
-        function () 
-            awful.client.swap.bydirection("up")
-        end,
-        { description = "swap with the client above", group = "client"}),
-
-    -- superkey + o
-    -- swap places with the client on the right
-    awful.key({ superkey }, 'o',
+    awful.key({ superkey }, "comma", 
         function ()
-            awful.client.swap.bydirection("right")
-        end,
-        { description = "swap with the client on the right", group = "client"}),
-
-    -- superkey + u
-    -- swap places with the client below
-    awful.key({ superkey }, "u",
-        function () 
-           awful.client.swap.bydirection("down")
-        end,
-        { description = "swap with the client below", group = "client"}),
-
-    -- superkey + y
-    -- swap with the client on the left
-    awful.key({ superkey }, "y",
-        function ()
-            awful.client.swap.bydirection("left")
-        end,
-        { description = "swap with the client on the left", group = "client" }),
-    
-
-    ------ resizing clients with superkey + [n.]keys
-
-    -- superkey + . to increase window width
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move( 0, 0, 0, dpi(-30) )
+            else
+                awful.client.incwfact(-0.05, c)
+            end
+        end),
     awful.key({ superkey }, "period",
         function () 
-            awful.tag.incmwfact( 0.03)
-        end,
-        { description = "increase master width factor", group = "client"}),
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move( 0, 0, dpi(30), 0 )
+            else
+                awful.client.incwfact(0.05, c)
+            end
+        end),
+    awful.key({ superkey }, "m", 
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move(  0,  0,  0, dpi(30) )
+            else
+                awful.client.incwfact(0.05, c)
+            end
+        end),
 
     -- superkey + n to decrease window width
     awful.key({ superkey }, "n",
-        function () 
-            awful.tag.incmwfact(-0.03) 
-        end,
-        { description = "decrease master width factor", group = "client"}),
+        function ()
+            local c = client.focus
+            local current_layout = awful.layout.getname(awful.layout.get(awful.screen.focused()))
+            if current_layout == "floating" or c.floating == true then
+                c:relative_move( 0, 0, dpi(-30), 0 )
+            else
+                awful.client.incwfact(0.05, c)
+            end
+        end)
+)
 
 
-
+-- Switching through layouts
+keys.globalkeys = gears.table.join( keys.globalkeys,
     ------ super + shift + [er] to browse back and forth through layouts for clients
-
-    -- superkey + shift + e select previous layout for clients
-    awful.key({ superkey, shift }, "e", function () awful.layout.inc(-1)                end,
+    awful.key({ superkey, shift }, "e", function () awful.layout.inc(-1) end,
               { description = "select previous", group = "client"}),
 
     -- superkey + shift + r select next layout for clients
-    awful.key({ superkey, shift }, "r", function () awful.layout.inc( 1)                end,
-              { description = "select next", group = "client"}),
+    awful.key({ superkey, shift }, "r", function () awful.layout.inc(1) end,
+              { description = "select next", group = "client"})
+)
 
+keys.globalkeys = gears.table.join( keys.globalkeys,
+    -- Center client
+    awful.key({ superkey }, "c",  function ()
+        local c = client.focus
+        awful.placement.centered(c,{honor_workarea=true})
+    end),
 
-    -- superkey + f 
+    -- Toggle titlebar (for focused client only)
+    -- awful.key({ alt }, "t",
+    --     function (c)
+    --         -- Don't toggle if titlebars are used as borders
+    --         if not beautiful.titlebars_imitate_borders then
+    --             awful.titlebar.toggle(c)
+    --         end
+    --     end,
+    --     {description = "toggle titlebar", group = "client"}),
+    -- Toggle titlebar (for all visible clients in selected tag)
+    awful.key({ alt, shiftkey }, "t",
+        function (c)
+            --local s = awful.screen.focused()
+            local clients = awful.screen.focused().clients
+            for _, c in pairs(clients) do
+                -- Don't toggle if titlebars are used as borders
+                if not beautiful.titlebars_imitate_borders then
+                    awful.titlebar.toggle(c)
+                end
+            end
+        end,
+        {description = "toggle titlebar", group = "client"}),
+
     -- toggle fullscreen
     awful.key({ superkey }, "f",
         function (c)
@@ -421,7 +493,17 @@ keys.globalkeys = gears.table.join(
         end,
         { description = "toggle fullscreen", group = "client"}),
 
-    -- superkey + s
+    -- toggle maximized
+    awful.key({ superkey }, "d",
+        function (c)
+            local c = client.focus
+            if c then
+                c.maximized = not c.maximized
+                c:raise()
+            end
+        end ,
+        { description = "toggle maximized", group = "client"}),
+
     -- minimize client
     awful.key({ superkey }, "s",
         function (c)
@@ -434,19 +516,6 @@ keys.globalkeys = gears.table.join(
         end,
         { description = "minimize", group = "client"}),
 
-    -- superkey + d
-    -- toggle maximized
-    awful.key({ superkey }, "d",
-        function (c)
-            local c = client.focus
-            if c then
-                c.maximized = not c.maximized
-                c:raise()
-            end
-        end ,
-        { description = "(un)maximize", group = "client"}),
-
-    -- superkey + a
     -- restore minimized client
     awful.key({ superkey }, "a",
         function ()
@@ -467,8 +536,7 @@ keys.globalkeys = gears.table.join(
                     c:kill()
                 end
         end,
-        { description = "close", group = "client" }),
-
+        { description = "kill client", group = "client" }),
 
     -- toggle floating layout mode
     awful.key({ superkey }, "space",  
@@ -487,17 +555,14 @@ keys.globalkeys = gears.table.join(
     --awful.key({ superkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
     --         {description = "toggle keep on top", group = "client"}),
 
-
     ------ other client-related keybindings
 
     -- superkey + u
     -- jump to urgent client
     awful.key({ superkey }, "z", 
         awful.client.urgent.jumpto,
-        { description = "jump to urgent client", group = "client"}),
-
-
-
+        { description = "jump to urgent client", group = "client"})
+)
     -- superkey + Tab
     -- go to the previously visited client
     -- awful.key({ superkey }, "Tab",
@@ -509,32 +574,22 @@ keys.globalkeys = gears.table.join(
     --    end,
     --    {description = "go back", group = "client"}),
 
-
     ---------------
     -- Misc
     ---------------
+keys.globalkeys = gears.table.join(keys.globalkeys,
 
     -- superkey + shift + h
     -- show help
     awful.key({ superkey, shift }, "h",      hotkeys_popup.show_help,
-              { description="show help", group="awesome"}),
-
-    awful.key({ alt }, "d", 
-        function()
-            awful.spawn("rofi -show")
-        end,
-        { description="show rofi", group="rofi"})
-
+              { description="show help", group="awesome"})
 )
-
-
 
 keys.globalkeys = gears.table.join(keys.globalkeys,
 
     ---------------
     -- Sidebar
     ---------------
-
     awful.key({ alt }, "s",
         function()
             piglets.sidebar.sidebar.visible = not piglets.sidebar.sidebar.visible
@@ -569,34 +624,13 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
 )
 
 keys.globalkeys = gears.table.join(keys.globalkeys,
-
     ----------------
     -- Hogbar
     ----------------
-
     awful.key({ superkey }, 'F9', porkerpanel.show_panel,
         { description = "show exit panel", group = "sidebar"})
 )
 
--- keys.globalkeys = gears.table.join(keys.globalkeys,
-
-    ---------------
-    -- trufflebar
-    ---------------
-    -- awful.key({ superkey }, 'F10', 
-    --     function ()
-    --         if not trufflequest.trufflebar.visible then
-    --             trufflequest.trufflebar.visible = true
-    --             trufflequest.trufflebar.ontop = true
-    --         else
-    --             trufflequest.trufflebar.visible = false
-    --         end
-    --     end,
-    --     { description = "show exit panel", group = "sidebar"})
-
--- )
-
--- naughty.notify({text = tostring(type(porkerpanel.porkerpanel))})
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
@@ -647,30 +681,28 @@ for i = 1, 9 do
     )
 end
 
-------------------------------------------------------------------------------- MOUSE BINDINGS
--- Mouse buttons on the client (whole window, not just titlebar)
-keys.clientbuttons = gears.table.join(
-    awful.button({ }, 1, 
-        function (c)
-            naughty.destroy_all_notifications()
-            piglets.sidebar.sidebar.visible = false
-            piglets.sidebar.sidebar.ontop = false
-            -- mymainmenu:hide()
-
+-- Mouse buttons on the desktop ( the actual background image )
+keys.desktopbuttons = gears.table.join(
+    awful.button({ }, 1, function (c)
+        if c then
             client.focus = c
             c:raise()
-        end),
-    awful.button({ superkey }, 1, awful.mouse.client.move),
-    awful.button({ superkey }, 3, awful.mouse.client.resize)
-    -- awful.button({ }, 3, function () mymainmenu:toggle() end)
+        end
+        utils.check_double_tap( function() end )
+    end)
 )
 
-------------------------------------------------------------------------------- MOUSE BINDINGS END
+-- Mouse buttons on the client (whole window, not the titlebar)
+keys.clientbuttons = gears.table.join(
+    awful.button({ }, 1, function (c)
+        naughty.destroy_all_notifications()
+        piglets.sidebar.sidebar.visible = false
 
-
--- Set keys
-root.keys(keys.globalkeys)
--- the buttons are just for the titlebars apparently
-root.buttons(keys.desktopbuttons)
+        client.focus = c
+        c:raise()
+    end),
+    awful.button({ superkey }, 1, awful.mouse.client.move),
+    awful.button({ superkey }, 3, awful.mouse.client.resize)
+)
 
 return keys

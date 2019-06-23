@@ -126,22 +126,20 @@ function utils.create_titlebar(c, titlebar_buttons, titlebar_position, titlebar_
     }
 end
 
+
 local double_tap_timer = nil
-function utils.single_double_tap(single_tap_function, double_tap_function)
-  if double_tap_timer then
-    double_tap_timer:stop()
-    double_tap_timer = nil
-    double_tap_function()
-    naughty.notify({text = "We got a double tap"})
-    return
-  end
+function utils.check_double_tap(double_tap_function)
+    if double_tap_timer then
+        double_tap_timer:stop()
+        double_tap_timer = nil
+        double_tap_function()
+        -- naughty.notify({text = "We got a double tap"})
+        return
+    end
   
-  double_tap_timer =
-    gears.timer.start_new(0.20, function()
-                            double_tap_timer = nil
-                            -- naughty.notify({text = "We got a single tap"})
-                            single_tap_function()
-                            return false
+    double_tap_timer = gears.timer.start_new(0.20, function()
+        double_tap_timer = nil
+        return false -- false so the timer doesn't restart automatically
     end)
 end
 

@@ -12,6 +12,7 @@ local titlebars = {}
 function titlebars.normal_tbar( args )
 
     local c = args.client
+    local buttons = args.buttons
     local left = {
         -- awful.titlebar.widget.iconwidget(c),
         utils.pad_width(14),

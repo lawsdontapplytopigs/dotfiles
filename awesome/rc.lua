@@ -7,6 +7,7 @@ local theme_collection = {
     "NebulaBlaze"
 }
 
+-- thanks for the idea, empress ;;;)
 -- Change this number to use a different theme
 local theme_name = theme_collection[1]
 
@@ -39,6 +40,9 @@ local piglets = require("piglets")
 
 -- Key bindings
 local keys = require("keys")
+-- Keys
+root.keys(keys.globalkeys)
+root.buttons(keys.desktopbuttons)
 
 -- utility functions
 local utils = require("utils") -- TODO: this name is garbage. 
@@ -77,9 +81,6 @@ for _, v in pairs(startup_programs) do
 end
 
 screen.connect_signal('refresh', function(c) return c end)
-
-
-local floating_terminal = "st -c fst"
 -------------------
 -- RULES
 -------------------
@@ -88,10 +89,8 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
         properties = { 
-            -- border_width = beautiful.border_width,
-            -- border_color = beautiful.border_normal,
-            border_width = 1,
             -- border_color = "#161a13",
+            border_width = 1,
             border_color = '#201e2a',
             focus = awful.client.focus.filter,
             raise = true,
@@ -105,7 +104,9 @@ awful.rules.rules = {
         }
     },
     { -- Add titlebars to normal clients and dialogs
-        rule_any = { type = { "normal", "dialog" } }, 
+        rule_any = { 
+            type = { "normal", "dialog" } 
+        }, 
         properties = { titlebars_enabled = true }
     },
     { -- Floating clients.
@@ -200,10 +201,14 @@ client.connect_signal("request::titlebars", function(c)
 
     -- buttons for the titlebar
     local buttons = gears.table.join(
-        awful.button({ }, 1, function() 
+        awful.button({ }, 1, function()
+            -- `client`: part of the global scope
             client.focus = c
-            c:raise()
             awful.mouse.client.move(c)
+            c:raise()
+            utils.check_double_tap( function()
+                c.maximized = not c.maximized
+            end)
         end),
         awful.button({ }, 3, function()
             client.focus = c
@@ -221,9 +226,10 @@ client.connect_signal("request::titlebars", function(c)
         fg_urgent = beautiful.titlebar_fg_urgent,
     })
 
-    top_titlebar : setup ( 
+    top_titlebar:setup(
         titlebars.normal_tbar({
             client = c,
+            buttons = buttons,
         }) 
     )
 end)

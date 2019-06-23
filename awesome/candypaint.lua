@@ -1,5 +1,6 @@
 #!/usr/bin/lua
 
+-- hex color library
 local lib = {}
 
 local function tohex(num)

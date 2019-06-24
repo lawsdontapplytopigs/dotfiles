@@ -24,7 +24,6 @@ SYMBOL="°C"
 
 weather=$(curl -sf "http://api.openweathermap.org/data/2.5/weather?APPID=$KEY&id=$CITY_ID&units=$UNITS")
 
-# if true; then
 if [ -n "$weather" ]; then
 weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
 weather_icon=$(echo "$weather" | jq -r ".weather[].icon" | head -1)
@@ -36,6 +35,11 @@ else
 CURRENT_WEATHER="... Info unavailable"
 # export $CURRENT_WEATHER
 fi
+
+if [ ! -d $HOME/.config/awesome/cache ]; then 
+    mkdir $HOME/.config/awesome/cache
+fi
+
 echo "$CURRENT_WEATHER" > $HOME/.config/awesome/cache/WEATHER
 # echo $(env | grep "CURRENT_WEATHER")
 

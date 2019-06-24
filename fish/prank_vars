@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR EDITOR:vim
-SETUVAR --export PATH:/home/ciugamenn/\x2elocal/bin\x1e/usr/local/sbin\x1e/usr/local/bin\x1e/usr/sbin\x1e/usr/bin\x1e/sbin\x1e/bin\x1e/usr/games\x1e/usr/local/games\x1e/usr/local/lib/libsass\x1e/usr/local/go\x1e/usr/local/go
+SETUVAR --export PATH:/home/ldap/\x2elocal/bin\x1e/usr/local/sbin\x1e/usr/local/bin\x1e/usr/sbin\x1e/usr/bin\x1e/sbin\x1e/bin\x1e/usr/games\x1e/usr/local/games\x1e/usr/local/lib/libsass\x1e/usr/local/go\x1e/usr/local/go
 SETUVAR PYTHONPATH:/usr/bin
 SETUVAR --export SASS_LIBSASS_PATH:/usr/local/lib
 SETUVAR --export SASS_SPEC_SASS:/usr/local/lib/sass\x2dspec/

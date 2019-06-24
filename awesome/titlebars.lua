@@ -7,6 +7,7 @@ local wibox = require("wibox")
 local gears = require("gears")
 local beautiful = require("beautiful")
 local utils = require("utils")
+local cpaint = require("candypaint")
 local titlebars = {}
 
 function titlebars.normal_tbar( args )
@@ -82,7 +83,14 @@ function titlebars.normal_tbar( args )
         layout = wibox.layout.fixed.vertical,
         {
             widget = wibox.widget.separator,
-            color  = '#ffffff10',
+            color  = '#ddccff36',
+            forced_height = 1,
+        },
+        {
+            widget = wibox.widget.separator,
+            -- color  = '#c8b0ff60',
+            color  = '#ccaaff26',
+            -- color = cpaint.lighten(beautiful.titlebar_bg_normal, 50),
             forced_height = 1,
         },
         {

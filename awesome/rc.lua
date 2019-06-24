@@ -90,8 +90,8 @@ awful.rules.rules = {
     { rule = { },
         properties = { 
             -- border_color = "#161a13",
-            border_width = 1,
-            border_color = '#201e2a',
+            -- border_width = 1,
+            border_color = '#1a1820',
             focus = awful.client.focus.filter,
             raise = true,
             keys = keys.globalkeys,
@@ -127,7 +127,7 @@ awful.rules.rules = {
                 "pinentry",
                 "veromix",
                 "xtightvncviewer",
-                "fst"
+                "fst" -- (floating st)
             },
             name = {
               "Event Tester",  -- xev.
@@ -180,8 +180,8 @@ awful.rules.rules = {
         },
         properties = {
             floating = true,
-            width = awful.screen.focused().geometry.width * 0.7,
-            height = awful.screen.focused().geometry.height * 0.7,
+            -- width = awful.screen.focused().geometry.width * 0.7,
+            -- height = awful.screen.focused().geometry.height * 0.7,
         },
         callback = function(c)
             awful.placement.centered(c, { honor_workarea = true })
@@ -238,7 +238,7 @@ end)
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    if not awesome.startup then awful.client.setslave(c) end
+    -- if not awesome.startup then awful.client.setslave(c) end
     if awesome.startup 
         and not c.size_hints.user_position
         and not c.size_hints.program_position then
@@ -254,15 +254,16 @@ if beautiful.border_radius ~= 0 then
             c.shape = utils.rrect(beautiful.border_radius)
         end
     end)
-
     -- Fullscreen clients should not have rounded corners
-    client.connect_signal("property::fullscreen", function (c)
-        if c.fullscreen then
+    local function no_rounded_corners(c)
+        if c.fullscreen or c.maximized then
             c.shape = utils.rect()
         else
             c.shape = utils.rrect(beautiful.border_radius)
         end
-    end)
+    end
+    client.connect_signal("property::fullscreen", no_rounded_corners)
+    client.connect_signal("property::maximized", no_rounded_corners)
 end
 
 -- If the layout is not floating, every floating client that appears is centered
@@ -271,9 +272,8 @@ client.connect_signal("manage", function (c)
     if not awesome.startup then
         if awful.layout.get(mouse.screen) ~= awful.layout.suit.floating then
             awful.placement.centered(c,{honor_workarea=true})
-        else if #mouse.screen.clients == 1 then
-                awful.placement.centered(c,{honor_workarea=true})
-            end
+        elseif #mouse.screen.clients == 1 then
+            awful.placement.centered(c,{honor_workarea=true})
         end
     end
 end)
@@ -285,6 +285,37 @@ client.connect_signal("manage", function (c)
     end
 end)
 
+local timebox = wibox({
+    x = awful.screen.focused().geometry.width / 2 + 80,
+    y = awful.screen.focused().geometry.height / 2 - 300,
+    width = 360,
+    height = 240,
+    bg = "#00000000",
+    visible = true,
+    ontop = false,
+    type = "dock",
+})
+
+timebox:setup({
+    widget = wibox.container.background,
+    shape = utils.rrect(10),
+    bg = "#14101a",
+    fg = "#e8e0ed",
+    -- shape_border_width = 40,
+    -- shape_border_color = "#201e2f",
+    {
+        widget = wibox.container.margin,
+        margins = 20,
+        {
+            widget = wibox.container.place,
+            {
+                widget = wibox.widget.textclock,
+                font = "TTCommons Bold 78",
+                format = "%H:%M",
+            },
+        }
+    }
+})
 -- the new keygrabber api is a bit weird, so I'll keep this here
 -- as an example use case
 

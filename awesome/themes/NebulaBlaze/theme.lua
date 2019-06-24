@@ -56,18 +56,24 @@ local gray6       = "#d4d0d8"
 local pretty_gray = '#9290a0'
 
 
-local bg          = "#201e2a"
+-- local bg          = "#201e2a"
+-- local bg1         = "#1f1e2a"
+-- local bg_light    = "#2f2e3a"
+-- local bg_light    = "#1f1e2a" -- really nice color
+-- local bg_light    = "#1a1820"
+local bg          = "#15131e"
 local bg1         = "#1f1e2a"
-local bg_light    = "#2f2e3a"
+-- local bg_light    = "#201e2b"
+local bg_light    = "#1a1823"
 local gamer_pink  = "#e92f52"
 local red         = "#9a3049"
-local blue        = "#77ffdd"
+local blue        = "#40cfd8"
 -- local blue        = "#77ffff"
 local pink        = "#ff8bff"
 local purple      = "#8860ed"
 local beige       = "#e6c098"
-local gray        = "#5d5543"
-local fg          = "#fffdd8"
+local gray        = "#585070"
+local fg          = "#ffffff"
 
 
 -------------------
@@ -251,8 +257,10 @@ theme.titlebar_position = "top"
 theme.titlebar_bg_normal = bg_light
 theme.titlebar_bg_focus = bg_light
 -- Titlebar text color
-theme.titlebar_fg_normal = pretty_gray
-theme.titlebar_fg_focus = pretty_gray
+-- theme.titlebar_fg_normal = pretty_gray
+-- theme.titlebar_fg_focus = pretty_gray
+theme.titlebar_fg_normal = "#ffffff"
+theme.titlebar_fg_focus = "#ffffff"
 
 -- Titlebar buttons
 -- Define the images to load
@@ -317,7 +325,8 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- theme.wallpaper = home .. '/images/21_9_wallpapers/Swe2Jap.png'
 -- theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
 -- theme.wallpaper = home .. "/images/16_9_wallpapers/4d6ed381483061.5d00e215315d2.jpg"
-theme.wallpaper = home .. "/images/16_9_wallpapers/3e9b1878521481.5ca708b1684c4.jpg"
+-- theme.wallpaper = home .. "/images/16_9_wallpapers/3e9b1878521481.5ca708b1684c4.jpg"
+theme.wallpaper = home .. "/images/16_9_wallpapers/cameron-mourot-EDIT.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

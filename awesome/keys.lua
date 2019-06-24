@@ -274,7 +274,7 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move( 0, 0, 0, dpi(-30) )
             else
-                awful.client.incwfact(0.05, c)
+                awful.tag.incmwfact(0.02)
             end
         end),
     awful.key({ superkey, control }, "Right",
@@ -284,7 +284,7 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move( 0, 0, dpi(30), 0 )
             else
-                awful.client.incwfact(0.05, c)
+                awful.tag.incmwfact(0.02)
             end
         end),
     awful.key({ superkey, control }, "Down", 
@@ -294,7 +294,7 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move(  0,  0,  0, dpi(30) )
             else
-                awful.client.incwfact(-0.05, c)
+                awful.tag.incmwfact(-0.02)
             end
         end),
     awful.key({ superkey, control }, "Left",
@@ -304,7 +304,7 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move( 0, 0, dpi(-30), 0 )
             else
-                awful.client.incwfact(-0.05, c)
+                awful.tag.incmwfact(-0.02)
             end
         end)
 )
@@ -403,7 +403,7 @@ keys.globalkeys = gears.table.join( keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move( 0, 0, 0, dpi(-30) )
             else
-                awful.client.incwfact(-0.05, c)
+                awful.tag.incmwfact(0.02)
             end
         end),
     awful.key({ superkey }, "period",
@@ -413,7 +413,7 @@ keys.globalkeys = gears.table.join( keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move( 0, 0, dpi(30), 0 )
             else
-                awful.client.incwfact(0.05, c)
+                awful.tag.incmwfact(0.02)
             end
         end),
     awful.key({ superkey }, "m", 
@@ -423,7 +423,7 @@ keys.globalkeys = gears.table.join( keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move(  0,  0,  0, dpi(30) )
             else
-                awful.client.incwfact(0.05, c)
+                awful.tag.incmwfact(-0.02)
             end
         end),
 
@@ -435,7 +435,7 @@ keys.globalkeys = gears.table.join( keys.globalkeys,
             if current_layout == "floating" or c.floating == true then
                 c:relative_move( 0, 0, dpi(-30), 0 )
             else
-                awful.client.incwfact(0.05, c)
+                awful.tag.incmwfact(-0.02)
             end
         end)
 )

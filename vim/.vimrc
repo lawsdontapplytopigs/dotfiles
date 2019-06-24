@@ -154,7 +154,7 @@ vnoremap <S-Tab> :Commentary<cr>
 set laststatus=2
 
 let g:lightline = {
-    \ 'colorscheme': 'momoshiki',
+    \ 'colorscheme': 'black_cherries',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]

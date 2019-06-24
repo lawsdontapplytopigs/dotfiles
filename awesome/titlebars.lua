@@ -83,13 +83,13 @@ function titlebars.normal_tbar( args )
         layout = wibox.layout.fixed.vertical,
         {
             widget = wibox.widget.separator,
-            color  = '#ddccff36',
+            color  = '#ddccff40',
             forced_height = 1,
         },
         {
             widget = wibox.widget.separator,
             -- color  = '#c8b0ff60',
-            color  = '#ccaaff26',
+            color  = '#ddaaff30',
             -- color = cpaint.lighten(beautiful.titlebar_bg_normal, 50),
             forced_height = 1,
         },

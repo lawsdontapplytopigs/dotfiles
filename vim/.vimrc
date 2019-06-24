@@ -150,6 +150,9 @@ nnoremap <S-Tab> :Commentary<cr>
 vnoremap <S-Tab> :Commentary<cr>
 
 
+let g:indentLine_fileTypeExclude = ['md']
+let g:indentLine_fileTypeExclude = ['markdown']
+set conceallevel=0
 
 set laststatus=2
 

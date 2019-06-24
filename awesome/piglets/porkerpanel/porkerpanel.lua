@@ -10,15 +10,16 @@ local dpi = beautiful.xresources.apply_dpi
 local home = os.getenv("HOME")
 
 -- setting up the background for the panel
-local surf = gears.surface( home .. "/EHGgqUq.jpg")
+-- local surf = gears.surface( home .. "/EHGgqUq.jpg")
+local surf = gears.surface( beautiful.wallpaper )
 local img_width, img_height = gears.surface.get_size(surf)
 -- local scale = searchbox_width / img_width
-local bg_wid = awful.screen.focused().geometry.width / 2
+local bg_wid = awful.screen.focused().geometry.width
 local bg_height = awful.screen.focused().geometry.height
-local scale = bg_height / img_height
+local scale = bg_wid / img_width
 
 -- if img_height * scale > bg_height then
-    -- scale = bg_height / img_height
+--     scale = bg_height / img_height
 -- end
 
 local function bg_image_function(_, cr, width, height)
@@ -45,7 +46,7 @@ local hot_corner = wibox.widget({
     point = {x = awful.screen.focused().geometry.width - 1, y = 0},
     forced_width = 1,
     forced_height = 1,
-    bg = "#ff0000f0",
+    bg = "#ff000000",
 })
 hot_corner:connect_signal("mouse::enter", function()
     panel_background.visible = false
@@ -394,7 +395,7 @@ panel_background:setup({
     bgimage = bg_image_function,
     {
         widget = wibox.container.background,
-        bg = '#000000c4',
+        bg = '#000000a4',
         {
             layout = wibox.layout.manual,
             hot_corner,

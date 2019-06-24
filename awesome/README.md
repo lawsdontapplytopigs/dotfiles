@@ -1,10 +1,5 @@
 # My awesome window manager config
 
-First off, this is very frail, not structured, there are still some bugs,
-but it's pretty usable at this moment.
-Until I actually get it done and I can clean things up, only the todo list
-will be here
-
 ## TODO
     <!--- 
     i still want the widgets from the wibar, but I don't like the wibar
@@ -14,11 +9,11 @@ will be here
     -->
     [ ] Redesign or remove the wibar
         [x] Clock widget
-        [ ] Taglist widget
+        [x] Taglist widget
         [ ] Networking widget
         [ ] Bluetooth widget
         [x] Exit widget
-        [ ] Layout widget
+        [x] Layout widget
         [ ] Make it change appearance based on what color the background is
 
     [ ] Sidebar
@@ -39,12 +34,12 @@ will be here
     [x] Titlebars
         [x] Change the current button icons with round ones
 
-    [ ] Write some sort of scheduling wiget
+    [x] Write some sort of scheduling wiget
 
     [ ] Clients
         [x] have each client show the same types of thin shlick borders that mac os has
 
-    [ ] Client-managing bar
+    [ ] Client-managing bar (called tasklist in awesome)
 
     [ ] Notifications
 
@@ -53,26 +48,19 @@ will be here
         [ ] The desktop files
 
     [ ] General
-        [ ] Clean up keybindings and implement additional ones
+        [x] Clean up keybindings and implement additional ones
         [ ] Create 'muted' icon for the sidebar volume bar 
         [ ] Create a fire icon that's actually the color of the temperature bar
         [x] Make it so when you click an actual client window, that client gets focus
         [ ] Make it so when you press 'mod + shift + [qw]` the client will get sent
             to the previous tag or the next one, respectively
-        [ ] Don't forget to credit the authors of the icons.
-            Currently the list is:
-                * Freepik
         [ ] Replace current cpu-indicator heart icon with a light bulb
-        [ ] Change theme variables of the "aero"-like feature implemented in awesome
+        [ ] Change theme variables of the "aero-snap"-like feature implemented in awesome
 
     [ ] Cleaning up (setting theme colors universally, setting proper icons, etc)
-        [ ] Making global variables that should be local local
+        [ ] Making global variables that should be local local (most of them are done)
         [ ] Put the weather file somewhere in my awesome config files.
             It makes more sense for it to be there, instead of my home directory.
-        [ ] Take out the `luafilesystem` dependency, and use the `gears.filesystem`
-            library built into Awesome
-        [ ] There are places where I used the full path with my username.
-            I have to go, take those out and replace them with os.getenv('PATH')
         [ ] Go back in the exitpanel and rename all of the stupidly named icons used there,
             along with the (few) stupidly named variable names used there
 
@@ -82,22 +70,15 @@ will be here
         [ ] Hotplugging: automatically mounting devices when they get plugged in
 
     [ ] Refactoring
-        [ ] Piggyprompt
+        [x] Piggyprompt
             [ ] Make it so when you type in too much text, the textbox scrolls
                 along with where the cursor is
             [ ] Add a rectangular background behind the widget and make the
                 background transparent so you get anti-aliased rounded corners
-            [ ] Fuck it, rewrite the whole thing
+            [x] Fuck it, rewrite the whole thing
         [ ] Reimplement the way widget spacing for the sidebar works. At the moment it's
             an extemely hacky way of doing it, based on textboxes with
             a font that has the size '2'
-        [ ] Rewrite the utils library to have the shape functions be in a `shape`
-            table. So instead of having `utils.circle` I'll have `utils.shape.circle`.
-        [ ] Also, the shape functions that I have in the `utils` library are 
-            named like garbage. Why are they `utils.rrect` for "rounded rectangle"
-            when in awesomewm that function is named `rounded_rect`? I'll have to
-            change those to be consistent with the respective awesome window manager
-            shape functions.
 
     [ ] Bugs
         [ ] When the mpc client on the sidebar is stopped, nothing is shown as the song. fix that
@@ -115,33 +96,10 @@ will be here
             continue to use them so I'll have to fix this.
         [ ] Sometimes, it seems that the exitscreen doesn't show up. I don't
             really know why.
-        [ ] Sometimes when I test stuff with `Xephyr` the `pactl subscribe`
-            daemon gets killed (I Think???). but what happens is that the
-            bar that should show the volume doesn't update anymore. And
-            I just noticed that this happens when I start `Xephyr` and in the
-            terminal it also says something like "kill: not enough arguments".
-            EDIT: it also happens when I don't see that message.
-            ALSO: it also happens while the `pactl subscribe` daemon is still 
-            running. Owie.
+        [ ] When testing with `Xephyr`, sometimes the audio bar from the
+            bottom-right side doesn't work anymore. It just stops redrawing itself.
 
     [ ] Unorganized
-        [ ] Everywhere where I have widgets comprized of subwidgets comprized 
-            of subwidgets I should change things to ACTUALLY be controled only 
-            at the TOP-MOST level of the whole hierarchy. What this means is that
-            I have functions which make subwidgets, etc and they're all in a
-            dependency hierarchy. And I thought "hey I'm going to allow these
-            widgets to be more general and I'm going to allow them to take parameters
-            and then I'll just control everything from the top-most level where
-            the widget actually gets made.
-            EDIT: I'm actually not really sure what to do about this. Maybe I'm
-            just not seeing something. It makes sense to have a hierarchical
-            structure. At the same time the deeper this hierarchy goes, the more
-            the code *feels* like spaghetti. I'll just have to go with one and
-            probably fail and see what the best way to do things is:
-            [ ] Either hardcode everything except for things that I REALLY can't
-            [ ] Or have almose everything be passed in as argument except for
-                things where it really doesn't make sense to pass in as an argument
-            
 
 
 

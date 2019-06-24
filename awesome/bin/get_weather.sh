@@ -36,6 +36,6 @@ else
 CURRENT_WEATHER="... Info unavailable"
 # export $CURRENT_WEATHER
 fi
-echo "$CURRENT_WEATHER" > $HOME/WEATHER
+echo "$CURRENT_WEATHER" > $HOME/.config/awesome/cache/WEATHER
 # echo $(env | grep "CURRENT_WEATHER")
 

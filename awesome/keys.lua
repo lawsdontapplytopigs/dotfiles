@@ -20,6 +20,7 @@ local control = "Control"
 local superkey = "Mod4"
 local alt = "Mod1"
 
+local terminal = "st"
 local floating_terminal = "st -c fst"
 
 -- for k, v in pairs(piglets.custom_prompt) do
@@ -84,7 +85,7 @@ keys.globalkeys = gears.table.join( keys.globalkeys,
               { description = "open a floating terminal", group = "awesome"}),
 
     -- superkey + 'grave' to start a terminal
-    awful.key({ superkey }, "grave", function () awful.spawn('st') end,
+    awful.key({ superkey }, "grave", function () awful.spawn(terminal) end,
               { description = "open a terminal", group = "awesome"}),
 
 

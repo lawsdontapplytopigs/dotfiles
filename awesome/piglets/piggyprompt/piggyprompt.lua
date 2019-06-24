@@ -216,8 +216,14 @@ local function get_all_commands_in_PATH ()
     end
     -- now recursively find all the executable names and put them in `executables`
     local executables = {}
-    for k, path in pairs(program_paths) do
-        utils.get_files_recursively(executables, path)
+
+    -- let's make sure we've met the `luafilesystem` dependency
+    if type(utils.get_files_recursively) == "function" then 
+        for k, path in pairs(program_paths) do
+            utils.get_files_recursively(executables, path)
+        end
+    else
+        naughty.notify({text = tostring("MISSING `luafilesystem` DEPENDENCY")})
     end
     return executables
 end

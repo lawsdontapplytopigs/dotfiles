@@ -3,7 +3,7 @@ local gears = require("gears")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local padding_font = beautiful.padding_font
-local lfs = require("lfs")
+local lfs_exists, lfs = pcall(require, "lfs") -- let's not crash like crazy if there's no `luafilesystem` module
 local naughty = require("naughty")
 
 local utils = {}
@@ -148,27 +148,29 @@ end
 -- and put them in `storage_place`
 -- @param `storage_place`, table: the table in which to store the found filenames
 -- @param `path`, the path from which to begin the search
-function utils.get_files_recursively(storage_place, path)
+if lfs_exists then
+    function utils.get_files_recursively(storage_place, path)
 
-    local path = path
+        local path = path
 
-    -- lets make sure we have a separator at the end
-    if string.sub(path, -1, -1) ~= "/" then
-        path = path .. '/'
-    end
+        -- lets make sure we have a separator at the end
+        if string.sub(path, -1, -1) ~= "/" then
+            path = path .. '/'
+        end
 
-    -- now let's recursively get all of the files in this diretory
-    for file in lfs.dir(path) do
-        if file ~= '.' and file ~= '..' then
-            local full_path_entity = path .. tostring(file)
-            
-            -- if it's a dir, recursively go in it
-            if lfs.attributes(full_path_entity, "mode") == "directory" then
-                utils.get_files_recursively(storage_place, full_path_entity)
+        -- now let's recursively get all of the files in this diretory
+        for file in lfs.dir(path) do
+            if file ~= '.' and file ~= '..' then
+                local full_path_entity = path .. tostring(file)
+                
+                -- if it's a dir, recursively go in it
+                if lfs.attributes(full_path_entity, "mode") == "directory" then
+                    utils.get_files_recursively(storage_place, full_path_entity)
 
-            -- if it's a file, put its name in the `files` table
-            elseif lfs.attributes(full_path_entity, "mode") == "file" then
-                table.insert(storage_place, tostring(file))
+                -- if it's a file, put its name in the `files` table
+                elseif lfs.attributes(full_path_entity, "mode") == "file" then
+                    table.insert(storage_place, tostring(file))
+                end
             end
         end
     end

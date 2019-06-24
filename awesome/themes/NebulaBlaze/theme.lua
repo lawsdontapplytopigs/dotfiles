@@ -326,7 +326,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
 -- theme.wallpaper = home .. "/images/16_9_wallpapers/4d6ed381483061.5d00e215315d2.jpg"
 -- theme.wallpaper = home .. "/images/16_9_wallpapers/3e9b1878521481.5ca708b1684c4.jpg"
-theme.wallpaper = home .. "/images/16_9_wallpapers/cameron-mourot-EDIT.png"
+theme.wallpaper = theme_folder .. "cameron-mourot-EDIT.jpg"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

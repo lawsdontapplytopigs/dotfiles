@@ -77,10 +77,9 @@ audio.notification_audio_bar_bg = wibox({
     shape = gears.shape.rectangle,
     bg = "#00000000",
     widget = audio.notification_audio_bar,
+    ontop = true,
     visible = false,
-    -- setting the type as dock allows compton to recognize it as dock
-    -- and not draw shadows for it
-    type = 'dock',
+    type = 'dock', -- let's let compton know we don't want shadows
 })
 
 

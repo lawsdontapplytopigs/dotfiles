@@ -10,6 +10,7 @@ local dpi = xresources.apply_dpi
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 local gears = require("gears")
+local utils = require("utils")
 
 -- get naughty for debugging ;;;;)
 local naughty = require("naughty")
@@ -154,17 +155,6 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- theme.taglist_fg_focus = "#ff0077"
 -- theme.taglist_font = "TTCommons Bold 15"
 
--------------------
--- Notifications
--------------------
-theme.notification_font = theme.font
-theme.notification_border_width = 0
-
-------------------------------------------------------------------------------- MENU (RIGHT CLICK)
-theme.menu_submenu_icon = themes_path.."default/submenu.png"
-theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
-
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
@@ -174,6 +164,33 @@ theme.menu_width  = dpi(100)
 -- Rounded corners
 -------------------
 theme.border_radius = dpi(7) -- set roundness of corners
+
+-- Until I either learn to use the new naughty api 
+-- OR write my own notification library, I'll just use this
+-------------------
+-- Notifications
+-------------------
+-- Position: bottom_left, bottom_right, bottom_middle,
+--         top_left, top_right, top_middle
+theme.notification_position = "top_right" -- BUG: some notifications appear at top_right regardless
+theme.notification_border_width = 1
+theme.notification_shape = utils.rrect(7)
+theme.notification_bg = "#ffffff"
+theme.notification_fg = "#1a1820"
+theme.notification_crit_bg = "#fe3f52"
+theme.notification_crit_fg = "#350910"
+theme.notification_icon_size = dpi(60)
+theme.notification_height = dpi(80)
+theme.notification_width = dpi(300)
+theme.notification_margin = dpi(15)
+theme.notification_opacity = 1
+theme.notification_font = "#TTCommons Medium 13"
+theme.notification_padding = theme.screen_margin * 2
+theme.notification_spacing = theme.screen_margin * 2
+------------------------------------------------------------------------------- MENU (RIGHT CLICK)
+theme.menu_submenu_icon = themes_path.."default/submenu.png"
+theme.menu_height = dpi(15)
+theme.menu_width  = dpi(100)
 
 -------------------
 -- Sidebar
@@ -326,7 +343,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
 -- theme.wallpaper = home .. "/images/16_9_wallpapers/4d6ed381483061.5d00e215315d2.jpg"
 -- theme.wallpaper = home .. "/images/16_9_wallpapers/3e9b1878521481.5ca708b1684c4.jpg"
-theme.wallpaper = theme_folder .. "cameron-mourot-EDIT.jpg"
+theme.wallpaper = theme_folder .. "cael_gibran_the_spirits_moon_and_sun.jpg"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

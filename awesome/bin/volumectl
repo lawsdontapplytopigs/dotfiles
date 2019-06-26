@@ -42,7 +42,6 @@ if [[ "$SIDEBAR_VISIBLE" == "false" ]]; then
     end
 
     notification_audio_bar.visible = true
-    notification_audio_bar.ontop = true
 
     -- make the timer regardless, so that each time we invoke this script,
     -- the timer's basically going to be reset to be the amount \`time\` specifies

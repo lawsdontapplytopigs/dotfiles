@@ -32,7 +32,6 @@ local titlebars = require("titlebars")
 -- otherwise they'll accumulate across awesome-wm restarts
 local pactl_cleanup = [[bash -c "ps aux | grep '[0-9] pactl subscribe' | awk '{ print $2 }' | xargs kill"]]
 awful.spawn(pactl_cleanup)
-
 local mpc_cleanup = [[bash -c "ps aux | grep '[0-9] mpc idleloop player' | awk '{ print $2 }' | xargs kill"]]
 awful.spawn(mpc_cleanup)
 
@@ -46,7 +45,7 @@ root.buttons(keys.desktopbuttons)
 
 -- utility functions
 local utils = require("utils") -- TODO: this name is garbage. 
--- there's a bunch of stuff in there that can be split into modules.
+-- there's a bunch of stuff in there that can be split into better-named modules.
 
 -------------------
 -- Error handling
@@ -81,6 +80,54 @@ for _, v in pairs(startup_programs) do
 end
 
 screen.connect_signal('refresh', function(c) return c end)
+
+-- Icon size
+naughty.config.defaults['icon_size'] = beautiful.notification_icon_size
+
+-- Timeouts
+naughty.config.defaults.timeout = 5
+naughty.config.presets.low.timeout = 2
+naughty.config.presets.critical.timeout = 12
+
+-- Apply theme variables
+naughty.config.padding = beautiful.notification_padding
+naughty.config.spacing = beautiful.notification_spacing
+naughty.config.defaults.margin = beautiful.notification_margin
+naughty.config.defaults.border_width = beautiful.notification_border_width
+
+naughty.config.presets.normal = {
+    font         = beautiful.notification_font,
+    fg           = beautiful.notification_fg,
+    bg           = beautiful.notification_bg,
+    border_width = beautiful.notification_border_width,
+    margin       = beautiful.notification_margin,
+    position     = beautiful.notification_position
+}
+
+naughty.config.presets.low = {
+    font         = beautiful.notification_font,
+    fg           = beautiful.notification_fg,
+    bg           = beautiful.notification_bg,
+    border_width = beautiful.notification_border_width,
+    margin       = beautiful.notification_margin,
+    position     = beautiful.notification_position
+}
+
+naughty.config.presets.ok = naughty.config.presets.low
+naughty.config.presets.info = naughty.config.presets.low
+naughty.config.presets.warn = naughty.config.presets.normal
+
+naughty.config.presets.critical = {
+    font         = beautiful.notification_font,
+    fg           = beautiful.notification_crit_fg,
+    bg           = beautiful.notification_crit_bg,
+    border_width = beautiful.notification_border_width,
+    margin       = beautiful.notification_margin,
+    position     = beautiful.notification_position
+}
+
+
+
 -------------------
 -- RULES
 -------------------
@@ -285,37 +332,37 @@ client.connect_signal("manage", function (c)
     end
 end)
 
-local timebox = wibox({
-    x = awful.screen.focused().geometry.width / 2 + 80,
-    y = awful.screen.focused().geometry.height / 2 - 300,
-    width = 360,
-    height = 240,
-    bg = "#00000000",
-    visible = true,
-    ontop = false,
-    type = "dock",
-})
+-- local timebox = wibox({
+--     x = awful.screen.focused().geometry.width / 2 - 280,
+--     y = awful.screen.focused().geometry.height / 2 - 200,
+--     width = 360,
+--     height = 240,
+--     bg = "#00000000",
+--     visible = true,
+--     ontop = false,
+--     type = "dock",
+-- })
 
-timebox:setup({
-    widget = wibox.container.background,
-    shape = utils.rrect(10),
-    bg = "#14101a",
-    fg = "#e8e0ed",
-    -- shape_border_width = 40,
-    -- shape_border_color = "#201e2f",
-    {
-        widget = wibox.container.margin,
-        margins = 20,
-        {
-            widget = wibox.container.place,
-            {
-                widget = wibox.widget.textclock,
-                font = "TTCommons Bold 78",
-                format = "%H:%M",
-            },
-        }
-    }
-})
+-- timebox:setup({
+--     widget = wibox.container.background,
+--     shape = utils.rrect(10),
+--     bg = "#14101a",
+--     fg = "#e8e0ed",
+--     -- shape_border_width = 40,
+--     -- shape_border_color = "#201e2f",
+--     {
+--         widget = wibox.container.margin,
+--         margins = 20,
+--         {
+--             widget = wibox.container.place,
+--             {
+--                 widget = wibox.widget.textclock,
+--                 font = "TTCommons Bold 72",
+--                 format = "%H:%M",
+--             },
+--         }
+--     }
+-- })
 -- the new keygrabber api is a bit weird, so I'll keep this here
 -- as an example use case
 

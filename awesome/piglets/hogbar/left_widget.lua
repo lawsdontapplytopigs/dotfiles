@@ -65,11 +65,13 @@ local make_left_widget = function( args )
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         style   = { 
-            -- shape = gears.shape.rounded_bar, 
-            bg_focus = '#1a1823',
-            fg_empty = '#ffffff',
-            fg_occupied = '#120020',
-            fg_focus = '#ffffff',
+            -- bg_focus = '#1a1823',
+            bg_focus = '#daeeff',
+            fg_focus = '#003040',
+            fg_empty = '#cceeff',
+            -- fg_occupied = '#120020',
+            -- fg_occupied = '#2880c8',
+            fg_occupied = '#30efb3',
             shape_border_width = 0,
             -- shape_border_color = 
             -- shape_empty
@@ -77,7 +79,7 @@ local make_left_widget = function( args )
             -- shape_border_color_empty
             -- shape_focus
             shape_border_width_focus = 1,
-            shape_border_color_focus = "#0e0818",
+            shape_border_color_focus = "#204058",
             shape_urgent
             -- shape_border_width_urgent = 
             -- shape_border_color_urgent
@@ -113,7 +115,7 @@ local make_left_widget = function( args )
                         self.backup_bg     = '#00000000'
                         self.backup_fg     = '#ffffffff'
                     end
-                    self.bg = '#2a104c'
+                    self.bg = '#40cfd8'
                     self.fg = '#111111'
                 end)
                 self:connect_signal('mouse::leave', function()

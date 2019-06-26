@@ -1,5 +1,9 @@
 # dotfiles
 
+**Preview:**
+
+![YeeHaw partner BBBB)](NebulaBlaze.png?raw=true "Nebula Blaze")
+
 ### "hey what's that program?"
 * **OS:** Manjaro
 * **WM:** Awesome
@@ -8,6 +12,7 @@
 * **Browser:** Firefox
 * **Launcher:** Piggyprompt (part of the AwesomeWM config)
 * **Sidebar:** Trufflebar (part of the AwesomeWM config)
+* **Wallpaper:** [Cael Gibran's painting](https://www.deviantart.com/caelgibran/art/The-Spirits-Moon-and-Sun-795390814)
 
 ## Before you "install"
 ***VERY IMPORTANT***  
@@ -56,6 +61,8 @@ So once you set your terminal and got the dependencies, this is the easiest part
         ~/.config/fish  
 * For the `vim` directory:
     * put all the files from there in your home directory
+* `gtk` directory:
+    * You're supposed to put it in `~/.themes` and then you can use a program like `lxappearance` to set the gtk theme
 * The X11 directory
 
 ## Keybinds
@@ -123,6 +130,8 @@ The other one is the one on the right, and you can toggle it with `alt + F10`
 *NOTE:*  
 This sidebar has a `keygrabber`. It will take control of your keys,
 but you can toggle it back away with `alt + F10`.
+ALSO! You can actually use `j` and `k` to scroll up and down through the rows ;;;)  
+It's just painfully laggy at times
 
 **About the program launcher ( piggyprompt )**  
 If you installed the `luafilesystem` package,
@@ -135,6 +144,9 @@ Also, the code is absolutely disgusting.
 `mod + F9` to make it show  
 Note: you can navigate through it with vim keys
 
+#### Issues
+If you find an issue, please feel free to open up an issue on github. 
+There are probably things I missed, but I would love to know about them.
 
 #### TODO
 [ ] Properly check for the `luafilesystem` dependency in the `utils.get_files_recursively` function

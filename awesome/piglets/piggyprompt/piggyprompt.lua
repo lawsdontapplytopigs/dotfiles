@@ -360,7 +360,7 @@ function piggyprompt.launch()
                 select_prev()
                 return cmd, false
             end},
-            {{  }, "Down", function(command)
+            {{  }, "Down", function(cmd)
                 select_next()
                 return cmd, false
             end},

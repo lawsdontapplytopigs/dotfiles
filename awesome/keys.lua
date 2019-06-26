@@ -583,7 +583,15 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
     -- superkey + shift + h
     -- show help
     awful.key({ superkey, shift }, "h",      hotkeys_popup.show_help,
-              { description="show help", group="awesome"})
+              { description="show help", group="awesome"}),
+
+    -- this is temporary
+    awful.key({ alt }, "y", function()
+        awful.spawn(os.getenv("HOME") .. "/.config/awesome/bin/screenshot.sh")
+    end),
+    awful.key({ alt }, "u", function()
+        awful.spawn(os.getenv("HOME") .. "/.config/awesome/bin/screenshot.sh -s")
+    end)
 )
 
 keys.globalkeys = gears.table.join(keys.globalkeys,
@@ -601,25 +609,25 @@ keys.globalkeys = gears.table.join(keys.globalkeys,
 
     awful.key({ superkey }, "F1", 
         function()
-            awful.spawn('volumectl down')
+            awful.spawn(os.getenv("HOME") .. "/.config/awesome/bin/volumectl down")
         end,
         { description = "decrease volume by 5%", group = "sidebar"}),
 
     awful.key({ superkey }, "F2", 
         function()
-            awful.spawn('volumectl up')
+            awful.spawn(os.getenv("HOME") .. "/.config/awesome/bin/volumectl up")
         end,
         { description = "increase volume by 5%", group = "sidebar"}),
 
     awful.key({ superkey }, "F3", 
         function()
-            awful.spawn('volumectl toggle')
+            awful.spawn(os.getenv("HOME") .. "/.config/awesome/bin/volumectl toggle")
         end,
         { description = "toggle volume", group = "sidebar"}),
 
     awful.key({ superkey }, "F4", 
         function()
-            awful.spawn('volumectl reset')
+            awful.spawn(os.getenv("HOME") .. "/.config/awesome/bin/volumectl reset")
         end,
         { description = "reset volume to 50%", group = "sidebar"})
 )

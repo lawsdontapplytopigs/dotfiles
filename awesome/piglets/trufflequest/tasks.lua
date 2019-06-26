@@ -2,8 +2,8 @@
 local tasks_resources = {
     -- timeless = false,
     {
-        group = "Life-changers",
-        description = "Defeat the Moon lord",
+        group = "Habit",
+        description = "Train",
         task_starts = "10:00",
         task_ends = "11:00",
     },
@@ -38,8 +38,8 @@ local tasks_resources = {
         fg = "#000000",
     },
     {
-        group = "Habit",
-        description = "Train",
+        group = "Life-changers",
+        description = "Defeat the Moon lord",
         task_starts = "08:35",
         task_ends = "10:00",
         -- bg = "#e02f52",

@@ -32,8 +32,12 @@ local function run_keygrabber( args )
             -- "Mod1" is actually "Alt"
             if key == "j" then
                 trufflebar.select_next_row()
+                -- for some reason sometimes the bar doesn't get redrawn 
+                -- so we have to scream at the bar to redraw itself
+                trufflebar:emit_signal("widget::redraw_needed")
             elseif key == "k" then
                 trufflebar.select_prev_row()
+                trufflebar:emit_signal("widget::redraw_needed")
             end
 
             -- this is where the keyboard configuration should actually be.

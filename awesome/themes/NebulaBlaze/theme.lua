@@ -61,7 +61,8 @@ local pretty_gray = '#9290a0'
 -- local bg1         = "#1f1e2a"
 -- local bg_light    = "#2f2e3a"
 -- local bg_light    = "#1f1e2a" -- really nice color
--- local bg_light    = "#1a1820"
+-- local bg_light    = "#1a1823"
+-- local bg_light    = "#13121a"
 local bg          = "#15131e"
 local bg1         = "#1f1e2a"
 -- local bg_light    = "#201e2b"
@@ -238,8 +239,8 @@ theme.infobar_height = dpi(40)
 
 -- Audio
 theme.audio_icon = theme_folder .. 'sidebar/volume.png'
-theme.audio_bar_top_color = '#ffd143'
-theme.audio_bar_bottom_color = '#b48800'
+theme.audio_bar_top_color = "#ffc800"
+theme.audio_bar_bottom_color = '#8f5e00'
 theme.audio_bar_top_color_muted = gray4
 theme.audio_bar_bottom_color_muted = gray2
 

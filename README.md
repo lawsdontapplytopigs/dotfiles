@@ -48,7 +48,7 @@ If there's a dependency missing please open an issue to let me know!
 
 ## Installation
 ***VERY IMPORTANT***  
-If you want to use the awesomewm config, set your terminal first. [here's how](#before-you-"install")
+If you want to use the awesomewm config, set your terminal first. [here's how](#before-you-install)
 
 So once you set your terminal and got the dependencies, this is the easiest part:
 * Clone the repository

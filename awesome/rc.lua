@@ -126,8 +126,6 @@ naughty.config.presets.critical = {
     position     = beautiful.notification_position
 }
 
-
-
 -------------------
 -- RULES
 -------------------
@@ -345,11 +343,11 @@ end)
 
 -- timebox:setup({
 --     widget = wibox.container.background,
---     shape = utils.rrect(10),
+--     shape = gears.shape.rounded_rect,
 --     bg = "#14101a",
---     fg = "#e8e0ed",
---     -- shape_border_width = 40,
---     -- shape_border_color = "#201e2f",
+--     fg = "#e8f0fd",
+--     shape_border_width = 1,
+--     shape_border_color = "#100c14",
 --     {
 --         widget = wibox.container.margin,
 --         margins = 20,
@@ -363,6 +361,7 @@ end)
 --         }
 --     }
 -- })
+
 -- the new keygrabber api is a bit weird, so I'll keep this here
 -- as an example use case
 

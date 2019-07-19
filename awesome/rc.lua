@@ -4,12 +4,13 @@ local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 
 -- Themes
 local theme_collection = {
-    "NebulaBlaze"
+    "NebulaBlaze",
+    "ElectricMetal",
 }
 
 -- thanks for the idea, empress ;;;)
 -- Change this number to use a different theme
-local theme_name = theme_collection[1]
+local theme_name = theme_collection[2]
 
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -329,39 +330,6 @@ client.connect_signal("manage", function (c)
         awful.titlebar.hide(c)
     end
 end)
-
--- local timebox = wibox({
---     x = awful.screen.focused().geometry.width / 2 - 280,
---     y = awful.screen.focused().geometry.height / 2 - 200,
---     width = 360,
---     height = 240,
---     bg = "#00000000",
---     visible = true,
---     ontop = false,
---     type = "dock",
--- })
-
--- timebox:setup({
---     widget = wibox.container.background,
---     shape = gears.shape.rounded_rect,
---     bg = "#14101a",
---     fg = "#e8f0fd",
---     shape_border_width = 1,
---     shape_border_color = "#100c14",
---     {
---         widget = wibox.container.margin,
---         margins = 20,
---         {
---             widget = wibox.container.place,
---             {
---                 widget = wibox.widget.textclock,
---                 font = "TTCommons Bold 72",
---                 format = "%H:%M",
---             },
---         }
---     }
--- })
-
 -- the new keygrabber api is a bit weird, so I'll keep this here
 -- as an example use case
 
@@ -387,3 +355,7 @@ end)
 --     end,
 --     export_keybindings = true,
 -- })
+
+
+
+

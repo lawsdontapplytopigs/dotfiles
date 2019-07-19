@@ -1,0 +1,1 @@
+/home/ldap/colors/electric_metal/implemented/vim/electric_metal.vim

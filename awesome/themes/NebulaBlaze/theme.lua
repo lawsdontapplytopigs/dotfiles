@@ -66,7 +66,8 @@ local pretty_gray = '#9290a0'
 local bg          = "#15131e"
 local bg1         = "#1f1e2a"
 -- local bg_light    = "#201e2b"
-local bg_light    = "#1a1823"
+-- local bg_light    = "#1e1a2a"
+local bg_light    = "#1e1a2a"
 local gamer_pink  = "#e92f52"
 local red         = "#9a3049"
 local blue        = "#40cfd8"
@@ -344,7 +345,8 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- theme.wallpaper = home .. '/images/21_9_wallpapers/1y1cMG2.jpg'
 -- theme.wallpaper = home .. "/images/16_9_wallpapers/4d6ed381483061.5d00e215315d2.jpg"
 -- theme.wallpaper = home .. "/images/16_9_wallpapers/3e9b1878521481.5ca708b1684c4.jpg"
-theme.wallpaper = theme_folder .. "cael_gibran_the_spirits_moon_and_sun.jpg"
+-- theme.wallpaper = theme_folder .. "cael_gibran_the_spirits_moon_and_sun.jpg"
+theme.wallpaper = home .. "/images/21_9_wallpapers/sxymz82ov2911.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.

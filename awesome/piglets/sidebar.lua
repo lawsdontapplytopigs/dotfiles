@@ -78,30 +78,30 @@ bar.sidebar = wibox({
 
 
 -- Show sidebar when mouse touches edge
-local sidebar_displayer = wibox({ 
-    x = 0,
-    y = 0, 
-    height = bar.sidebar.height,
-    ontop = true,
-    width = 1,
-    visible = true, 
-    opacity = 0,
-})
+-- local sidebar_displayer = wibox({ 
+--     x = 0,
+--     y = 0, 
+--     height = bar.sidebar.height,
+--     ontop = true,
+--     width = 1,
+--     visible = true, 
+--     opacity = 0,
+-- })
 
-sidebar_displayer:connect_signal( "mouse::enter", 
-    function()
-        bar.sidebar.visible = true
-        bar.sidebar.ontop = true
-        notification_audio_bar_bg.visible = false
-    end
-)
+-- sidebar_displayer:connect_signal( "mouse::enter", 
+--     function()
+--         bar.sidebar.visible = true
+--         bar.sidebar.ontop = true
+--         notification_audio_bar_bg.visible = false
+--     end
+-- )
 
-bar.sidebar:connect_signal( "mouse::leave", 
-    function()
-        bar.sidebar.visible = false
-        bar.sidebar.ontop = false
-    end
-)
+-- bar.sidebar:connect_signal( "mouse::leave", 
+--     function()
+--         bar.sidebar.visible = false
+--         bar.sidebar.ontop = false
+--     end
+-- )
 
 bar.promptbox = awful.widget.prompt()
 

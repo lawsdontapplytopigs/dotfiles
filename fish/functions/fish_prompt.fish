@@ -5,5 +5,5 @@ function fish_prompt
     and echo (set_color red)"#"
 
     # Main
-    echo -n (set_color cceeff)(prompt_pwd) (set_color 432b6b)'❯'(set_color 8860ed)'❯'(set_color c8b0ff)'❯ '
+    echo -n (set_color ccffee)(prompt_pwd) (set_color 104060)'❯'(set_color 4f8fcc)'❯'(set_color a0dfff)'❯ '
 end

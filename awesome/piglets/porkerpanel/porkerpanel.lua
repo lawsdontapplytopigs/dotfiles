@@ -98,15 +98,15 @@ local close_panel_button = wibox.widget({
     forced_height = 18,
     forced_width = 18,
     widget = wibox.widget.imagebox,
-    image = home .. '/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_2.svg',
+    image = beautiful.theme_path .. "titlebar" .. '/close/close_focus.svg',
 })
 -- mouse enter
 close_panel_button:connect_signal("mouse::enter", function()
-    close_panel_button.image = home .. "/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_3.svg"
+    close_panel_button.image = beautiful.theme_path .. "titlebar" .. '/close/close_hover.svg'
 end)
 -- mouse leave
 close_panel_button:connect_signal("mouse::leave", function()
-    close_panel_button.image = home .. "/.config/awesome/themes/NebulaBlaze/titlebar2/close/close_2.svg"
+    close_panel_button.image = beautiful.theme_path .. "titlebar" .. "/close/close_focused.svg"
 end)
 -- mouse button release
 close_panel_button:connect_signal("button::release", function()
@@ -116,18 +116,18 @@ end)
 
 local button_resources = {
     [1] = {
-        image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/poweroff/power_240_gradient.svg", 
-        button_color = "#e92f52",
-        border_color = "#ab003988",
+        image = beautiful.exitpanel.power_normal,
+        button_color = "#ffffff00",
+        -- border_color = "#ab003988",
 
-        inactive_image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/poweroff/power_240_white.svg",
+        inactive_image = beautiful.exitpanel.power_hover,
         inactive_button_color = "#201e2a20",
         inactive_border_color = "#1a182400",
 
-        pressed_image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/poweroff/power_240_bright.svg",
+        pressed_image = beautiful.exitpanel.power_pressed,
 
         button_text = "Power off",
-        border_width = 1,
+        border_width = 0,
         command = function()
             -- awful.spawn( [[ bash -c "shutdown now"]] )
             awful.spawn( [[bash -c "st"]] )
@@ -135,17 +135,17 @@ local button_resources = {
     },
     
     [2] = {
-        image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/lock/key_240_gradient.svg",
-        button_color = '#ffd143',
-        border_color = '#b48800dd',
+        image = beautiful.exitpanel.lock_normal,
+        button_color = '#ffffff00',
+        -- border_color = '#b48800dd',
 
-        inactive_image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/lock/key_240_white.svg",
+        inactive_image = beautiful.exitpanel.lock_hover,
         inactive_button_color = "#201e2a20",
         inactive_border_color = "#1a182400",
         
-        pressed_image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/lock/key_240_bright.svg",
+        pressed_image = beautiful.exitpanel.lock_pressed,
 
-        border_width = 1,
+        border_width = 0,
         button_text = 'Lock',
         command = function()
             -- awful.spawn([[bash -c "dm-tool lock"]])
@@ -154,17 +154,17 @@ local button_resources = {
     },
 
     [3] = {
-        image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/suspend/pause_240_gradient.svg",
-        button_color = '#551383',
-        border_color = '#3f1a69dd',
+        image = beautiful.exitpanel.suspend_normal,
+        button_color = '#ffffff00',
+        -- border_color = '#3f1a69dd',
 
-        inactive_image = home .. '/.config/awesome/themes/NebulaBlaze/exitpanel/suspend/pause_240_white.svg',
+        inactive_image = beautiful.exitpanel.suspend_hover,
         inactive_button_color = "#201e2a20",
         inactive_border_color = "#1a182400",
 
-        pressed_image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/suspend/pause_240_bright.svg",
+        pressed_image = beautiful.exitpanel.suspend_pressed,
 
-        border_width = 1,
+        border_width = 0,
         button_text = 'Suspend',
         command = function()
             -- awful.spawn([[bash -c "dm-tool lock; systemctl suspend"]])
@@ -173,17 +173,17 @@ local button_resources = {
     },
 
     [4] = {
-        image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/reboot/reboot_240.svg",
-        button_color = '#12bd80',
-        border_color = '#005c30dd',
+        image = beautiful.exitpanel.reboot_normal,
+        button_color = '#ffffff00',
+        -- border_color = '#005c30dd',
 
-        inactive_image = home .. '/.config/awesome/themes/NebulaBlaze/exitpanel/reboot/reboot_240_white.svg',
+        inactive_image = beautiful.exitpanel.reboot_hover,
         inactive_button_color = "#201e2a20",
         inactive_border_color = "#1a182400",
 
-        pressed_image = home .. "/.config/awesome/themes/NebulaBlaze/exitpanel/reboot/reboot_240_bright.svg",
+        pressed_image = beautiful.exitpanel.reboot_pressed,
 
-        border_width = 1,
+        border_width = 0,
         button_text = 'Reboot',
         command = function()
             -- awful.spawn([[bash -c 'reboot']])
@@ -602,7 +602,6 @@ local function run ( args )
     end
 
     local grabber = keygrabber.run(keygrabber_vim_config_callback)
-    
 end
 
 local function show_panel()

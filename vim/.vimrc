@@ -57,6 +57,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'haishanh/night-owl.vim'
 call plug#end()
 
 
@@ -66,7 +67,7 @@ call plug#end()
 " write ':colorscheme ' and press [TAB] to cycle through color schemes 
 
 " set colorscheme and true colors in vim "
-:colorscheme black_cherries
+:colorscheme electric_metal
 set termguicolors
 " i actually don't have a clue what this does
 " BUT if you modify the semicolons to colons
@@ -145,6 +146,11 @@ endfunction
 
 autocmd FileType lua setlocal commentstring=\--%s
 autocmd FileType vim setlocal commentstring=\"%s
+autocmd FileType c, cpp, java, scala setlocal commentstring=\//%s
+autocmd FileType sh, ruby, python setlocal commentstring=\#%s
+autocmd FileType conf, fstab setlocal commentstring=\#%s
+autocmd FileType tex setlocal commentstring=\%%s
+autocmd FileType mail setlocal commentstring=\>%s
 
 nnoremap <S-Tab> :Commentary<cr>
 vnoremap <S-Tab> :Commentary<cr>

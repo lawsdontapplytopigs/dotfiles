@@ -4,13 +4,14 @@ local wibox = require("wibox")
 local naughty = require("naughty")
 local utils = require("utils")
 local gears = require("gears")
+local beautiful = require("beautiful")
 
 local home = os.getenv("HOME")
 
 local system_widgets_resources = {
     {
         name = "bluetooth",
-        normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/bluetooth/bluetooth_240_white.svg",
+        normal_image = beautiful.hogbar.bluetooth_normal,
         -- margins = {
             top = 13,
             bottom = 13,
@@ -18,7 +19,7 @@ local system_widgets_resources = {
     },
     {
         name = "networking",
-        normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/networking/wifi_240_white.svg",
+        normal_image = beautiful.hogbar.networking_normal,
         -- margins = {
             top = 13,
             bottom = 13,
@@ -26,8 +27,8 @@ local system_widgets_resources = {
     },
     {
         name = "notifications",
-        normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/notifications/bell_240_white.svg",
-        hover_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/notifications/bell_240_bright.svg",
+        normal_image = beautiful.hogbar.bell_normal,
+        hover_image = beautiful.hogbar.bell_hover,
         -- margins = {
             top = 13,
             bottom = 13,
@@ -37,8 +38,8 @@ local system_widgets_resources = {
     },
     {
         name = "power",
-        normal_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/power/power_240_white.svg",
-        hover_image = home .. "/.config/awesome/themes/NebulaBlaze/hogbar/power/power_240_bright.svg",
+        normal_image = beautiful.hogbar.power_normal,
+        hover_image = beautiful.hogbar.power_hover,
         -- margins = {
             top = 13,
             bottom = 13,

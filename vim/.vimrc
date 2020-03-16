@@ -58,6 +58,7 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'haishanh/night-owl.vim'
+Plug 'andys8/vim-elm-syntax'
 call plug#end()
 
 
@@ -67,7 +68,7 @@ call plug#end()
 " write ':colorscheme ' and press [TAB] to cycle through color schemes 
 
 " set colorscheme and true colors in vim "
-:colorscheme electric_metal
+:colorscheme black_cherries
 set termguicolors
 " i actually don't have a clue what this does
 " BUT if you modify the semicolons to colons
@@ -145,11 +146,22 @@ function! ToggleComment()
 endfunction
 
 autocmd FileType lua setlocal commentstring=\--%s
+autocmd FileType elm setlocal commentstring=\--%s
+
 autocmd FileType vim setlocal commentstring=\"%s
-autocmd FileType c, cpp, java, scala setlocal commentstring=\//%s
-autocmd FileType sh, ruby, python setlocal commentstring=\#%s
-autocmd FileType conf, fstab setlocal commentstring=\#%s
+
+autocmd FileType c setlocal commentstring=\//%s
+autocmd FileType cpp setlocal commentstring=\//%s
+autocmd FileType java setlocal commentstring=\//%s
+autocmd FileType scala setlocal commentstring=\//%s
+
+autocmd FileType sh setlocal commentstring=\#%s
+autocmd FileType ruby setlocal commentstring=\#%s
+autocmd FileType python setlocal commentstring=\#%s
+autocmd FileType conf setlocal commentstring=\#%s
+autocmd FileType fstab setlocal commentstring=\#%s
 autocmd FileType tex setlocal commentstring=\%%s
+
 autocmd FileType mail setlocal commentstring=\>%s
 
 nnoremap <S-Tab> :Commentary<cr>
